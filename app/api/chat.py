@@ -57,7 +57,7 @@ async def chat(request: ChatRequest):
         }
 
     except Exception as e:
-        logger.error(f"对话接口错误: {e}")
+        logger.exception(f"对话接口错误: {e}")
         return {
             "code": 500,
             "message": "error",
@@ -177,7 +177,7 @@ async def chat_stream(request: ChatRequest):
             logger.info(f"[会话 {request.id}] 流式对话完成")
 
         except Exception as e:
-            logger.error(f"流式对话接口错误: {e}")
+            logger.exception(f"流式对话接口错误: {e}")
             yield {
                 "event": "message",
                 "data": json.dumps({

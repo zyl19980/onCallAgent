@@ -41,11 +41,18 @@ class Settings(BaseSettings):
     rag_candidate_top_k: int = 20
     rag_final_top_k: int = 5
     rag_window_rounds: int = 10
-    rag_confidence_threshold_high: float = 0.72
+    rag_confidence_threshold_high: float = 0.78
     rag_confidence_threshold_low: float = 0.45
+    rag_document_confidence_threshold_high: float = 0.75
+    rag_document_confidence_threshold_low: float = 0.45
     rag_summary_max_chars: int = 1200
     bm25_enabled: bool = True
     rerank_enabled: bool = True
+    rerank_provider: str = "local"
+    rerank_request_timeout: float = 15.0
+    cohere_api_key: str = ""
+    cohere_rerank_model: str = "rerank-v4.0-fast"
+    cohere_rerank_url: str = "https://api.cohere.com/v2/rerank"
 
     # 文档分块配置
     chunk_max_size: int = 800

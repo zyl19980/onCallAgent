@@ -9,7 +9,7 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langchain_qwq import ChatQwen
 from loguru import logger
 
-from app.agent.mcp_client import get_mcp_client_with_retry
+from app.agent.mcp_client import get_mcp_tools_safely
 from app.config import config
 from app.services.conversation_memory_service import conversation_memory_service
 from app.services.hybrid_retrieval_service import RetrievalResult, hybrid_retrieval_service
@@ -43,8 +43,7 @@ class RagAgentService:
         if self._agent_initialized:
             return
 
-        mcp_client = await get_mcp_client_with_retry()
-        self.mcp_tools = await mcp_client.get_tools()
+        self.mcp_tools = await get_mcp_tools_safely()
         all_tools = self.tools + self.mcp_tools
         self.agent = create_agent(self.model, tools=all_tools)
         self._agent_initialized = True
@@ -91,6 +90,7 @@ class RagAgentService:
             "data": {
                 "confidence": retrieval.confidence,
                 "references": retrieval.references,
+                "retrievalDebug": self._build_retrieval_debug(retrieval),
             },
         }
 
@@ -231,11 +231,7 @@ class RagAgentService:
             "confidence": retrieval.confidence,
             "references": retrieval.references if retrieval.confidence in {"high", "medium"} else retrieval.references,
             "queuedForSupplement": queued,
-            "retrievalDebug": {
-                "primaryQuery": retrieval.query_analysis.primary_query,
-                "expandedQueries": retrieval.query_analysis.expanded_queries,
-                "keywords": retrieval.query_analysis.keywords,
-            },
+            "retrievalDebug": self._build_retrieval_debug(retrieval),
         }
 
     async def _summarize_with_model(self, prompt: str) -> str:
@@ -268,8 +264,27 @@ class RagAgentService:
                 parts.append(f"第{item['page_number']}页")
             if item.get("section_path"):
                 parts.append(str(item["section_path"]))
-            lines.append(f"[{index}] {' / '.join(parts)}")
+            score = item.get("score")
+            confidence = item.get("confidence")
+            suffix = []
+            if score is not None:
+                suffix.append(f"score={score}")
+            if confidence:
+                suffix.append(f"confidence={confidence}")
+            suffix_text = f" ({', '.join(suffix)})" if suffix else ""
+            lines.append(f"[{index}] {' / '.join(parts)}{suffix_text}")
         return "\n".join(lines)
+
+    def _build_retrieval_debug(self, retrieval: RetrievalResult) -> Dict[str, Any]:
+        return {
+            "primaryQuery": retrieval.query_analysis.primary_query,
+            "expandedQueries": retrieval.query_analysis.expanded_queries,
+            "keywords": retrieval.query_analysis.keywords,
+            "rerankProvider": retrieval.rerank_provider,
+            "overallConfidence": retrieval.confidence,
+            "confidenceDetails": retrieval.confidence_debug,
+            "references": retrieval.references,
+        }
 
 
 rag_agent_service = RagAgentService(streaming=True)

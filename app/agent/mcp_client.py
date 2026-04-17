@@ -158,6 +158,41 @@ async def get_mcp_client_with_retry(
     )
 
 
+def _flatten_exception_messages(exc: BaseException) -> List[str]:
+    """展开 ExceptionGroup，提取可读错误。"""
+    if isinstance(exc, BaseExceptionGroup):
+        messages: List[str] = []
+        for sub_exc in exc.exceptions:
+            messages.extend(_flatten_exception_messages(sub_exc))
+        return messages or [str(exc)]
+    return [str(exc)]
+
+
+async def get_mcp_tools_safely(
+    servers: Optional[Dict[str, Dict[str, str]]] = None,
+    tool_interceptors: Optional[List] = None,
+    force_new: bool = False,
+) -> list:
+    """安全获取 MCP 工具列表；失败时降级为空列表。"""
+    try:
+        client = await get_mcp_client_with_retry(
+            servers=servers,
+            tool_interceptors=tool_interceptors,
+            force_new=force_new,
+        )
+        tools = await client.get_tools()
+        logger.info(f"MCP 工具加载成功: {len(tools)} 个")
+        return tools
+    except Exception as exc:
+        error_messages = _flatten_exception_messages(exc)
+        logger.warning(
+            "MCP 工具加载失败，将降级为仅使用本地工具: {}",
+            " | ".join(error_messages[:3]),
+        )
+        logger.debug("MCP 工具加载完整异常: {}", repr(exc))
+        return []
+
+
 def _create_mcp_client(
     servers: Dict[str, Dict[str, str]],
     tool_interceptors: Optional[List] = None

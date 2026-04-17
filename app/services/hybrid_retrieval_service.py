@@ -12,6 +12,7 @@ from loguru import logger
 
 from app.config import config
 from app.services.bm25_search_service import bm25_search_service
+from app.services.reranker_service import reranker_service
 from app.services.vector_search_service import SearchResult, vector_search_service
 
 
@@ -42,7 +43,10 @@ class RetrievalCandidate:
     vector_score: float = 0.0
     keyword_score: float = 0.0
     fused_score: float = 0.0
+    raw_rerank_score: float = 0.0
     rerank_score: float = 0.0
+    rerank_source: str = "local"
+    document_confidence: str = "low"
     matched_queries: List[str] = field(default_factory=list)
 
     def to_document(self) -> Document:
@@ -52,7 +56,10 @@ class RetrievalCandidate:
                 "vector_score": self.vector_score,
                 "keyword_score": self.keyword_score,
                 "fused_score": self.fused_score,
+                "raw_rerank_score": self.raw_rerank_score,
                 "rerank_score": self.rerank_score,
+                "rerank_source": self.rerank_source,
+                "document_confidence": self.document_confidence,
             }
         )
         return Document(page_content=self.content, metadata=metadata)
@@ -68,6 +75,8 @@ class RetrievalResult:
     confidence: str
     queued_for_supplement: bool
     low_confidence_reason: str
+    rerank_provider: str = "local"
+    confidence_debug: Dict[str, object] = field(default_factory=dict)
 
     def context_text(self) -> str:
         parts = []
@@ -77,7 +86,9 @@ class RetrievalResult:
                     [
                         f"【证据 {index}】",
                         f"来源: {self._format_reference(candidate.metadata)}",
-                        f"重排分数: {candidate.rerank_score:.3f}",
+                        f"文档置信度: {candidate.document_confidence}",
+                        f"重排来源: {candidate.rerank_source}",
+                        f"重排分数: {candidate.rerank_score:.3f} (raw={candidate.raw_rerank_score:.3f})",
                         candidate.content,
                     ]
                 )
@@ -109,18 +120,43 @@ class HybridRetrievalService:
         recent_messages: List[Dict[str, str]] | None = None,
     ) -> RetrievalResult:
         analysis = self._understand_query(query, summary, recent_messages or [])
+        logger.info(
+            "查询理解完成: primary='{}', keyword='{}', expanded={}, keywords={}",
+            analysis.primary_query,
+            analysis.keyword_query,
+            analysis.expanded_queries,
+            analysis.keywords,
+        )
+
         vector_candidates = self._vector_recall(analysis)
         keyword_candidates = self._keyword_recall(analysis)
 
         merged = self._fuse_candidates(vector_candidates, keyword_candidates)
-        reranked = self._rerank_candidates(analysis, merged)
+        reranked, rerank_provider = self._rerank_candidates(analysis, merged)
         top_candidates = reranked[: config.rag_final_top_k]
+        self._label_document_confidences(top_candidates)
 
-        confidence, reason = self._evaluate_confidence(top_candidates)
+        confidence, reason, confidence_debug = self._evaluate_confidence(top_candidates, rerank_provider)
         references = [self._build_reference(candidate) for candidate in top_candidates]
 
         logger.info(
-            f"混合检索完成: vector={len(vector_candidates)}, bm25={len(keyword_candidates)}, final={len(top_candidates)}, confidence={confidence}"
+            "混合检索完成: vector={}, bm25={}, final={}, rerank_provider={}, overall_confidence={}",
+            len(vector_candidates),
+            len(keyword_candidates),
+            len(top_candidates),
+            rerank_provider,
+            confidence,
+        )
+        logger.info(
+            "Top 文档摘要: {}",
+            [
+                {
+                    "score": round(candidate.rerank_score, 4),
+                    "label": candidate.document_confidence,
+                    "source": candidate.metadata.get("_file_name", "未知来源"),
+                }
+                for candidate in top_candidates[:5]
+            ],
         )
 
         return RetrievalResult(
@@ -130,6 +166,8 @@ class HybridRetrievalService:
             confidence=confidence,
             queued_for_supplement=False,
             low_confidence_reason=reason,
+            rerank_provider=rerank_provider,
+            confidence_debug=confidence_debug,
         )
 
     def _understand_query(
@@ -245,35 +283,133 @@ class HybridRetrievalService:
         self,
         analysis: QueryUnderstandingResult,
         candidates: List[RetrievalCandidate],
+    ) -> tuple[List[RetrievalCandidate], str]:
+        if not candidates:
+            return [], "local"
+
+        if config.rerank_enabled and reranker_service.is_online_enabled():
+            try:
+                return reranker_service.rerank_with_cohere(analysis.primary_query, candidates), "cohere"
+            except Exception as exc:
+                logger.warning(f"在线重排失败，回退到本地重排: {exc}")
+
+        return self._local_rerank_candidates(analysis, candidates), "local"
+
+    def _local_rerank_candidates(
+        self,
+        analysis: QueryUnderstandingResult,
+        candidates: List[RetrievalCandidate],
     ) -> List[RetrievalCandidate]:
+        max_fused_score = max((candidate.fused_score for candidate in candidates), default=0.0) or 1.0
+
         for candidate in candidates:
             overlap = self._token_overlap_ratio(analysis.keywords, candidate.content)
             metadata_text = " ".join(
                 str(candidate.metadata.get(key, "")) for key in ("section_path", "_file_name", "page_number")
             )
             metadata_overlap = self._token_overlap_ratio(analysis.keywords, metadata_text)
-            candidate.rerank_score = (
-                0.45 * candidate.fused_score
-                + 0.30 * candidate.vector_score
-                + 0.15 * candidate.keyword_score
-                + 0.07 * overlap
-                + 0.03 * metadata_overlap
+            fused_score = min(1.0, candidate.fused_score / max_fused_score)
+
+            local_score = (
+                0.35 * fused_score
+                + 0.25 * self._clip_score(candidate.vector_score)
+                + 0.20 * self._clip_score(candidate.keyword_score)
+                + 0.15 * overlap
+                + 0.05 * metadata_overlap
             )
+            candidate.raw_rerank_score = local_score
+            candidate.rerank_score = self._clip_score(local_score)
+            candidate.rerank_source = "local"
 
         return sorted(candidates, key=lambda item: item.rerank_score, reverse=True)
 
-    def _evaluate_confidence(self, candidates: List[RetrievalCandidate]) -> tuple[str, str]:
+    def _label_document_confidences(self, candidates: List[RetrievalCandidate]) -> None:
+        for candidate in candidates:
+            candidate.document_confidence = self._score_to_label(
+                candidate.rerank_score,
+                high_threshold=config.rag_document_confidence_threshold_high,
+                low_threshold=config.rag_document_confidence_threshold_low,
+            )
+
+    def _evaluate_confidence(
+        self,
+        candidates: List[RetrievalCandidate],
+        rerank_provider: str,
+    ) -> tuple[str, str, Dict[str, object]]:
         if not candidates:
-            return "low", "未检索到任何相关片段"
+            debug = {
+                "provider": rerank_provider,
+                "reason": "未检索到任何相关片段",
+                "top1Score": 0.0,
+                "top2Score": 0.0,
+                "avgTop3Score": 0.0,
+                "supportCount": 0,
+                "strongSupportCount": 0,
+                "candidates": [],
+            }
+            return "low", "未检索到任何相关片段", debug
 
-        top1 = candidates[0].rerank_score
-        support_count = len([candidate for candidate in candidates[:3] if candidate.rerank_score >= 0.35])
+        top_candidates = candidates[:3]
+        top1 = top_candidates[0].rerank_score
+        top2 = top_candidates[1].rerank_score if len(top_candidates) > 1 else 0.0
+        avg_top3 = sum(candidate.rerank_score for candidate in top_candidates) / len(top_candidates)
+        support_count = len(
+            [
+                candidate
+                for candidate in top_candidates
+                if candidate.rerank_score >= config.rag_document_confidence_threshold_low
+            ]
+        )
+        strong_support_count = len(
+            [
+                candidate
+                for candidate in top_candidates
+                if candidate.rerank_score >= config.rag_document_confidence_threshold_high
+            ]
+        )
 
-        if top1 >= config.rag_confidence_threshold_high and support_count >= 2:
-            return "high", ""
-        if top1 < config.rag_confidence_threshold_low:
-            return "low", f"最高证据分数偏低: {top1:.3f}"
-        return "medium", f"证据支撑有限: top1={top1:.3f}, support={support_count}"
+        if top1 >= config.rag_confidence_threshold_high and support_count >= 2 and avg_top3 >= 0.55:
+            confidence = "high"
+            reason = ""
+        elif top1 >= config.rag_confidence_threshold_low and support_count >= 1:
+            confidence = "medium"
+            reason = (
+                "证据具备一定相关性，但强支撑不足"
+                f": top1={top1:.3f}, support={support_count}, avg_top3={avg_top3:.3f}"
+            )
+        else:
+            confidence = "low"
+            reason = (
+                "证据相关性偏弱"
+                f": top1={top1:.3f}, top2={top2:.3f}, support={support_count}, avg_top3={avg_top3:.3f}"
+            )
+
+        debug = {
+            "provider": rerank_provider,
+            "reason": reason,
+            "top1Score": round(top1, 4),
+            "top2Score": round(top2, 4),
+            "avgTop3Score": round(avg_top3, 4),
+            "supportCount": support_count,
+            "strongSupportCount": strong_support_count,
+            "thresholds": {
+                "overallHigh": config.rag_confidence_threshold_high,
+                "overallLow": config.rag_confidence_threshold_low,
+                "documentHigh": config.rag_document_confidence_threshold_high,
+                "documentLow": config.rag_document_confidence_threshold_low,
+            },
+            "candidates": [self._build_candidate_debug(candidate) for candidate in candidates[:5]],
+        }
+        logger.info(
+            "置信度评估完成: provider={}, overall={}, top1={}, top2={}, avg_top3={}, support={}",
+            rerank_provider,
+            confidence,
+            round(top1, 4),
+            round(top2, 4),
+            round(avg_top3, 4),
+            support_count,
+        )
+        return confidence, reason, debug
 
     def _build_reference(self, candidate: RetrievalCandidate) -> Dict[str, object]:
         metadata = candidate.metadata
@@ -282,6 +418,25 @@ class HybridRetrievalService:
             "page_number": metadata.get("page_number"),
             "section_path": metadata.get("section_path"),
             "score": round(candidate.rerank_score, 4),
+            "raw_score": round(candidate.raw_rerank_score, 4),
+            "confidence": candidate.document_confidence,
+            "rerank_source": candidate.rerank_source,
+        }
+
+    def _build_candidate_debug(self, candidate: RetrievalCandidate) -> Dict[str, object]:
+        return {
+            "id": candidate.id,
+            "fileName": candidate.metadata.get("_file_name", "未知来源"),
+            "pageNumber": candidate.metadata.get("page_number"),
+            "sectionPath": candidate.metadata.get("section_path"),
+            "vectorScore": round(candidate.vector_score, 4),
+            "keywordScore": round(candidate.keyword_score, 4),
+            "fusedScore": round(candidate.fused_score, 4),
+            "rawRerankScore": round(candidate.raw_rerank_score, 4),
+            "rerankScore": round(candidate.rerank_score, 4),
+            "documentConfidence": candidate.document_confidence,
+            "rerankSource": candidate.rerank_source,
+            "matchedQueries": list(candidate.matched_queries),
         }
 
     def _candidate_from_vector(
@@ -321,6 +476,16 @@ class HybridRetrievalService:
             return 0.0
         hits = sum(1 for token in keyword_list if token in tokens)
         return hits / len(keyword_list)
+
+    def _clip_score(self, score: float) -> float:
+        return max(0.0, min(1.0, float(score)))
+
+    def _score_to_label(self, score: float, high_threshold: float, low_threshold: float) -> str:
+        if score >= high_threshold:
+            return "high"
+        if score >= low_threshold:
+            return "medium"
+        return "low"
 
 
 hybrid_retrieval_service = HybridRetrievalService()

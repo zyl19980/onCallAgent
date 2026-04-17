@@ -11,7 +11,7 @@ from loguru import logger
 
 from app.config import config
 from app.tools import get_current_time, retrieve_knowledge
-from app.agent.mcp_client import get_mcp_client_with_retry
+from app.agent.mcp_client import get_mcp_tools_safely
 from .state import PlanExecuteState
 
 
@@ -42,8 +42,7 @@ async def executor(state: PlanExecuteState) -> Dict[str, Any]:
         ]
 
         # 获取 MCP 工具
-        mcp_client = await get_mcp_client_with_retry()
-        mcp_tools = await mcp_client.get_tools()
+        mcp_tools = await get_mcp_tools_safely()
         logger.info(f"可用工具数量: 本地 {len(local_tools)} + MCP {len(mcp_tools)}")
 
         # 合并所有工具

@@ -12,7 +12,7 @@ from loguru import logger
 
 from app.config import config
 from app.tools import get_current_time, retrieve_knowledge
-from app.agent.mcp_client import get_mcp_client_with_retry
+from app.agent.mcp_client import get_mcp_tools_safely
 from .state import PlanExecuteState
 from .utils import format_tools_description
 
@@ -146,8 +146,7 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
         ]
 
         # 获取 MCP 工具
-        mcp_client = await get_mcp_client_with_retry()
-        mcp_tools = await mcp_client.get_tools()
+        mcp_tools = await get_mcp_tools_safely()
 
         # 合并所有工具
         all_tools = local_tools + mcp_tools
