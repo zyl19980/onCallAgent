@@ -39,7 +39,7 @@ class MilvusClientManager:
     """Milvus 客户端管理器，支持多 collection。"""
 
     VECTOR_DIM: int = 1024
-    ID_MAX_LENGTH: int = 100
+    ID_MAX_LENGTH: int = 1024
     CONTENT_MAX_LENGTH: int = 8000
     DEFAULT_SHARD_NUMBER: int = 2
 

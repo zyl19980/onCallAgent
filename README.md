@@ -9,7 +9,7 @@
 ## ✨ 核心特性
 
 - 🤖 **智能对话** - LangChain 多轮对话 + 流式输出
-- 📚 **RAG 问答** - 支持 Markdown/PDF 文档接入、混合召回、重排、来源标注和低置信度待补充队列
+- 📚 **RAG 问答** - 支持 Markdown/PDF 文档接入、混合召回、重排、来源标注、低置信度事件入库和人工修订发布
 - 🔧 **AIOps 诊断** - Plan-Execute-Replan 自动故障诊断和根因分析
 - 🌐 **Web 界面** - 现代化 UI，支持多种对话模式：快速问答/流式对话
 - 🔌 **MCP 集成** - 日志查询和监控数据工具接入
@@ -19,6 +19,7 @@
 - **框架**: FastAPI + LangChain + LangGraph
 - **LLM**: 阿里云 DashScope (通义千问)
 - **向量库**: Milvus
+- **主数据存储**: PostgreSQL
 - **工具协议**: MCP (Model Context Protocol)
 
 ## 🚀 快速开始
@@ -50,10 +51,14 @@ pip install -e .
 # 首次使用需要编辑 .env 文件，填入你的 DASHSCOPE_API_KEY
 vim .env  # 或使用其他编辑器
 
-# 4. 一键初始化（启动 Docker + 服务 + 上传文档）
+# 4. 创建 PostgreSQL 数据库并初始化表
+createdb super_biz_agent
+psql -d super_biz_agent -f sql/001_init_low_confidence_pgsql.sql
+
+# 5. 一键初始化（启动 Docker + 服务 + 上传文档）
 make init
 
-# 5. 一键启动
+# 6. 一键启动
 make start
 ```
 
@@ -85,27 +90,31 @@ pip install -e .
 # 使用记事本或其他编辑器打开 .env 文件，填入你的 DASHSCOPE_API_KEY
 notepad .env
 
-# 4. 启动 Docker Desktop
+# 4. 创建 PostgreSQL 数据库并初始化表
+createdb super_biz_agent
+psql -d super_biz_agent -f sql/001_init_low_confidence_pgsql.sql
+
+# 5. 启动 Docker Desktop
 # 确保 Docker Desktop 已安装并正在运行
 
-# 5. 启动 Milvus 向量数据库（Docker Compose）
+# 6. 启动 Milvus 向量数据库（Docker Compose）
 docker compose -f vector-database.yml up -d
 
-# 6. 等待 Milvus 启动完成（约 5-10 秒）
+# 7. 等待 Milvus 启动完成（约 5-10 秒）
 timeout /t 10
 
-# 7. 启动 MCP 服务
+# 8. 启动 MCP 服务
 # 启动 CLS 日志查询服务（新开一个 PowerShell 窗口）
 python mcp_servers/cls_server.py
 
 # 启动 Monitor 监控服务（新开一个 PowerShell 窗口）
 python mcp_servers/monitor_server.py
 
-# 8. 启动 FastAPI 主服务（新开一个 PowerShell 窗口）
+# 9. 启动 FastAPI 主服务（新开一个 PowerShell 窗口）
 # 注意：日志会自动输出到 logs\app_YYYY-MM-DD.log
 python -m uvicorn app.main:app --host 0.0.0.0 --port 9900
 
-# 9. 上传文档到向量库（新开一个 PowerShell 窗口）
+# 10. 上传文档到向量库（新开一个 PowerShell 窗口）
 # 等待服务启动完成后执行
 timeout /t 5
 python -c "import requests, os, time; [requests.post('http://localhost:9900/api/upload', files={'file': open(f'aiops-docs/{f}', 'rb')}) or time.sleep(1) for f in os.listdir('aiops-docs') if f.endswith('.md')]"
@@ -127,6 +136,24 @@ python -c "import requests, os, time; [requests.post('http://localhost:9900/api/
 - **Web 界面**: http://localhost:9900
 - **API 文档**: http://localhost:9900/docs
 
+## 🧭 初始化与迁移
+
+推荐初始化方式是重新索引 `uploads/`，它会同时刷新 PostgreSQL、Milvus 和 `rag_corpus.jsonl`。
+
+```bash
+./.venv/bin/python scripts/reindex_uploads.py
+```
+
+如果历史 Milvus collection 仍是随机 UUID 主键，先在维护窗口执行：
+
+```bash
+./.venv/bin/python scripts/rebuild_milvus_collection.py
+```
+
+新 collection 的主键必须是稳定 `chunk_key = {source_path}::{chunk_index}`。
+
+完整运维说明见 [docs/pgsql_migration_and_ops.md](docs/pgsql_migration_and_ops.md)。
+
 ## 📡 API 接口
 
 ### 核心接口
@@ -137,7 +164,7 @@ python -c "import requests, os, time; [requests.post('http://localhost:9900/api/
 | 流式对话 | POST | `/api/chat_stream` | SSE 流式输出 |
 | AIOps 诊断 | POST | `/api/aiops` | 自动故障诊断（流式） |
 | 文件上传 | POST | `/api/upload` | 上传并索引 txt/md/pdf 文档 |
-| 健康检查 | GET | `/api/health` | 服务状态检查 |
+| 健康检查 | GET | `/api/health` | 服务状态检查，包含 Milvus 与 PostgreSQL |
 
 ### 使用示例
 
@@ -248,6 +275,15 @@ DASHSCOPE_MODEL=qwen-max
 # Milvus 配置
 MILVUS_HOST=localhost
 MILVUS_PORT=19530
+
+# PostgreSQL 配置
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=
+POSTGRES_DB=super_biz_agent
+# 或直接使用完整 DSN
+# POSTGRES_DSN=postgresql+psycopg://user:password@host:5432/dbname
 
 # RAG 配置
 RAG_TOP_K=3
@@ -368,6 +404,27 @@ docker compose -f vector-database.yml restart
 
 # 或者重启单个服务
 docker compose -f vector-database.yml restart standalone
+```
+
+### PostgreSQL 连接失败
+```bash
+# 检查数据库是否存在
+psql -l | grep super_biz_agent
+
+# 检查表是否已初始化
+psql -d super_biz_agent -c "\\dt"
+
+# 重新执行初始化 SQL
+psql -d super_biz_agent -f sql/001_init_low_confidence_pgsql.sql
+```
+
+### 初始化或迁移时如何重建索引
+```bash
+# 重新索引 uploads，完成 PostgreSQL / Milvus / jsonl 初始化
+./.venv/bin/python scripts/reindex_uploads.py
+
+# 若历史 collection 使用随机 UUID 主键，先重建 Milvus collection
+./.venv/bin/python scripts/rebuild_milvus_collection.py
 ```
 
 ### 服务无法启动

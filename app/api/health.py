@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from app.config import config
 from app.core.milvus_client import milvus_manager
+from app.core.postgres import postgres_manager
 from loguru import logger
 
 router = APIRouter()
@@ -12,7 +13,6 @@ router = APIRouter()
 
 @router.get("/health")
 async def health_check():
-    
     """健康检查接口
     检查服务状态和数据库连接状态
     
@@ -41,16 +41,34 @@ async def health_check():
             "status": "error",
             "message": f"Milvus 检查失败: {str(e)}"
         }
+
+    try:
+        postgres_healthy = postgres_manager.health_check()
+        postgres_status: str = "connected" if postgres_healthy else "disconnected"
+        postgres_message: str = "PostgreSQL 连接正常" if postgres_healthy else "PostgreSQL 连接异常"
+        health_data["postgres"] = {
+            "status": postgres_status,
+            "message": postgres_message
+        }
+    except Exception as e:
+        logger.warning(f"PostgreSQL 健康检查失败: {e}")
+        health_data["postgres"] = {
+            "status": "error",
+            "message": f"PostgreSQL 检查失败: {str(e)}"
+        }
     
     # 判断整体健康状态
     overall_status = "healthy"
     status_code = 200
     
-    # 如果 Milvus 不可用，服务不可用
-    if health_data["milvus"]["status"] != "connected":
+    # 如果关键依赖不可用，服务不可用
+    if (
+        health_data["milvus"]["status"] != "connected"
+        or health_data["postgres"]["status"] != "connected"
+    ):
         overall_status = "unhealthy"
         status_code = 503
-        health_data["error"] = "数据库不可用"
+        health_data["error"] = "关键依赖不可用"
     
     health_data["status"] = overall_status
     

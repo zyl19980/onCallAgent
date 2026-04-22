@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import Dict, List
+import time
+from typing import Any, Dict, List
 
 from langchain_core.documents import Document
 from langchain_milvus import Milvus
@@ -58,16 +59,13 @@ class VectorStoreManager:
         if self.vector_store is None:
             raise RuntimeError("VectorStore 未初始化")
 
-        import time
-        import uuid
-
         start_time = time.time()
         batch_size = 50
         result_ids: List[str] = []
 
         for start in range(0, len(documents), batch_size):
             batch = documents[start:start + batch_size]
-            ids = [str(uuid.uuid4()) for _ in batch]
+            ids = [self._get_document_id(doc) for doc in batch]
             batch_ids = self.vector_store.add_documents(batch, ids=ids)
             result_ids.extend(batch_ids)
             logger.info(
@@ -116,5 +114,33 @@ class VectorStoreManager:
             logger.error(f"相似度搜索失败: {exc}")
             return []
 
+    def upsert_chunk(
+        self,
+        *,
+        chunk_key: str,
+        text: str,
+        metadata: dict[str, Any],
+        embedding: list[float] | None = None,
+    ) -> str:
+        collection = milvus_manager.get_collection(self.collection_name)
+        vector = embedding or vector_embedding_service.embed_documents([text])[0]
+        payload = [
+            {
+                "id": chunk_key,
+                "vector": vector,
+                "content": text,
+                "metadata": dict(metadata),
+            }
+        ]
+        collection.upsert(payload)
+        collection.flush()
+        logger.info(
+            f"Milvus 单 chunk upsert 完成: collection={self.collection_name}, chunk_key={chunk_key}"
+        )
+        return chunk_key
 
-vector_store_manager = VectorStoreManager.for_collection(config.rag_collection_name)
+    def _get_document_id(self, document: Document) -> str:
+        chunk_id = str(document.metadata.get("chunk_id", "")).strip()
+        if not chunk_id:
+            raise ValueError("文档 metadata 中缺少稳定 chunk_id，无法写入 Milvus")
+        return chunk_id

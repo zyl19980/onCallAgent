@@ -11,7 +11,9 @@ from app.services.reranker_service import reranker_service
 from app.tools.knowledge_tool import retrieve_knowledge
 
 
-def test_local_rerank_assigns_document_confidence_and_high_overall_confidence():
+def test_local_rerank_assigns_document_confidence_and_high_overall_confidence(monkeypatch):
+    monkeypatch.setattr(reranker_service, "is_online_enabled", lambda: False)
+
     service = HybridRetrievalService()
     analysis = QueryUnderstandingResult(
         primary_query="ABB 报码如何处理",

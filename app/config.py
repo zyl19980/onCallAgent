@@ -4,6 +4,7 @@
 """
 
 from typing import Dict, Any
+from urllib.parse import quote_plus
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -34,6 +35,14 @@ class Settings(BaseSettings):
     milvus_port: int = 19530
     milvus_timeout: int = 10000  # 毫秒
 
+    # PostgreSQL 配置
+    postgres_host: str = "localhost"
+    postgres_port: int = 5432
+    postgres_user: str = "postgres"
+    postgres_password: str = ""
+    postgres_db: str = "super_biz_agent"
+    postgres_dsn: str = ""
+
     # RAG 配置
     rag_top_k: int = 3
     rag_model: str = "qwen-max"  # 使用快速响应模型，不带扩展思考
@@ -58,9 +67,8 @@ class Settings(BaseSettings):
     chunk_max_size: int = 800
     chunk_overlap: int = 100
 
-    # 本地知识库索引与待补充队列
+    # 本地知识库索引
     rag_corpus_path: str = "./data/rag_corpus.jsonl"
-    supplement_queue_path: str = "./data/knowledge_supplement_queue.jsonl"
 
     # MCP 服务配置
     mcp_cls_transport: str = "streamable-http"
@@ -81,6 +89,23 @@ class Settings(BaseSettings):
                 "url": self.mcp_monitor_url,
             }
         }
+
+    def build_postgres_dsn(self) -> str:
+        """构建 PostgreSQL DSN，允许完整 DSN 覆盖分散配置。"""
+        explicit_dsn = self.postgres_dsn.strip()
+        if explicit_dsn:
+            return explicit_dsn
+
+        user = quote_plus(self.postgres_user)
+        password = quote_plus(self.postgres_password)
+        auth = user if not password else f"{user}:{password}"
+        database = quote_plus(self.postgres_db)
+        return f"postgresql+psycopg://{auth}@{self.postgres_host}:{self.postgres_port}/{database}"
+
+    @property
+    def postgres_effective_dsn(self) -> str:
+        """返回最终生效的 PostgreSQL DSN。"""
+        return self.build_postgres_dsn()
 
 
 # 全局配置实例

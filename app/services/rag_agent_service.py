@@ -205,18 +205,9 @@ class RagAgentService:
 
         if retrieval.confidence == "low":
             queued = supplement_queue_service.enqueue(
-                {
-                    "session_id": session_id,
-                    "question": question,
-                    "query_analysis": {
-                        "primary_query": retrieval.query_analysis.primary_query,
-                        "keyword_query": retrieval.query_analysis.keyword_query,
-                        "expanded_queries": retrieval.query_analysis.expanded_queries,
-                        "keywords": retrieval.query_analysis.keywords,
-                    },
-                    "references": retrieval.references,
-                    "reason": retrieval.low_confidence_reason,
-                }
+                session_id=session_id,
+                question=question,
+                retrieval=retrieval,
             )
 
         await conversation_memory_service.append_exchange(

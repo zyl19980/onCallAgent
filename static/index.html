@@ -26,6 +26,14 @@
                     </svg>
                     <span>新建对话</span>
                 </button>
+
+                <button class="sidebar-btn" id="governanceEntryBtn">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 11L12 14L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 12V19H4V5H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>低置信度治理</span>
+                </button>
                 
                 <div class="chat-history-section">
                     <div class="history-header">
@@ -112,7 +120,58 @@
                             </div>
                         </div>
                     </div>
-                    <input type="file" id="fileInput" accept=".txt,.md,.markdown" style="display: none;">
+                    <input type="file" id="fileInput" accept=".txt,.md,.markdown,.pdf" style="display: none;">
+                </div>
+            </div>
+
+            <div class="governance-view hidden" id="governanceView">
+                <div class="governance-shell">
+                    <div class="governance-header">
+                        <div>
+                            <div class="governance-eyebrow">治理工作台</div>
+                            <h1 class="governance-title">低置信度治理</h1>
+                            <p class="governance-subtitle">聚合查看低置信度问题，定位关联 chunk，并完成草稿修订与手动发布。</p>
+                        </div>
+                        <button class="governance-refresh-btn" id="governanceRefreshBtn" type="button">刷新列表</button>
+                    </div>
+
+                    <div class="governance-body">
+                        <section class="governance-fingerprint-column">
+                            <div class="governance-panel">
+                                <div class="governance-panel-header">
+                                    <h2>问题指纹</h2>
+                                    <span class="panel-hint">最近聚合</span>
+                                </div>
+                                <div class="governance-panel-body governance-scroll-body" id="governanceFingerprintList">
+                                    <div class="governance-empty">正在加载低置信度问题...</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="governance-detail-column">
+                            <div class="governance-panel governance-detail-panel">
+                                <div class="governance-panel-header">
+                                    <h2>指纹详情</h2>
+                                    <span class="panel-hint" id="governanceDetailHint">选择左侧问题查看详情</span>
+                                </div>
+                                <div class="governance-panel-body governance-scroll-body" id="governanceDetail">
+                                    <div class="governance-empty">暂未选择问题指纹</div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <aside class="governance-editor-column" id="chunkEditorPanel">
+                            <div class="governance-panel governance-editor-panel">
+                                <div class="governance-panel-header">
+                                    <h2>Chunk 编辑</h2>
+                                    <span class="panel-hint" id="chunkEditorHint">选择某个 chunk 开始修订</span>
+                                </div>
+                                <div class="governance-panel-body governance-scroll-body" id="chunkEditorContent">
+                                    <div class="governance-empty">暂未选择 chunk</div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
                 </div>
             </div>
         </main>

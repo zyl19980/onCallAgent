@@ -8,6 +8,15 @@ class SuperBizAgentApp {
         this.currentChatHistory = []; // 当前对话的消息历史
         this.chatHistories = this.loadChatHistories(); // 所有历史对话
         this.isCurrentChatFromHistory = false; // 标记当前对话是否是从历史记录加载的
+        this.currentMainView = 'chat';
+        this.fingerprintList = [];
+        this.currentFingerprint = null;
+        this.currentFingerprintDetail = null;
+        this.currentChunk = null;
+        this.currentChunkHistory = [];
+        this.isGovernanceLoading = false;
+        this.isChunkPublishing = false;
+        this.isDraftDirty = false;
         
         this.initializeElements();
         this.bindEvents();
@@ -15,6 +24,7 @@ class SuperBizAgentApp {
         this.initMarkdown();
         this.checkAndSetCentered();
         this.renderChatHistory();
+        this.switchMainView('chat');
     }
 
     // 初始化Markdown配置
@@ -97,6 +107,7 @@ class SuperBizAgentApp {
         // 侧边栏元素
         this.sidebar = document.querySelector('.sidebar');
         this.newChatBtn = document.getElementById('newChatBtn');
+        this.governanceEntryBtn = document.getElementById('governanceEntryBtn');
         this.aiOpsSidebarBtn = document.getElementById('aiOpsSidebarBtn');
         
         // 输入区域元素
@@ -116,6 +127,14 @@ class SuperBizAgentApp {
         this.chatContainer = document.querySelector('.chat-container');
         this.welcomeGreeting = document.getElementById('welcomeGreeting');
         this.chatHistoryList = document.getElementById('chatHistoryList');
+        this.governanceView = document.getElementById('governanceView');
+        this.governanceRefreshBtn = document.getElementById('governanceRefreshBtn');
+        this.governanceFingerprintList = document.getElementById('governanceFingerprintList');
+        this.governanceDetail = document.getElementById('governanceDetail');
+        this.governanceDetailHint = document.getElementById('governanceDetailHint');
+        this.chunkEditorPanel = document.getElementById('chunkEditorPanel');
+        this.chunkEditorHint = document.getElementById('chunkEditorHint');
+        this.chunkEditorContent = document.getElementById('chunkEditorContent');
         
         // 初始化时检查是否需要居中
         this.checkAndSetCentered();
@@ -125,7 +144,14 @@ class SuperBizAgentApp {
     bindEvents() {
         // 新建对话
         if (this.newChatBtn) {
-            this.newChatBtn.addEventListener('click', () => this.newChat());
+            this.newChatBtn.addEventListener('click', () => {
+                this.switchMainView('chat');
+                this.newChat();
+            });
+        }
+
+        if (this.governanceEntryBtn) {
+            this.governanceEntryBtn.addEventListener('click', () => this.switchMainView('governance'));
         }
         
         // AI Ops按钮
@@ -202,6 +228,53 @@ class SuperBizAgentApp {
         
         if (this.fileInput) {
             this.fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
+        }
+
+        if (this.governanceRefreshBtn) {
+            this.governanceRefreshBtn.addEventListener('click', () => this.loadFingerprintList({ force: true, withOverlay: true }));
+        }
+
+        if (this.governanceFingerprintList) {
+            this.governanceFingerprintList.addEventListener('click', (event) => {
+                const item = event.target.closest('[data-fingerprint]');
+                if (item) {
+                    this.openFingerprint(item.dataset.fingerprint);
+                }
+            });
+        }
+
+        if (this.governanceDetail) {
+            this.governanceDetail.addEventListener('click', (event) => {
+                const chunkCard = event.target.closest('[data-chunk-key]');
+                if (chunkCard) {
+                    this.openChunkEditor(chunkCard.dataset.chunkKey);
+                }
+            });
+        }
+
+        if (this.chunkEditorContent) {
+            this.chunkEditorContent.addEventListener('input', (event) => {
+                if (event.target && event.target.id === 'chunkDraftTextarea') {
+                    this.isDraftDirty = true;
+                    this.updateChunkEditorActions();
+                }
+            });
+
+            this.chunkEditorContent.addEventListener('click', (event) => {
+                const action = event.target.closest('[data-action]');
+                if (!action) {
+                    return;
+                }
+
+                const { action: actionName } = action.dataset;
+                if (actionName === 'save-draft' && this.currentChunk) {
+                    this.saveChunkDraft(this.currentChunk.chunk_key);
+                } else if (actionName === 'publish-chunk' && this.currentChunk) {
+                    this.publishChunk(this.currentChunk.chunk_key);
+                } else if (actionName === 'view-history' && this.currentChunk) {
+                    this.loadChunkHistory(this.currentChunk.chunk_key, { force: true });
+                }
+            });
         }
     }
 
@@ -425,6 +498,8 @@ class SuperBizAgentApp {
         if (!history) {
             return;
         }
+
+        this.switchMainView('chat');
         
         // 如果当前有对话内容，且不是同一个对话，先保存
         if (this.currentChatHistory.length > 0 && this.sessionId !== historyId) {
@@ -618,6 +693,667 @@ class SuperBizAgentApp {
             this.messageInput.disabled = this.isStreaming;
             this.messageInput.placeholder = '问问智能OnCall助手';
         }
+
+        if (this.governanceRefreshBtn) {
+            this.governanceRefreshBtn.disabled = this.isGovernanceLoading || this.isChunkPublishing;
+        }
+
+        this.updateMainViewState();
+        this.updateChunkEditorActions();
+    }
+
+    updateMainViewState() {
+        const isGovernance = this.currentMainView === 'governance';
+
+        if (this.chatContainer) {
+            this.chatContainer.classList.toggle('hidden', isGovernance);
+        }
+
+        if (this.governanceView) {
+            this.governanceView.classList.toggle('hidden', !isGovernance);
+        }
+
+        if (this.aiOpsSidebarBtn) {
+            this.aiOpsSidebarBtn.classList.toggle('hidden', isGovernance);
+        }
+
+        if (this.governanceEntryBtn) {
+            this.governanceEntryBtn.classList.toggle('active', isGovernance);
+        }
+    }
+
+    switchMainView(viewName) {
+        this.currentMainView = viewName === 'governance' ? 'governance' : 'chat';
+        this.updateMainViewState();
+
+        if (this.currentMainView === 'governance') {
+            this.renderGovernanceView();
+            if (this.fingerprintList.length === 0 && !this.isGovernanceLoading) {
+                this.loadFingerprintList({ withOverlay: true });
+            }
+        }
+    }
+
+    renderGovernanceView() {
+        this.renderFingerprintList(this.fingerprintList);
+        this.renderFingerprintDetail(this.currentFingerprintDetail);
+        this.renderChunkEditor(this.currentChunk);
+    }
+
+    async governanceRequest(path, options = {}) {
+        const response = await fetch(`${this.apiBaseUrl}${path}`, options);
+        let payload = null;
+
+        try {
+            payload = await response.json();
+        } catch (error) {
+            payload = null;
+        }
+
+        if (!response.ok) {
+            const message = payload?.detail || payload?.message || `HTTP错误: ${response.status}`;
+            throw new Error(message);
+        }
+
+        if (payload?.code !== 200 && payload?.message !== 'success') {
+            throw new Error(payload?.message || '请求失败');
+        }
+
+        return payload?.data;
+    }
+
+    setGovernanceLoading(isLoading, message = '正在加载低置信度治理数据...', withOverlay = false) {
+        this.isGovernanceLoading = isLoading;
+
+        if (withOverlay) {
+            if (isLoading) {
+                this.showLoadingOverlay(true, {
+                    title: message,
+                    subtitle: '请稍候',
+                });
+            } else {
+                this.showLoadingOverlay(false);
+            }
+        }
+
+        this.updateUI();
+    }
+
+    setChunkPublishing(isPublishing) {
+        this.isChunkPublishing = isPublishing;
+        if (isPublishing) {
+            this.showLoadingOverlay(true, {
+                title: '正在发布修订内容...',
+                subtitle: '系统正在同步向量库与知识库，请稍候',
+            });
+        } else {
+            this.showLoadingOverlay(false);
+        }
+        this.updateUI();
+    }
+
+    encodeChunkKey(chunkKey) {
+        return encodeURIComponent(chunkKey || '');
+    }
+
+    encodeFingerprint(fingerprint) {
+        return encodeURIComponent(fingerprint || '');
+    }
+
+    async loadFingerprintList({ force = false, withOverlay = false } = {}) {
+        if (this.isGovernanceLoading) {
+            return;
+        }
+
+        if (!force && this.fingerprintList.length > 0) {
+            this.renderFingerprintList(this.fingerprintList);
+            return;
+        }
+
+        this.setGovernanceLoading(true, '正在加载低置信度问题...', withOverlay);
+
+        if (this.governanceFingerprintList) {
+            this.governanceFingerprintList.innerHTML = '<div class="governance-loading-block">正在加载低置信度问题...</div>';
+        }
+
+        try {
+            const data = await this.governanceRequest('/admin/low-confidence/fingerprints');
+            this.fingerprintList = Array.isArray(data?.items) ? data.items : [];
+            this.renderFingerprintList(this.fingerprintList);
+
+            if (!this.currentFingerprint && this.fingerprintList.length > 0) {
+                await this.openFingerprint(this.fingerprintList[0].query_fingerprint);
+            } else if (this.currentFingerprint) {
+                const stillExists = this.fingerprintList.some(item => item.query_fingerprint === this.currentFingerprint);
+                if (!stillExists) {
+                    this.currentFingerprint = null;
+                    this.currentFingerprintDetail = null;
+                    this.currentChunk = null;
+                    this.currentChunkHistory = [];
+                    this.renderFingerprintDetail(null);
+                    this.renderChunkEditor(null);
+                }
+            }
+        } catch (error) {
+            console.error('加载 fingerprint 列表失败:', error);
+            this.renderFingerprintListError(error.message);
+            this.showNotification(`加载低置信度问题失败: ${error.message}`, 'error');
+        } finally {
+            this.setGovernanceLoading(false, '', withOverlay);
+        }
+    }
+
+    async loadFingerprintDetail(fingerprint) {
+        if (!fingerprint) {
+            return;
+        }
+
+        if (this.governanceDetail) {
+            this.governanceDetail.innerHTML = '<div class="governance-loading-block">正在加载指纹详情...</div>';
+        }
+
+        try {
+            const data = await this.governanceRequest(`/admin/low-confidence/fingerprints/${this.encodeFingerprint(fingerprint)}`);
+            this.currentFingerprint = fingerprint;
+            this.currentFingerprintDetail = data;
+            this.renderFingerprintList(this.fingerprintList);
+            this.renderFingerprintDetail(data);
+        } catch (error) {
+            console.error('加载 fingerprint 详情失败:', error);
+            this.currentFingerprintDetail = null;
+            this.renderFingerprintDetailError(error.message);
+            this.showNotification(`加载指纹详情失败: ${error.message}`, 'error');
+        }
+    }
+
+    async loadChunkDetail(chunkKey) {
+        if (!chunkKey) {
+            return;
+        }
+
+        this.currentChunk = null;
+        this.currentChunkHistory = [];
+        this.isDraftDirty = false;
+        this.renderChunkEditorLoading();
+
+        try {
+            const data = await this.governanceRequest(`/admin/chunks/${this.encodeChunkKey(chunkKey)}`);
+            this.currentChunk = data;
+            this.isDraftDirty = false;
+            this.renderChunkEditor(data);
+        } catch (error) {
+            console.error('加载 chunk 详情失败:', error);
+            this.renderChunkEditorError(error.message);
+            this.showNotification(`加载 chunk 详情失败: ${error.message}`, 'error');
+        }
+    }
+
+    async loadChunkHistory(chunkKey, { force = false } = {}) {
+        if (!chunkKey) {
+            return;
+        }
+
+        if (!force && this.currentChunkHistory.length > 0 && this.currentChunk?.chunk_key === chunkKey) {
+            this.renderChunkHistory(this.currentChunkHistory);
+            return;
+        }
+
+        this.renderChunkHistoryLoading();
+
+        try {
+            const data = await this.governanceRequest(`/admin/chunks/${this.encodeChunkKey(chunkKey)}/history`);
+            this.currentChunkHistory = Array.isArray(data?.items) ? data.items : [];
+            this.renderChunkHistory(this.currentChunkHistory);
+        } catch (error) {
+            console.error('加载 chunk 历史失败:', error);
+            this.renderChunkHistoryError(error.message);
+            this.showNotification(`加载历史失败: ${error.message}`, 'error');
+        }
+    }
+
+    async openFingerprint(fingerprint) {
+        if (!fingerprint) {
+            return;
+        }
+
+        this.currentFingerprint = fingerprint;
+        this.currentChunk = null;
+        this.currentChunkHistory = [];
+        this.renderFingerprintList(this.fingerprintList);
+        this.renderChunkEditor(null);
+        await this.loadFingerprintDetail(fingerprint);
+    }
+
+    async openChunkEditor(chunkKey) {
+        if (!chunkKey) {
+            return;
+        }
+
+        await this.loadChunkDetail(chunkKey);
+        await this.loadChunkHistory(chunkKey);
+    }
+
+    async saveChunkDraft(chunkKey, { silent = false } = {}) {
+        if (!chunkKey) {
+            return false;
+        }
+
+        const draftTextarea = document.getElementById('chunkDraftTextarea');
+        const draftText = draftTextarea ? draftTextarea.value : this.currentChunk?.draft_text || '';
+
+        try {
+            const data = await this.governanceRequest(`/admin/chunks/${this.encodeChunkKey(chunkKey)}/draft`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    draftText,
+                }),
+            });
+
+            this.currentChunk = data;
+            this.isDraftDirty = false;
+            this.renderChunkEditor(data);
+            if (!silent) {
+                this.showNotification('草稿已保存', 'success');
+            }
+            return true;
+        } catch (error) {
+            console.error('保存草稿失败:', error);
+            this.showNotification(`保存草稿失败: ${error.message}`, 'error');
+            return false;
+        }
+    }
+
+    async publishChunk(chunkKey) {
+        if (!chunkKey || this.isChunkPublishing) {
+            return;
+        }
+
+        if (this.isDraftDirty) {
+            const saved = await this.saveChunkDraft(chunkKey, { silent: true });
+            if (!saved) {
+                return;
+            }
+        }
+
+        this.setChunkPublishing(true);
+
+        try {
+            const data = await this.governanceRequest(`/admin/chunks/${this.encodeChunkKey(chunkKey)}/publish`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    editor: 'frontend-admin',
+                    editNote: '治理工作台手动发布',
+                }),
+            });
+
+            this.currentChunk = data;
+            this.isDraftDirty = false;
+            this.renderChunkEditor(data);
+            await this.loadChunkHistory(chunkKey, { force: true });
+            this.showNotification('Chunk 发布成功', 'success');
+        } catch (error) {
+            console.error('发布 chunk 失败:', error);
+            this.showNotification(`发布失败: ${error.message}`, 'error');
+            if (this.currentChunk?.chunk_key === chunkKey) {
+                await this.loadChunkDetail(chunkKey);
+                await this.loadChunkHistory(chunkKey, { force: true });
+            }
+        } finally {
+            this.setChunkPublishing(false);
+        }
+    }
+
+    renderFingerprintList(items = []) {
+        if (!this.governanceFingerprintList) {
+            return;
+        }
+
+        if (!items.length) {
+            this.governanceFingerprintList.innerHTML = '<div class="governance-empty">暂无低置信度问题</div>';
+            return;
+        }
+
+        this.governanceFingerprintList.innerHTML = items.map((item) => {
+            const fingerprint = item.query_fingerprint || '';
+            const isActive = fingerprint === this.currentFingerprint;
+
+            return `
+                <button class="fingerprint-item${isActive ? ' active' : ''}" data-fingerprint="${this.escapeHtml(fingerprint)}" type="button">
+                    <div class="fingerprint-item-head">
+                        <span class="fingerprint-count">${this.escapeHtml(String(item.event_count ?? 0))}</span>
+                        <span class="fingerprint-updated">${this.escapeHtml(this.formatDateTime(item.last_seen_at))}</span>
+                    </div>
+                    <div class="fingerprint-title">${this.escapeHtml(item.normalized_query || '未命名问题')}</div>
+                    <div class="fingerprint-meta">${this.escapeHtml(fingerprint)}</div>
+                    <div class="fingerprint-range">首次: ${this.escapeHtml(this.formatDateTime(item.first_seen_at))}</div>
+                </button>
+            `;
+        }).join('');
+    }
+
+    renderFingerprintListError(message) {
+        if (!this.governanceFingerprintList) {
+            return;
+        }
+
+        this.governanceFingerprintList.innerHTML = `
+            <div class="governance-error">
+                <div>低置信度问题加载失败</div>
+                <div class="governance-error-detail">${this.escapeHtml(message || '未知错误')}</div>
+            </div>
+        `;
+    }
+
+    renderFingerprintDetail(data) {
+        if (!this.governanceDetail) {
+            return;
+        }
+
+        if (!data) {
+            if (this.governanceDetailHint) {
+                this.governanceDetailHint.textContent = '选择左侧问题查看详情';
+            }
+            this.governanceDetail.innerHTML = '<div class="governance-empty">暂未选择问题指纹</div>';
+            return;
+        }
+
+        if (this.governanceDetailHint) {
+            this.governanceDetailHint.textContent = `${data.eventCount || 0} 个低置信度事件`;
+        }
+
+        const events = Array.isArray(data.events) ? data.events : [];
+        if (!events.length) {
+            this.governanceDetail.innerHTML = '<div class="governance-empty">该指纹下暂无事件</div>';
+            return;
+        }
+
+        this.governanceDetail.innerHTML = `
+            <div class="fingerprint-summary-card">
+                <div class="fingerprint-summary-label">当前指纹</div>
+                <div class="fingerprint-summary-title">${this.escapeHtml(events[0]?.normalized_query || data.fingerprint || '')}</div>
+                <div class="fingerprint-summary-meta">${this.escapeHtml(data.fingerprint || '')}</div>
+            </div>
+            ${events.map((eventItem, index) => {
+                const chunks = Array.isArray(eventItem.chunks) ? eventItem.chunks : [];
+                return `
+                    <section class="event-card">
+                        <div class="event-card-head">
+                            <div>
+                                <div class="event-badge">事件 ${index + 1}</div>
+                                <h3>${this.escapeHtml(eventItem.raw_query || '未记录原始问题')}</h3>
+                            </div>
+                            <div class="event-confidence-pill ${this.escapeHtml(eventItem.overall_confidence || 'unknown')}">${this.escapeHtml(eventItem.overall_confidence || 'unknown')}</div>
+                        </div>
+                        <div class="event-meta-grid">
+                            <div><span>时间</span><strong>${this.escapeHtml(this.formatDateTime(eventItem.created_at))}</strong></div>
+                            <div><span>归一化问题</span><strong>${this.escapeHtml(eventItem.normalized_query || '-')}</strong></div>
+                            <div><span>原因</span><strong>${this.escapeHtml(eventItem.low_confidence_reason || eventItem.reason || '-')}</strong></div>
+                        </div>
+                        <div class="event-chunk-list">
+                            ${chunks.length ? chunks.map((chunk) => `
+                                <button class="chunk-snapshot-card" data-chunk-key="${this.escapeHtml(chunk.chunk_key_snapshot || '')}" type="button">
+                                    <div class="chunk-snapshot-head">
+                                        <span class="chunk-file-name">${this.escapeHtml(chunk.file_name_snapshot || '未知文件')}</span>
+                                        <span class="chunk-score">${this.escapeHtml(this.formatScore(chunk.rerank_score))}</span>
+                                    </div>
+                                    <div class="chunk-snapshot-meta">
+                                        <span>页码 ${this.escapeHtml(this.formatNullable(chunk.page_number_snapshot))}</span>
+                                        <span>${this.escapeHtml(chunk.section_path_snapshot || '未标注章节')}</span>
+                                        <span class="chunk-confidence-tag ${this.escapeHtml(chunk.document_confidence || 'unknown')}">${this.escapeHtml(chunk.document_confidence || 'unknown')}</span>
+                                    </div>
+                                    <div class="chunk-snapshot-text markdown-surface">${this.renderMarkdown(chunk.chunk_text_snapshot || '无快照内容')}</div>
+                                </button>
+                            `).join('') : '<div class="governance-empty compact">暂无 chunk 快照</div>'}
+                        </div>
+                    </section>
+                `;
+            }).join('')}
+        `;
+
+        this.governanceDetail.querySelectorAll('.markdown-surface').forEach((node) => {
+            this.highlightCodeBlocks(node);
+        });
+    }
+
+    renderFingerprintDetailError(message) {
+        if (!this.governanceDetail) {
+            return;
+        }
+
+        if (this.governanceDetailHint) {
+            this.governanceDetailHint.textContent = '详情加载失败';
+        }
+
+        this.governanceDetail.innerHTML = `
+            <div class="governance-error">
+                <div>指纹详情加载失败</div>
+                <div class="governance-error-detail">${this.escapeHtml(message || '未知错误')}</div>
+            </div>
+        `;
+    }
+
+    renderChunkEditorLoading() {
+        if (this.chunkEditorHint) {
+            this.chunkEditorHint.textContent = '正在加载 chunk 内容...';
+        }
+        if (this.chunkEditorContent) {
+            this.chunkEditorContent.innerHTML = '<div class="governance-loading-block">正在加载 chunk 内容...</div>';
+        }
+    }
+
+    renderChunkEditor(chunk) {
+        if (!this.chunkEditorContent) {
+            return;
+        }
+
+        if (!chunk) {
+            if (this.chunkEditorHint) {
+                this.chunkEditorHint.textContent = '选择某个 chunk 开始修订';
+            }
+            this.chunkEditorContent.innerHTML = '<div class="governance-empty">暂未选择 chunk</div>';
+            return;
+        }
+
+        const metadata = chunk.metadata || {};
+        const publishedText = chunk.published_text || chunk.source_text || '';
+        const draftText = chunk.draft_text ?? publishedText;
+
+        if (this.chunkEditorHint) {
+            this.chunkEditorHint.textContent = `${chunk.file_name || metadata._file_name || '未知文件'} · v${chunk.published_version || 0}`;
+        }
+
+        this.chunkEditorContent.innerHTML = `
+            <div class="chunk-editor-meta-card">
+                <div class="chunk-editor-meta-grid">
+                    <div><span>文件</span><strong>${this.escapeHtml(chunk.file_name || metadata._file_name || '-')}</strong></div>
+                    <div><span>集合</span><strong>${this.escapeHtml(chunk.collection_name || '-')}</strong></div>
+                    <div><span>页码</span><strong>${this.escapeHtml(this.formatNullable(chunk.page_number ?? metadata.page_number))}</strong></div>
+                    <div><span>状态</span><strong class="sync-status-tag ${this.escapeHtml(chunk.sync_status || 'unknown')}">${this.escapeHtml(chunk.sync_status || 'unknown')}</strong></div>
+                    <div><span>版本</span><strong>${this.escapeHtml(String(chunk.published_version || 0))}</strong></div>
+                    <div><span>章节</span><strong>${this.escapeHtml(chunk.section_path || metadata.section_path || '-')}</strong></div>
+                </div>
+                <div class="chunk-key-line">${this.escapeHtml(chunk.chunk_key || '')}</div>
+                ${chunk.last_publish_error ? `<div class="publish-error-banner">${this.escapeHtml(chunk.last_publish_error)}</div>` : ''}
+            </div>
+
+            <div class="chunk-text-section">
+                <div class="chunk-text-header">
+                    <h3>当前线上内容</h3>
+                </div>
+                <div class="chunk-text-preview markdown-surface">${this.renderMarkdown(publishedText || '暂无已发布内容')}</div>
+            </div>
+
+            <div class="chunk-text-section">
+                <div class="chunk-text-header">
+                    <h3>草稿内容</h3>
+                    <span class="draft-state ${this.isDraftDirty ? 'dirty' : 'saved'}">${this.isDraftDirty ? '未保存修改' : '已同步到页面'}</span>
+                </div>
+                <textarea id="chunkDraftTextarea" class="chunk-draft-textarea" ${this.isChunkPublishing ? 'disabled' : ''} placeholder="请输入修订后的 chunk 文本">${this.escapeHtml(draftText)}</textarea>
+            </div>
+
+            <div class="chunk-action-row">
+                <button class="governance-primary-btn" type="button" data-action="save-draft">保存草稿</button>
+                <button class="governance-accent-btn" type="button" data-action="publish-chunk">发布</button>
+                <button class="governance-secondary-btn" type="button" data-action="view-history">刷新历史</button>
+            </div>
+
+            <section class="chunk-history-section">
+                <div class="chunk-text-header">
+                    <h3>发布历史</h3>
+                </div>
+                <div id="chunkHistoryPanel">
+                    <div class="governance-empty compact">暂无历史记录</div>
+                </div>
+            </section>
+        `;
+
+        this.chunkEditorContent.querySelectorAll('.markdown-surface').forEach((node) => {
+            this.highlightCodeBlocks(node);
+        });
+        this.renderChunkHistory(this.currentChunkHistory);
+        this.updateChunkEditorActions();
+    }
+
+    renderChunkEditorError(message) {
+        if (!this.chunkEditorContent) {
+            return;
+        }
+
+        if (this.chunkEditorHint) {
+            this.chunkEditorHint.textContent = 'Chunk 加载失败';
+        }
+
+        this.chunkEditorContent.innerHTML = `
+            <div class="governance-error">
+                <div>Chunk 加载失败</div>
+                <div class="governance-error-detail">${this.escapeHtml(message || '未知错误')}</div>
+            </div>
+        `;
+    }
+
+    renderChunkHistoryLoading() {
+        const historyPanel = document.getElementById('chunkHistoryPanel');
+        if (historyPanel) {
+            historyPanel.innerHTML = '<div class="governance-loading-block compact">正在加载历史...</div>';
+        }
+    }
+
+    renderChunkHistory(items = []) {
+        const historyPanel = document.getElementById('chunkHistoryPanel');
+        if (!historyPanel) {
+            return;
+        }
+
+        if (!items.length) {
+            historyPanel.innerHTML = '<div class="governance-empty compact">暂无发布历史</div>';
+            return;
+        }
+
+        historyPanel.innerHTML = `
+            <div class="chunk-history-list">
+                ${items.map((item) => `
+                    <article class="history-entry">
+                        <div class="history-entry-head">
+                            <strong>v${this.escapeHtml(String(item.version_no || '-'))}</strong>
+                            <span>${this.escapeHtml(this.formatDateTime(item.created_at))}</span>
+                        </div>
+                        <div class="history-entry-meta">
+                            <span>编辑人: ${this.escapeHtml(item.editor || 'admin')}</span>
+                            <span>状态: ${this.escapeHtml(item.publish_status || 'success')}</span>
+                        </div>
+                        ${item.edit_note ? `<div class="history-entry-note">${this.escapeHtml(item.edit_note)}</div>` : ''}
+                        ${item.new_text ? `<div class="history-entry-preview markdown-surface">${this.renderMarkdown(item.new_text)}</div>` : ''}
+                    </article>
+                `).join('')}
+            </div>
+        `;
+
+        historyPanel.querySelectorAll('.markdown-surface').forEach((node) => {
+            this.highlightCodeBlocks(node);
+        });
+    }
+
+    renderChunkHistoryError(message) {
+        const historyPanel = document.getElementById('chunkHistoryPanel');
+        if (!historyPanel) {
+            return;
+        }
+
+        historyPanel.innerHTML = `
+            <div class="governance-error compact">
+                <div>历史加载失败</div>
+                <div class="governance-error-detail">${this.escapeHtml(message || '未知错误')}</div>
+            </div>
+        `;
+    }
+
+    updateChunkEditorActions() {
+        if (!this.chunkEditorContent) {
+            return;
+        }
+
+        const saveBtn = this.chunkEditorContent.querySelector('[data-action="save-draft"]');
+        const publishBtn = this.chunkEditorContent.querySelector('[data-action="publish-chunk"]');
+        const historyBtn = this.chunkEditorContent.querySelector('[data-action="view-history"]');
+        const draftTextarea = this.chunkEditorContent.querySelector('#chunkDraftTextarea');
+
+        const hasChunk = Boolean(this.currentChunk);
+        const disabled = this.isChunkPublishing || !hasChunk;
+
+        if (saveBtn) {
+            saveBtn.disabled = disabled;
+            saveBtn.textContent = this.isChunkPublishing ? '处理中...' : (this.isDraftDirty ? '保存草稿' : '草稿已保存');
+        }
+
+        if (publishBtn) {
+            publishBtn.disabled = disabled;
+            publishBtn.textContent = this.isChunkPublishing ? '发布中...' : '发布';
+        }
+
+        if (historyBtn) {
+            historyBtn.disabled = disabled;
+        }
+
+        if (draftTextarea) {
+            draftTextarea.disabled = disabled;
+        }
+    }
+
+    formatDateTime(value) {
+        if (!value) {
+            return '-';
+        }
+
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) {
+            return String(value);
+        }
+
+        return date.toLocaleString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+        });
+    }
+
+    formatScore(value) {
+        const numeric = Number(value);
+        return Number.isFinite(numeric) ? numeric.toFixed(3) : '-';
+    }
+
+    formatNullable(value) {
+        if (value === null || value === undefined || value === '') {
+            return '-';
+        }
+        return String(value);
     }
 
     // 生成随机会话ID
@@ -1092,7 +1828,7 @@ class SuperBizAgentApp {
         if (file) {
             // 验证文件格式
             if (!this.validateFileType(file)) {
-                this.showNotification('只支持上传 TXT 或 Markdown (.md) 格式的文件', 'error');
+                this.showNotification('只支持上传 TXT、Markdown (.md) 或 PDF 格式的文件', 'error');
                 this.fileInput.value = '';
                 return;
             }
@@ -1103,7 +1839,7 @@ class SuperBizAgentApp {
     // 验证文件类型
     validateFileType(file) {
         const fileName = file.name.toLowerCase();
-        const allowedExtensions = ['.txt', '.md', '.markdown'];
+        const allowedExtensions = ['.txt', '.md', '.markdown', '.pdf'];
         return allowedExtensions.some(ext => fileName.endsWith(ext));
     }
 
@@ -1111,7 +1847,7 @@ class SuperBizAgentApp {
     async uploadFile(file) {
         // 再次验证文件类型（双重保险）
         if (!this.validateFileType(file)) {
-            this.showNotification('只支持上传 TXT 或 Markdown (.md) 格式的文件', 'error');
+            this.showNotification('只支持上传 TXT、Markdown (.md) 或 PDF 格式的文件', 'error');
             return;
         }
 
@@ -1588,6 +2324,8 @@ class SuperBizAgentApp {
             return;
         }
 
+        this.switchMainView('chat');
+
         // 新建对话
         this.newChat();
         
@@ -1618,15 +2356,14 @@ class SuperBizAgentApp {
     }
 
     // 显示/隐藏加载遮罩层
-    showLoadingOverlay(show) {
+    showLoadingOverlay(show, options = {}) {
         if (this.loadingOverlay) {
             if (show) {
                 this.loadingOverlay.style.display = 'flex';
-                // 更新文字为智能运维
                 const loadingText = this.loadingOverlay.querySelector('.loading-text');
                 const loadingSubtext = this.loadingOverlay.querySelector('.loading-subtext');
-                if (loadingText) loadingText.textContent = '智能运维分析中，请稍候...';
-                if (loadingSubtext) loadingSubtext.textContent = '后端正在处理，请耐心等待';
+                if (loadingText) loadingText.textContent = options.title || '智能运维分析中，请稍候...';
+                if (loadingSubtext) loadingSubtext.textContent = options.subtitle || '后端正在处理，请耐心等待';
                 // 防止页面滚动
                 document.body.style.overflow = 'hidden';
             } else {

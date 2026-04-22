@@ -51,6 +51,43 @@ class KnowledgeCorpusService:
         ]
         self._write_corpus(corpus, collection_name)
 
+    def upsert_chunk(
+        self,
+        collection_name: str,
+        chunk_key: str,
+        text: str,
+        metadata: Dict[str, object],
+    ) -> None:
+        normalized_metadata = dict(metadata)
+        normalized_metadata["chunk_id"] = chunk_key
+
+        corpus = self.load_corpus(collection_name)
+        for index, item in enumerate(corpus):
+            if str(item.get("chunk_id")) != chunk_key:
+                continue
+            merged_metadata = {key: value for key, value in item.items() if key != "content"}
+            merged_metadata.update(normalized_metadata)
+            corpus[index] = {
+                "content": text,
+                **merged_metadata,
+            }
+            self._write_corpus(corpus, collection_name)
+            logger.info(
+                f"本地语料单 chunk 已更新: collection={collection_name}, chunk_key={chunk_key}"
+            )
+            return
+
+        corpus.append(
+            {
+                "content": text,
+                **normalized_metadata,
+            }
+        )
+        self._write_corpus(corpus, collection_name)
+        logger.info(
+            f"本地语料单 chunk 已新增: collection={collection_name}, chunk_key={chunk_key}"
+        )
+
     def get_corpus_path(self, collection_name: str | None = None) -> Path:
         target = collection_name or config.rag_collection_name
         if target == config.rag_collection_name:
