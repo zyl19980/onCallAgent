@@ -83,4 +83,16 @@ dmypy.json
 *.md
 
 tests/
+!tests/
+tests/*
+!tests/test_inspect_experiment_sources.py
 temp.py
+
+RAGTest/
+aiops-docs/
+!aiops-docs/
+aiops-docs/*
+!aiops-docs/experiment/
+!aiops-docs/experiment/**
+!scripts/experiment/
+!scripts/experiment/README.md
