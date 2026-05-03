@@ -1,0 +1,378 @@
+{
+  "results": "aiops-docs/experiment/results/dense_current_rerank_dev.json",
+  "experiment_name": "dense_current_rerank_dev",
+  "split": "dev",
+  "strategy": "rank_and_margin",
+  "high_threshold": 0.62,
+  "low_threshold": 0.58,
+  "margin_threshold": 0.015,
+  "success_k": 10,
+  "evaluated_samples": 20,
+  "per_sample": [
+    {
+      "sample_id": "rag_002",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "top1_score": 0.946121,
+      "top2_score": 0.926729,
+      "score_margin": 0.019391,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_003",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "top1_score": 0.915083,
+      "top2_score": 0.914474,
+      "score_margin": 0.000609,
+      "predicted_confidence": "low",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_004",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "top1_score": 0.935252,
+      "top2_score": 0.889471,
+      "score_margin": 0.045781,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_005",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "top1_score": 0.947692,
+      "top2_score": 0.918656,
+      "score_margin": 0.029036,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_017",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "top1_score": 0.907837,
+      "top2_score": 0.838071,
+      "score_margin": 0.069765,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_018",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "top1_score": 0.597906,
+      "top2_score": 0.589612,
+      "score_margin": 0.008294,
+      "predicted_confidence": "medium",
+      "retrieval_success": true,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_020",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "top1_score": 0.579773,
+      "top2_score": 0.575755,
+      "score_margin": 0.004018,
+      "predicted_confidence": "low",
+      "retrieval_success": true,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_021",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "top1_score": 0.5988,
+      "top2_score": 0.581448,
+      "score_margin": 0.017352,
+      "predicted_confidence": "medium",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_022",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "top1_score": 0.58308,
+      "top2_score": 0.544522,
+      "score_margin": 0.038558,
+      "predicted_confidence": "medium",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_032",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "top1_score": 0.568191,
+      "top2_score": 0.562896,
+      "score_margin": 0.005295,
+      "predicted_confidence": "low",
+      "retrieval_success": true,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_033",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "top1_score": 0.553769,
+      "top2_score": 0.549977,
+      "score_margin": 0.003792,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_039",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "top1_score": 0.609398,
+      "top2_score": 0.596087,
+      "score_margin": 0.013311,
+      "predicted_confidence": "medium",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_040",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "top1_score": 0.590936,
+      "top2_score": 0.562091,
+      "score_margin": 0.028845,
+      "predicted_confidence": "medium",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_041",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "top1_score": 0.539102,
+      "top2_score": 0.532145,
+      "score_margin": 0.006957,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_042",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "top1_score": 0.587541,
+      "top2_score": 0.584253,
+      "score_margin": 0.003288,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_043",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "top1_score": 0.578233,
+      "top2_score": 0.568124,
+      "score_margin": 0.010109,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_055",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "top1_score": 0.555525,
+      "top2_score": 0.547301,
+      "score_margin": 0.008225,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_056",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "top1_score": 0.574851,
+      "top2_score": 0.563551,
+      "score_margin": 0.0113,
+      "predicted_confidence": "low",
+      "retrieval_success": true,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    },
+    {
+      "sample_id": "rag_057",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "top1_score": 0.637052,
+      "top2_score": 0.633415,
+      "score_margin": 0.003637,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0
+    },
+    {
+      "sample_id": "rag_058",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "top1_score": 0.645945,
+      "top2_score": 0.644781,
+      "score_margin": 0.001164,
+      "predicted_confidence": "low",
+      "retrieval_success": true,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0
+    }
+  ],
+  "count_by_confidence": {
+    "high": 4,
+    "medium": 5,
+    "low": 11
+  },
+  "high_confidence_precision": 1.0,
+  "low_confidence_error_capture": 0.666667,
+  "medium_confidence_success_rate": 0.4,
+  "confidence_accuracy": 0.6,
+  "calibration_table": [
+    {
+      "confidence": "high",
+      "count": 4,
+      "success_count": 4,
+      "fail_count": 0,
+      "success_rate": 1.0,
+      "avg_top1_score": 0.934225,
+      "avg_score_margin": 0.040993
+    },
+    {
+      "confidence": "medium",
+      "count": 5,
+      "success_count": 2,
+      "fail_count": 3,
+      "success_rate": 0.4,
+      "avg_top1_score": 0.596024,
+      "avg_score_margin": 0.021272
+    },
+    {
+      "confidence": "low",
+      "count": 11,
+      "success_count": 5,
+      "fail_count": 6,
+      "success_rate": 0.454545,
+      "avg_top1_score": 0.612279,
+      "avg_score_margin": 0.005309
+    }
+  ],
+  "metadata": {
+    "strategy": "rank_and_margin",
+    "high_threshold": 0.62,
+    "low_threshold": 0.58,
+    "margin_threshold": 0.015,
+    "success_k": 10
+  }
+}

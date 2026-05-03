@@ -1,0 +1,26 @@
+{
+  "total_chunks": 4503,
+  "indexed_chunks": 4503,
+  "skipped_chunks": 0,
+  "collection_name": "experiment_manuals_all",
+  "drop_existing": false,
+  "batch_size": 64,
+  "metadata_fields": [
+    "chunk_id",
+    "source_id",
+    "source_file",
+    "collection",
+    "page_start",
+    "page_end",
+    "section_path",
+    "chunk_index",
+    "chunk_type",
+    "title",
+    "fault_code",
+    "parameter_name",
+    "safety_level",
+    "text_hash"
+  ],
+  "missing_required_fields": {},
+  "warnings": []
+}

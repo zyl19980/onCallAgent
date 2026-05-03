@@ -1,0 +1,2 @@
+experiment_name,split,strategy,evaluated_samples,success_k,high_threshold,low_threshold,margin_threshold,high_confidence_precision,low_confidence_error_capture,medium_confidence_success_rate,confidence_accuracy,high_count,medium_count,low_count
+dense_current_rerank_build,build,rank_and_margin,30,10,0.62,0.58,0.015,1.0,0.571429,0.727273,0.633333,7,11,12

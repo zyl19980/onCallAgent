@@ -1,0 +1,26 @@
+{
+  "total_samples": 64,
+  "valid_samples": 64,
+  "invalid_samples": 0,
+  "count_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": 14,
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 5,
+    "haascnc_com_rotary_troubleshooting_guide_ngc": 16,
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 16,
+    "s71200_system_manual": 13
+  },
+  "count_by_question_type": {
+    "definition_or_component_lookup": 3,
+    "parameter_or_fault_code": 23,
+    "safety_or_constraint": 12,
+    "symptom_cause": 6,
+    "troubleshooting_step": 20
+  },
+  "count_by_split": {
+    "build": 64
+  },
+  "errors_by_type": {},
+  "warnings": [
+    "normalized_reasoning_hops:64"
+  ]
+}

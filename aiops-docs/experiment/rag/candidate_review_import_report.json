@@ -1,0 +1,12 @@
+{
+  "total_candidates": 80,
+  "review_rows": 80,
+  "imported_reviews": 80,
+  "approved": 0,
+  "revised": 64,
+  "rejected": 16,
+  "pending_after_import": 0,
+  "invalid_review_rows": [],
+  "duplicate_candidate_ids": [],
+  "unknown_candidate_ids": []
+}

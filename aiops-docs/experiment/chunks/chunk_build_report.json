@@ -1,0 +1,34 @@
+{
+  "total_chunks": 4503,
+  "count_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": 504,
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 265,
+    "haascnc_com_rotary_troubleshooting_guide_ngc": 124,
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 971,
+    "s71200_system_manual": 2639
+  },
+  "count_by_chunk_type": {
+    "alarm_fault_code": 287,
+    "concept_and_component": 37,
+    "front_matter": 468,
+    "installation_or_wiring": 313,
+    "maintenance_procedure": 52,
+    "other": 669,
+    "parameter_and_configuration": 1746,
+    "safety_and_constraint": 566,
+    "troubleshooting_procedure": 365
+  },
+  "candidate_chunks": 3388,
+  "excluded_chunks": 1115,
+  "avg_chars_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": 669.82,
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 630.11,
+    "haascnc_com_rotary_troubleshooting_guide_ngc": 344.55,
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 585.52,
+    "s71200_system_manual": 622.64
+  },
+  "warnings": [
+    "source_chunk_volume_high:rockwell_powerflex_520_series_user_manual_520_um001_en_e:971",
+    "source_chunk_volume_high:s71200_system_manual:2639"
+  ]
+}

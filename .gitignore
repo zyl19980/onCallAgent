@@ -86,6 +86,19 @@ tests/
 !tests/
 tests/*
 !tests/test_inspect_experiment_sources.py
+!tests/test_build_experiment_chunks.py
+!tests/test_build_annotation_pool.py
+!tests/test_generate_rag_candidate_questions.py
+!tests/test_export_candidate_review_sheet.py
+!tests/test_import_candidate_review.py
+!tests/test_build_rag_dataset_from_candidates.py
+!tests/test_validate_rag_dataset.py
+!tests/test_split_rag_dataset.py
+!tests/test_evaluate_rag_retrieval.py
+!tests/test_index_experiment_chunks.py
+!tests/test_compare_retrieval_experiments.py
+!tests/test_evaluate_retrieval_confidence.py
+!tests/test_summarize_experiment_results.py
 temp.py
 
 RAGTest/

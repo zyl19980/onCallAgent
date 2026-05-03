@@ -1,0 +1,58 @@
+{
+  "total_samples": 64,
+  "count_by_split": {
+    "build": 30,
+    "dev": 20,
+    "test": 0,
+    "reserve": 14
+  },
+  "count_by_source_per_split": {
+    "build": {
+      "abb_manual_for_induction_motors_and_generators_en": 7,
+      "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 1,
+      "haascnc_com_rotary_troubleshooting_guide_ngc": 8,
+      "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 8,
+      "s71200_system_manual": 6
+    },
+    "dev": {
+      "abb_manual_for_induction_motors_and_generators_en": 4,
+      "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 2,
+      "haascnc_com_rotary_troubleshooting_guide_ngc": 5,
+      "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 5,
+      "s71200_system_manual": 4
+    },
+    "test": {},
+    "reserve": {
+      "abb_manual_for_induction_motors_and_generators_en": 3,
+      "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 2,
+      "haascnc_com_rotary_troubleshooting_guide_ngc": 3,
+      "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 3,
+      "s71200_system_manual": 3
+    }
+  },
+  "count_by_question_type_per_split": {
+    "build": {
+      "definition_or_component_lookup": 1,
+      "parameter_or_fault_code": 10,
+      "safety_or_constraint": 5,
+      "symptom_cause": 2,
+      "troubleshooting_step": 12
+    },
+    "dev": {
+      "parameter_or_fault_code": 9,
+      "safety_or_constraint": 4,
+      "symptom_cause": 3,
+      "troubleshooting_step": 4
+    },
+    "test": {},
+    "reserve": {
+      "definition_or_component_lookup": 2,
+      "parameter_or_fault_code": 4,
+      "safety_or_constraint": 3,
+      "symptom_cause": 1,
+      "troubleshooting_step": 4
+    }
+  },
+  "leakage_warnings": [],
+  "seed": 42
+}

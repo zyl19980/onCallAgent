@@ -1,0 +1,5 @@
+experiment_name,split,retrieval_strategy,rerank,evaluated_samples,candidate_top_k,final_top_k,candidate_hit_at_10,candidate_hit_at_20,candidate_hit_at_50,hit_at_1,hit_at_3,hit_at_5,hit_at_10,recall_at_1,recall_at_3,recall_at_5,recall_at_10,mrr,gold_in_candidate_not_final_count,gold_promoted_by_rerank_count,gold_demoted_by_rerank_count,delta_hit_at_1,delta_hit_at_3,delta_hit_at_5,delta_hit_at_10,delta_mrr
+dense_no_rerank_build,build,dense,none,30,50,10,0.633333,0.833333,0.9,0.333333,0.5,0.6,0.633333,0.333333,0.5,0.6,0.633333,0.434444,0,0,0,0.0,0.0,0.0,0.0,0.0
+dense_current_rerank_build,build,dense,current,30,50,10,0.633333,0.833333,0.9,0.466667,0.566667,0.666667,0.766667,0.466667,0.566667,0.666667,0.766667,0.537593,4,11,3,0.133334,0.066667,0.066667,0.133334,0.103149
+dense_no_rerank_dev,dev,dense,none,20,50,10,0.4,0.5,0.85,0.15,0.2,0.3,0.4,0.15,0.2,0.3,0.4,0.20256,0,0,0,0.0,0.0,0.0,0.0,0.0
+dense_current_rerank_dev,dev,dense,current,20,50,10,0.4,0.5,0.85,0.35,0.5,0.55,0.55,0.35,0.5,0.55,0.55,0.418333,6,12,1,0.2,0.3,0.25,0.15,0.215773

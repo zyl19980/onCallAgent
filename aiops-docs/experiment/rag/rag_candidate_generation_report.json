@@ -1,0 +1,36 @@
+{
+  "total_candidates": 80,
+  "count_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": 15,
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 10,
+    "haascnc_com_rotary_troubleshooting_guide_ngc": 20,
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 20,
+    "s71200_system_manual": 15
+  },
+  "count_by_question_type": {
+    "definition_or_component_lookup": 10,
+    "parameter_or_fault_code": 20,
+    "safety_or_constraint": 15,
+    "symptom_cause": 15,
+    "troubleshooting_step": 20
+  },
+  "failed_generation_count": 0,
+  "skipped_chunks": {
+    "input_pool_rows": 728,
+    "eligible_rows_considered": 728,
+    "unselected_rows": 648
+  },
+  "warnings": [
+    "definition_fallback_used:abb_manual_for_induction_motors_and_generators_en::5-5::71f52e873f2515cc",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::39-39::60d4c89e77a1e888",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::30-30::ba68d2c858e4bcff",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::155-155::9214aac20a2cef09",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::63-63::0730aae5ae9875d6",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::40-40::18e19464a5f7c1e9",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::263-263::0baa6731341c5308",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::43-43::22c34eee73550b96",
+    "definition_fallback_used:s71200_system_manual::609-609::2a817cf3938d747a",
+    "definition_fallback_used:s71200_system_manual::130-130::b64a19b4b3055e9f",
+    "selected_rows_need_manual_focus:26"
+  ]
+}

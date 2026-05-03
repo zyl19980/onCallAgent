@@ -1,0 +1,4385 @@
+{
+  "dataset": "aiops-docs/experiment/rag/splits/rag_build.jsonl",
+  "mode": "mock",
+  "top_k": 10,
+  "ks": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "total_samples": 30,
+  "evaluated_samples": 30,
+  "skipped_abstain": 0,
+  "missing_chunk_id_count": 0,
+  "metrics": {
+    "Hit@1": 1.0,
+    "Recall@1": 1.0,
+    "Evidence Coverage@1": 1.0,
+    "Source Accuracy@1": 1.0,
+    "Page Accuracy@1": 1.0,
+    "Hit@3": 1.0,
+    "Recall@3": 1.0,
+    "Evidence Coverage@3": 1.0,
+    "Source Accuracy@3": 1.0,
+    "Page Accuracy@3": 1.0,
+    "Hit@5": 1.0,
+    "Recall@5": 1.0,
+    "Evidence Coverage@5": 1.0,
+    "Source Accuracy@5": 1.0,
+    "Page Accuracy@5": 1.0,
+    "Hit@10": 1.0,
+    "Recall@10": 1.0,
+    "Evidence Coverage@10": 1.0,
+    "Source Accuracy@10": 1.0,
+    "Page Accuracy@10": 1.0,
+    "MRR": 1.0
+  },
+  "metrics_by_question_type": {
+    "definition_or_component_lookup": {
+      "samples": 1,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "parameter_or_fault_code": {
+      "samples": 10,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "safety_or_constraint": {
+      "samples": 5,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "symptom_cause": {
+      "samples": 2,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "troubleshooting_step": {
+      "samples": 12,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    }
+  },
+  "metrics_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": {
+      "samples": 7,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": {
+      "samples": 1,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "haascnc_com_rotary_troubleshooting_guide_ngc": {
+      "samples": 8,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": {
+      "samples": 8,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    },
+    "s71200_system_manual": {
+      "samples": 6,
+      "metrics": {
+        "Hit@1": 1.0,
+        "Recall@1": 1.0,
+        "Evidence Coverage@1": 1.0,
+        "Source Accuracy@1": 1.0,
+        "Page Accuracy@1": 1.0,
+        "Hit@3": 1.0,
+        "Recall@3": 1.0,
+        "Evidence Coverage@3": 1.0,
+        "Source Accuracy@3": 1.0,
+        "Page Accuracy@3": 1.0,
+        "Hit@5": 1.0,
+        "Recall@5": 1.0,
+        "Evidence Coverage@5": 1.0,
+        "Source Accuracy@5": 1.0,
+        "Page Accuracy@5": 1.0,
+        "Hit@10": 1.0,
+        "Recall@10": 1.0,
+        "Evidence Coverage@10": 1.0,
+        "Source Accuracy@10": 1.0,
+        "Page Accuracy@10": 1.0,
+        "MRR": 1.0
+      }
+    }
+  },
+  "per_sample": [
+    {
+      "id": "rag_006",
+      "user_input": "How should radial alignment readings be taken on an ABB motor?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::45-45::05190e41a91ee0be"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::45-45::05190e41a91ee0be",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 45,
+          "page_end": 45,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::715-715::456f1a5009bb1fa4",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 715,
+          "page_end": 715,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::37-37::e64891f403940c5e",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 37,
+          "page_end": 37,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::587-587::e7e33cb066dd69a3",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 587,
+          "page_end": 587,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::306-306::5676870f97708a49",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 306,
+          "page_end": 306,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::215-215::9ac7314241306d22",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 215,
+          "page_end": 215,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::41-41::c98dde82c5e627e6",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 41,
+          "page_end": 41,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::527-527::f800d705b63ecbc3",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 527,
+          "page_end": 527,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::59-59::3f9a7fb104bae0d9",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 59,
+          "page_end": 59,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::76-76::68feb835c858c877",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 76,
+          "page_end": 76,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_009",
+      "user_input": "What general safety instruction must be observed when working with the ABB motor?",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::65-65::abe878e08bc326d8"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::65-65::abe878e08bc326d8",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 65,
+          "page_end": 65,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::232-232::90c545fbeff25ba2",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 232,
+          "page_end": 232,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::588-588::f0a7394ed4f38b1b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 588,
+          "page_end": 588,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::111-111::94dab1db68397dbd",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 111,
+          "page_end": 111,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::15-15::eb8d961ab176e3df",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 15,
+          "page_end": 15,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::304-304::6ee1e21a7a7fafe0",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 304,
+          "page_end": 304,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::87-87::a8c5a68b9742893b",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 87,
+          "page_end": 87,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::56-56::fd138126ca80a69d",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 56,
+          "page_end": 56,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::59-59::d49dc3c4b8252f6d",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 59,
+          "page_end": 59,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::78-78::38e434958bbaf7b0",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 78,
+          "page_end": 78,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_010",
+      "user_input": "How should initial alarm and trip vibration values for ABB motor bearing housing vibration be adjusted after operation?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::78-78::6232b51e4a94c2db"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::78-78::6232b51e4a94c2db",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 78,
+          "page_end": 78,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::40-40::06ceebe204868fec",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 40,
+          "page_end": 40,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::200-200::58301d3a7bd65361",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 200,
+          "page_end": 200,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::723-723::3d920e40a03cb86a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 723,
+          "page_end": 723,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::70-70::0593459d6e31ce7e",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 70,
+          "page_end": 70,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::469-469::d16a59a98d85b8d5",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 469,
+          "page_end": 469,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::204-204::aec95a1fc3fb69bc",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 204,
+          "page_end": 204,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::776-776::334d31127b5c8028",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 776,
+          "page_end": 776,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::7-7::bbce4507d12a5f1c",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::8-8::0fd0d0ebbb99bee2",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 8,
+          "page_end": 8,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_011",
+      "user_input": "What hazardous substances may be involved in ABB motor winding maintenance?",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::86-86::7abb41a8fc2ec473"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::86-86::7abb41a8fc2ec473",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 86,
+          "page_end": 86,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::472-472::020e4b9a697126fd",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 472,
+          "page_end": 472,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::48-48::744496de98b08518",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 48,
+          "page_end": 48,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::38-38::2a37471e0453e918",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 38,
+          "page_end": 38,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::42-42::ad7b686332848d5b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 42,
+          "page_end": 42,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::276-276::e9ee5d66b252f8f6",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 276,
+          "page_end": 276,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::285-285::a94fedd64053e847",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 285,
+          "page_end": 285,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::63-63::0730aae5ae9875d6",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 63,
+          "page_end": 63,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::697-697::40ca5c87567c0e86",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 697,
+          "page_end": 697,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::135-135::60cae1b17381e527",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 135,
+          "page_end": 135,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_012",
+      "user_input": "When should ABB motor air filters be changed if a filter differential pressure monitoring system is used?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::94-94::0f31177740b87c6a"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::94-94::0f31177740b87c6a",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 94,
+          "page_end": 94,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::659-659::161be75ee379efa8",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 659,
+          "page_end": 659,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::471-471::98e2f8e3271b4c3c",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 471,
+          "page_end": 471,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::758-758::96b96ae6a34e5da8",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 758,
+          "page_end": 758,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::49-49::ce597645dc4c52c5",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 49,
+          "page_end": 49,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::231-231::b5010d0a17c2d8f5",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 231,
+          "page_end": 231,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::161-161::bc12759bced7f2d1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 161,
+          "page_end": 161,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::354-354::113032aa6e60e8db",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 354,
+          "page_end": 354,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::451-451::d120f4e8a1aa42de",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 451,
+          "page_end": 451,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::601-601::234908b447769f19",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 601,
+          "page_end": 601,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_013",
+      "user_input": "What checks are recommended for overload, overspeed, or network unbalance on the ABB motor?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::104-104::d4dcbeae19025c19"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::104-104::d4dcbeae19025c19",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 104,
+          "page_end": 104,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::26-26::e55b586c4fb32d2b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 26,
+          "page_end": 26,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::252-252::f6ac9bba714646a3",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 252,
+          "page_end": 252,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::12-12::753fb3b142ea60b6",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 12,
+          "page_end": 12,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::16-16::ff212931313920a1",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 16,
+          "page_end": 16,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::825-825::36e22d42475622b1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 825,
+          "page_end": 825,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::586-586::f0818078942b7e3d",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 586,
+          "page_end": 586,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::210-210::e1f225b612db5767",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 210,
+          "page_end": 210,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::96-96::69b8b6711cc10e44",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 96,
+          "page_end": 96,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::5-5::46f9480eec97f462",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 5,
+          "page_end": 5,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_014",
+      "user_input": "What should be checked when troubleshooting brush sparking on an ABB motor?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "reference_chunk_ids": [
+        "abb_manual_for_induction_motors_and_generators_en::112-112::03edba4c0229200d"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::112-112::03edba4c0229200d",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 112,
+          "page_end": 112,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::497-497::4953f8159f535362",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 497,
+          "page_end": 497,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::328-328::d7dd52bcb78322c0",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 328,
+          "page_end": 328,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::63-63::f238de0c0a98470e",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 63,
+          "page_end": 63,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::747-747::02664c13158609a8",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 747,
+          "page_end": 747,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::5-5::6a1acaae1a844022",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 5,
+          "page_end": 5,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::66-66::fbff2250086da0f9",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 66,
+          "page_end": 66,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::71-71::b68e5555b78705fd",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 71,
+          "page_end": 71,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::67-67::49448a075fc9a251",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 67,
+          "page_end": 67,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::143-143::dba0d6ddc2c19631",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 143,
+          "page_end": 143,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_015",
+      "user_input": "What transportation safety precaution should be followed for the Grundfos pump product?",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "reference_chunk_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::5-5::1f26f016dd457c6a"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::5-5::1f26f016dd457c6a",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 5,
+          "page_end": 5,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::707-707::dbb54dbd33ed5504",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 707,
+          "page_end": 707,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::90-90::c667b874155f5614",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 90,
+          "page_end": 90,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::75-75::df6cd41464fba048",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 75,
+          "page_end": 75,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::731-731::ffb2cd62016f6d93",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 731,
+          "page_end": 731,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::601-601::53dc63e001c247f9",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 601,
+          "page_end": 601,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::47-47::137c74972d905e6e",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 47,
+          "page_end": 47,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::700-700::bcc563897c684948",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 700,
+          "page_end": 700,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::3-3::3946365e01f47a43",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 3,
+          "page_end": 3,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::5-5::f45e55cdf7e5d05b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 5,
+          "page_end": 5,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_023",
+      "user_input": "What could cause Alarm 5.9719 on a Haas rotary unit?",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::14-14::4ce6d3f477d07895"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::14-14::4ce6d3f477d07895",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 14,
+          "page_end": 14,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::227-227::14ac0ab625d38847",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 227,
+          "page_end": 227,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::388-388::e7acdbcff4871705",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 388,
+          "page_end": 388,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::134-134::2c3d93560736c176",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 134,
+          "page_end": 134,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::164-164::7f7b11c789cdb075",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 164,
+          "page_end": 164,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::813-813::178be772cb8080e1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 813,
+          "page_end": 813,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::711-711::48c7701563729d6c",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 711,
+          "page_end": 711,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::225-225::d32a4000f038f53f",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 225,
+          "page_end": 225,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::50-50::d7c2511dc542d6a1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 50,
+          "page_end": 50,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::703-703::75a8e4e8eb2010ec",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 703,
+          "page_end": 703,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_024",
+      "user_input": "What should be inspected when troubleshooting the Haas rotary encoder cable or connector fault evidence in this chunk?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::15-15::c5c1a1320a4fb605"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::15-15::c5c1a1320a4fb605",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 15,
+          "page_end": 15,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::614-614::1e7827fb16c4c3aa",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 614,
+          "page_end": 614,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::28-28::a23def5c4ba94d57",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 28,
+          "page_end": 28,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::84-84::400702d9d1682349",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 84,
+          "page_end": 84,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::661-661::308a78f73cc5f800",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 661,
+          "page_end": 661,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::228-228::94229ee983bb9480",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 228,
+          "page_end": 228,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::30-30::9f6599749a7fd27f",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 30,
+          "page_end": 30,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::68-68::341d1f5c7c32ea50",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 68,
+          "page_end": 68,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::347-347::dc7388e6a9a80504",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 347,
+          "page_end": 347,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::73-73::1442ede3e1cf417e",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 73,
+          "page_end": 73,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_025",
+      "user_input": "What does Alarm 5.9720, 6.9720, or 7.9720 relate to on a Haas rotary unit?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::16-16::d90bcd66a5f8fa17"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::16-16::d90bcd66a5f8fa17",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 16,
+          "page_end": 16,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::96-96::57097e610ee31544",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 96,
+          "page_end": 96,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::456-456::da75daded4268dce",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 456,
+          "page_end": 456,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::470-470::93bab5cc9cf6018f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 470,
+          "page_end": 470,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::230-230::5352a64e639adb52",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 230,
+          "page_end": 230,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::381-381::df2031c805cea325",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 381,
+          "page_end": 381,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::195-195::27624900f6ef2f7b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 195,
+          "page_end": 195,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::366-366::6016065738d32608",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 366,
+          "page_end": 366,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::89-89::a2dae01c47f3803b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 89,
+          "page_end": 89,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::470-470::e9c2cada9acd2ca5",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 470,
+          "page_end": 470,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_029",
+      "user_input": "What corrective action is recommended for earlier Haas TRT70 rotary models related to the O-ring?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::42-42::0a0020d436bbee45"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::42-42::0a0020d436bbee45",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 42,
+          "page_end": 42,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::110-110::db5ed45fb2e02263",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 110,
+          "page_end": 110,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::13-13::8763201826d6e249",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 13,
+          "page_end": 13,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::4-4::4e551256306915c9",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 4,
+          "page_end": 4,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::454-454::607f561bf19aa821",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 454,
+          "page_end": 454,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::823-823::16efde6feb77d584",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 823,
+          "page_end": 823,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::236-236::54dc20f3a2707162",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 236,
+          "page_end": 236,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::164-164::32495c9fecbb1fbf",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 164,
+          "page_end": 164,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::448-448::94a4e4bf6ab53bf2",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 448,
+          "page_end": 448,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::462-462::f852cbcabe45d3e8",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 462,
+          "page_end": 462,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_030",
+      "user_input": "What should be done if Haas rotary cables are connected correctly, not damaged, and the alarm persists?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::43-43::8db5c1143bc80e6e"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::43-43::8db5c1143bc80e6e",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 43,
+          "page_end": 43,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::6-6::b71d742e1ca14560",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 6,
+          "page_end": 6,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::3-3::6b8f3fab255295e2",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 3,
+          "page_end": 3,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::641-641::4d13d17dd5288d1b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 641,
+          "page_end": 641,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::863-863::8cc647fde39505d1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 863,
+          "page_end": 863,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::424-424::f4b2a35ac1099a32",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 424,
+          "page_end": 424,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::738-738::03abdc59f5c6f933",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 738,
+          "page_end": 738,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::652-652::be91492e06238d63",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 652,
+          "page_end": 652,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::202-202::b7cc6f26bfd5f810",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 202,
+          "page_end": 202,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::132-132::c8b1af3be49494c8",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 132,
+          "page_end": 132,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_031",
+      "user_input": "What are the first steps for removing the rear brake cap on a Haas HRC unit?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::46-46::5352555ed6f82668"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::46-46::5352555ed6f82668",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 46,
+          "page_end": 46,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::205-205::43cd2ef3a4c507e2",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 205,
+          "page_end": 205,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::52-52::1cfdc7557d0362f2",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 52,
+          "page_end": 52,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::108-108::cd31c07b1ccf8399",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 108,
+          "page_end": 108,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::179-179::10b222dade8c5562",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 179,
+          "page_end": 179,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::48-48::7bb604464c2fa1f1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 48,
+          "page_end": 48,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::26-26::e55b586c4fb32d2b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 26,
+          "page_end": 26,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::699-699::574cb20fbdeeb04a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 699,
+          "page_end": 699,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::40-40::18e19464a5f7c1e9",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 40,
+          "page_end": 40,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::448-448::94a4e4bf6ab53bf2",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 448,
+          "page_end": 448,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_034",
+      "user_input": "What should be checked on the Maincon connector and cable when troubleshooting a Haas rotary unit?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::53-54::2859ceb150675abf"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::53-54::2859ceb150675abf",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 53,
+          "page_end": 54,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::851-851::0ff20de6cd3d3a88",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 851,
+          "page_end": 851,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::522-522::04a8fc0abfd09e70",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 522,
+          "page_end": 522,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::740-740::674fee1031c3da92",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 740,
+          "page_end": 740,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::568-568::ab3a9a0f9cb1b609",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 568,
+          "page_end": 568,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::161-161::3f2284d12944828e",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 161,
+          "page_end": 161,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::81-81::30bb8fb409c32b33",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 81,
+          "page_end": 81,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::528-528::ecedaa3d96f887de",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 528,
+          "page_end": 528,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::13-13::dc4bf3d67676013f",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 13,
+          "page_end": 13,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::136-136::61e014cb50f2d262",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 136,
+          "page_end": 136,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_035",
+      "user_input": "What is a possible cause of Haas rotary Alarm 4011?",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "reference_chunk_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc::55-55::ff253c31e88e7406"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::55-55::ff253c31e88e7406",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 55,
+          "page_end": 55,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::121-121::3a6c010b867f2683",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 121,
+          "page_end": 121,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::211-211::07a40b5e01f57e52",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 211,
+          "page_end": 211,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::194-194::c963783a494343c6",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 194,
+          "page_end": 194,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::19-19::3bb85ad22bf53d31",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 19,
+          "page_end": 19,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::717-717::bb14c549325bc521",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 717,
+          "page_end": 717,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::89-89::ecc17a9101246e7f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 89,
+          "page_end": 89,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::233-233::b6c2cf45a78a206b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 233,
+          "page_end": 233,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::132-132::99de4e204970fc15",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 132,
+          "page_end": 132,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::22-22::56c3cabf97356fbf",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 22,
+          "page_end": 22,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_044",
+      "user_input": "What does PowerFlex parameter A541 [Auto Rstrt Tries] set?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::134-134::5ca7990cd4e9aeb2"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::134-134::5ca7990cd4e9aeb2",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 134,
+          "page_end": 134,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::219-219::739963c95427d85f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 219,
+          "page_end": 219,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::185-185::1ad6345023767d3c",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 185,
+          "page_end": 185,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::233-233::80cf98b317b645be",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 233,
+          "page_end": 233,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::215-215::fa4e8af9457dc280",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 215,
+          "page_end": 215,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::8-8::c7f56f64463efea4",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 8,
+          "page_end": 8,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::234-234::b087f3066bbd594c",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 234,
+          "page_end": 234,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::74-74::ef7b0470ee9f846a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 74,
+          "page_end": 74,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::140-140::3549f2739bbf0b35",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 140,
+          "page_end": 140,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::641-641::cd0e8da7cd39377e",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 641,
+          "page_end": 641,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_045",
+      "user_input": "What does PowerFlex parameter F631 [Fault 1 Freq] record?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::145-145::62c714be0548eb28"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::145-145::62c714be0548eb28",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 145,
+          "page_end": 145,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::19-19::c619bf0ff5230a8f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 19,
+          "page_end": 19,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::140-140::cd45a28ca6759297",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 140,
+          "page_end": 140,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::656-656::9a9f77421c17be1e",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 656,
+          "page_end": 656,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::75-75::17fbae5ce44545a6",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 75,
+          "page_end": 75,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::134-134::f05126909b4f27ed",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 134,
+          "page_end": 134,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::39-39::468bbaa09577892f",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 39,
+          "page_end": 39,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::143-143::939d6ddffb6fbc26",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 143,
+          "page_end": 143,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::427-427::b7eb0d11cfcd4702",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 427,
+          "page_end": 427,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::53-53::eea569833467e446",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 53,
+          "page_end": 53,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_046",
+      "user_input": "Which PowerFlex 520 parameters should be set when Start and Speed Reference are controlled over RS-485 DSI?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::206-206::2117bbb1ac1c91ab"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::206-206::2117bbb1ac1c91ab",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 206,
+          "page_end": 206,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::66-66::77fc2d82defbd1f3",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 66,
+          "page_end": 66,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::130-130::02ee06dfa1bc3b15",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 130,
+          "page_end": 130,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::729-729::5d934c825b2cb525",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 729,
+          "page_end": 729,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::521-521::25e037fd65dd5c9f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 521,
+          "page_end": 521,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::80-80::7fd69c4f9995f969",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 80,
+          "page_end": 80,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "haascnc_com_rotary_troubleshooting_guide_ngc::20-20::93223db6d9bae867",
+          "source_id": "haascnc_com_rotary_troubleshooting_guide_ngc",
+          "source_file": "haascnc.com-Rotary - Troubleshooting Guide - NGC.pdf",
+          "page_start": 20,
+          "page_end": 20,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::11-11::892210ce47a752f6",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 11,
+          "page_end": 11,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::192-193::579381a305229b54",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 192,
+          "page_end": 193,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::207-207::f2888f9356cad881",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 207,
+          "page_end": 207,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_047",
+      "user_input": "What happens when PowerFlex 520 A535 [Motor Fdbk Type] is set to a nonzero value?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::219-219::9d798113ccb3678f"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::219-219::9d798113ccb3678f",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 219,
+          "page_end": 219,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::498-498::1981bdf494019923",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 498,
+          "page_end": 498,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::59-59::09d3bbb6cc9efe98",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 59,
+          "page_end": 59,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::814-814::d412ccdf4a1c78d3",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 814,
+          "page_end": 814,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::117-117::809f535566f53458",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 117,
+          "page_end": 117,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::496-496::dd7b6fffefcde0fa",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 496,
+          "page_end": 496,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::123-123::5776cdcdf5345dbf",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 123,
+          "page_end": 123,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::24-24::d4d6b831f11dad39",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 24,
+          "page_end": 24,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::11-11::9c0658c8be581860",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 11,
+          "page_end": 11,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::12-12::54461ffec1b96e3d",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 12,
+          "page_end": 12,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_048",
+      "user_input": "What safety performance level does the PowerFlex 525 Safe Torque Off function achieve under EN ISO 13849-1?",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::240-240::4d4a20ed8d44b3ff"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::240-240::4d4a20ed8d44b3ff",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 240,
+          "page_end": 240,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::701-701::b7dba12aa1165352",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 701,
+          "page_end": 701,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::86-86::c89eced0da2d1d88",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 86,
+          "page_end": 86,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::90-90::01b6a8c74d34051b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 90,
+          "page_end": 90,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::341-341::7898d9c0322dd0cd",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 341,
+          "page_end": 341,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::201-201::0ef02676cc8cb05f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 201,
+          "page_end": 201,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::459-459::5de13200fb1d3871",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 459,
+          "page_end": 459,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::371-371::bf7da955f82d14ea",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 371,
+          "page_end": 371,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::259-259::238f22940e1662b5",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 259,
+          "page_end": 259,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::286-286::f8fc7b94ddbd58d7",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 286,
+          "page_end": 286,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_049",
+      "user_input": "When are additional protective measures required for the PowerFlex 520 Safe Torque Off stop action?",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::244-244::7cb6337820c3bcfa"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::244-244::7cb6337820c3bcfa",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 244,
+          "page_end": 244,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::642-642::d164d42945258c3b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 642,
+          "page_end": 642,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::7-7::95d98e339ff01cb0",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::27-27::2afa1953ef989680",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 27,
+          "page_end": 27,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::787-787::27ff076fd8da78b9",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 787,
+          "page_end": 787,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::106-106::542b2425eeb8fae7",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 106,
+          "page_end": 106,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::150-150::058346d8262aeacf",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 150,
+          "page_end": 150,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::48-48::bcb5bf08c95ef4b5",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 48,
+          "page_end": 48,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::252-252::f6ac9bba714646a3",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 252,
+          "page_end": 252,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::716-716::64a11a702afbde35",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 716,
+          "page_end": 716,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_050",
+      "user_input": "Why is a properly performed Auto Tune important on a PowerFlex 520-series drive?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::257-257::55b4974868fa572b"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::257-257::55b4974868fa572b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 257,
+          "page_end": 257,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::121-121::3a6c010b867f2683",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 121,
+          "page_end": 121,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::238-238::9931d91bcd4f2e9a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 238,
+          "page_end": 238,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::279-279::6825494d9c098db9",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 279,
+          "page_end": 279,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::143-143::5ec8b3d013ccec6b",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 143,
+          "page_end": 143,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::16-16::86e30caf0933c1f4",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 16,
+          "page_end": 16,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::502-502::58a1a719f6bf2880",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 502,
+          "page_end": 502,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::198-199::7b89fedebfcf4656",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 198,
+          "page_end": 199,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::418-418::a89aa4da4f81fc21",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 418,
+          "page_end": 418,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::25-25::12d395f55868e737",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 25,
+          "page_end": 25,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_051",
+      "user_input": "What is the PowerFlex PM motor alignment DC current parameter used for?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "reference_chunk_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e::263-263::0baa6731341c5308"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::263-263::0baa6731341c5308",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 263,
+          "page_end": 263,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::122-122::346c1ab2c8f8ad7b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 122,
+          "page_end": 122,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::293-293::81a0e508192d2407",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 293,
+          "page_end": 293,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::137-137::019c0e99f0e7b129",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 137,
+          "page_end": 137,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::689-689::b4325a39399ad59b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 689,
+          "page_end": 689,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::43-43::ec6907d8aed84386",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 43,
+          "page_end": 43,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::12-12::eb8e454659e931b9",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 12,
+          "page_end": 12,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::354-354::728075c2a8fa99c2",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 354,
+          "page_end": 354,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::75-75::90c7a444a9972437",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 75,
+          "page_end": 75,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::610-610::37d94d5f29b5dc12",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 610,
+          "page_end": 610,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_059",
+      "user_input": "What does the Direction input specify for S7-1200 motion control?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::388-388::e7acdbcff4871705"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::388-388::e7acdbcff4871705",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 388,
+          "page_end": 388,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::631-631::0340872a576825b3",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 631,
+          "page_end": 631,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::113-113::d5c595edbb7a81b4",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 113,
+          "page_end": 113,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::837-837::59ccc26a6f0499aa",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 837,
+          "page_end": 837,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::356-356::ae635c161ead242b",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 356,
+          "page_end": 356,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::223-223::1734eefcb691e481",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 223,
+          "page_end": 223,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::241-241::7c435c2e384ce595",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 241,
+          "page_end": 241,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::156-156::760d9af3e89e2aa3",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 156,
+          "page_end": 156,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::766-766::fda15a3d5f3a2541",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 766,
+          "page_end": 766,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::97-97::854a515df471e79f",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 97,
+          "page_end": 97,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_060",
+      "user_input": "How are completed and aborted S7-1200 motion control commands indicated?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::410-410::bc6c42cf74a77461"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::410-410::bc6c42cf74a77461",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 410,
+          "page_end": 410,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::464-464::35cfab64ae678c14",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 464,
+          "page_end": 464,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::8-8::9cd41cc43edaa9b5",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 8,
+          "page_end": 8,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::630-630::8cc4b8726aeb68a1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 630,
+          "page_end": 630,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::12-12::23255da25b69c43e",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 12,
+          "page_end": 12,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::615-615::82b8ec7d009acd3f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 615,
+          "page_end": 615,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::790-790::7b49022598f6c02d",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 790,
+          "page_end": 790,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::206-206::b44a0edb17617288",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 206,
+          "page_end": 206,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::220-220::bb71da911de15e2f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 220,
+          "page_end": 220,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::8-8::c8202af0a2fac4f9",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 8,
+          "page_end": 8,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_061",
+      "user_input": "What does DONE = 1 mean for TRCV_C receive data consistency on the S7-1200?",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::436-436::f9de86a664a17219"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::436-436::f9de86a664a17219",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 436,
+          "page_end": 436,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::343-343::87f54eee7551aa0a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 343,
+          "page_end": 343,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::731-731::ffb2cd62016f6d93",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 731,
+          "page_end": 731,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::222-222::e48aaf980e5e4e5c",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 222,
+          "page_end": 222,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::531-531::53d747cfd656b560",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 531,
+          "page_end": 531,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::631-631::4667f96827adfff7",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 631,
+          "page_end": 631,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::843-843::75aa0e3fac533d7a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 843,
+          "page_end": 843,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::434-434::5c2c6cae3f90b24d",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 434,
+          "page_end": 434,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::715-715::f13333fe35d41ed1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 715,
+          "page_end": 715,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::403-403::f9324f48a4f35270",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 403,
+          "page_end": 403,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_062",
+      "user_input": "How can an AlarmEnum be defined and referenced in an S7-1200 user-defined web page?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::531-531::53d747cfd656b560"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::531-531::53d747cfd656b560",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 531,
+          "page_end": 531,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::438-438::2263765b811ddbc9",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 438,
+          "page_end": 438,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::770-770::f4930ad80344a2f1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 770,
+          "page_end": 770,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::378-378::a5b0f00600652cac",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 378,
+          "page_end": 378,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::786-786::e36ed5773d81fbff",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 786,
+          "page_end": 786,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "s71200_system_manual::347-347::796b9ce40b2fd821",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 347,
+          "page_end": 347,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::536-536::ea6e8dc4a81419ad",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 536,
+          "page_end": 536,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::182-182::7b2daa77e0a042b7",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 182,
+          "page_end": 182,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::841-841::aa3cee0877268809",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 841,
+          "page_end": 841,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::46-46::71014a5cc3390aaf",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 46,
+          "page_end": 46,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_063",
+      "user_input": "What are CTRL4 and CTRL5 used for in S7-1200 drive communication?",
+      "question_type": "definition_or_component_lookup",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::609-609::2a817cf3938d747a"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::609-609::2a817cf3938d747a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 609,
+          "page_end": 609,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::538-538::0f5db93861556dc1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 538,
+          "page_end": 538,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "s71200_system_manual::604-604::83015eedaaf26bd3",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 604,
+          "page_end": 604,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::670-670::c039168283cf6987",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 670,
+          "page_end": 670,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::28-28::8e848fe7f2c8d679",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 28,
+          "page_end": 28,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::63-63::af4c1e9b0ac75449",
+          "source_id": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+          "source_file": "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions.pdf",
+          "page_start": 63,
+          "page_end": 63,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "s71200_system_manual::7-7::d4afdce3b0cc6e74",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 7,
+          "page_end": 7,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::778-778::1bae72d2892415d1",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 778,
+          "page_end": 778,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "s71200_system_manual::299-299::dac071b245e97610",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 299,
+          "page_end": 299,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::524-524::150a1ef8cbb9c208",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 524,
+          "page_end": 524,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    },
+    {
+      "id": "rag_064",
+      "user_input": "What do S7-1200 PROFINET open user communication status codes 8010 and 8011 indicate?",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "reference_chunk_ids": [
+        "s71200_system_manual::670-670::e145653afd91442a"
+      ],
+      "retrieved": [
+        {
+          "rank": 1,
+          "chunk_id": "s71200_system_manual::670-670::e145653afd91442a",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 670,
+          "page_end": 670,
+          "score": 1.0
+        },
+        {
+          "rank": 2,
+          "chunk_id": "s71200_system_manual::437-437::60774e9eeac678d7",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 437,
+          "page_end": 437,
+          "score": 0.99
+        },
+        {
+          "rank": 3,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::17-17::dd2f86c90c1f5e25",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 17,
+          "page_end": 17,
+          "score": 0.98
+        },
+        {
+          "rank": 4,
+          "chunk_id": "s71200_system_manual::192-192::2889339f46849434",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 192,
+          "page_end": 192,
+          "score": 0.97
+        },
+        {
+          "rank": 5,
+          "chunk_id": "s71200_system_manual::356-356::d349bd54fad76e7f",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 356,
+          "page_end": 356,
+          "score": 0.96
+        },
+        {
+          "rank": 6,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::92-92::4e0a8224179af119",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 92,
+          "page_end": 92,
+          "score": 0.95
+        },
+        {
+          "rank": 7,
+          "chunk_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e::164-164::7f7b11c789cdb075",
+          "source_id": "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+          "source_file": "rockwell_powerflex_520-series_user_manual_520-um001-en-e.pdf",
+          "page_start": 164,
+          "page_end": 164,
+          "score": 0.94
+        },
+        {
+          "rank": 8,
+          "chunk_id": "s71200_system_manual::611-611::5dc02614dbb5a69c",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 611,
+          "page_end": 611,
+          "score": 0.93
+        },
+        {
+          "rank": 9,
+          "chunk_id": "abb_manual_for_induction_motors_and_generators_en::33-33::b8cba510ee35a6d2",
+          "source_id": "abb_manual_for_induction_motors_and_generators_en",
+          "source_file": "abb_manual_for_induction_motors_and_generators_en.pdf",
+          "page_start": 33,
+          "page_end": 33,
+          "score": 0.92
+        },
+        {
+          "rank": 10,
+          "chunk_id": "s71200_system_manual::713-713::fcd8de90b3070faa",
+          "source_id": "s71200_system_manual",
+          "source_file": "s71200_system_manual.pdf",
+          "page_start": 713,
+          "page_end": 713,
+          "score": 0.91
+        }
+      ],
+      "hit_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "recall_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "first_relevant_rank": 1,
+      "mrr": 1.0,
+      "evidence_coverage_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "source_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "page_accuracy_at_k": {
+        "1": 1.0,
+        "3": 1.0,
+        "5": 1.0,
+        "10": 1.0
+      },
+      "errors": []
+    }
+  ],
+  "warnings": []
+}

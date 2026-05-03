@@ -1,0 +1,2 @@
+experiment_name,split,strategy,score_direction,evaluated_samples,success_k,high_threshold,low_threshold,margin_threshold,strong_threshold,support_threshold,high_avg_threshold,high_confidence_precision,low_confidence_error_capture,medium_confidence_success_rate,confidence_accuracy,count_high,count_medium,count_low
+dense_current_rerank_dev,dev,system_top3_support,higher_is_better,20,10,0.62,0.58,0.015,0.78,0.45,0.55,1.0,1.0,0.0,0.7,5,0,15

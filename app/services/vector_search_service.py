@@ -41,7 +41,12 @@ class VectorSearchService:
         """初始化向量检索服务"""
         logger.info("向量检索服务初始化完成")
 
-    def search_similar_documents(self, query: str, top_k: int = 3) -> List[SearchResult]:
+    def search_similar_documents(
+        self,
+        query: str,
+        top_k: int = 3,
+        collection_name: str | None = None,
+    ) -> List[SearchResult]:
         """
         搜索相似文档
 
@@ -63,7 +68,7 @@ class VectorSearchService:
             logger.debug(f"查询向量生成成功, 维度: {len(query_vector)}")
 
             # 2. 获取 collection
-            collection: Collection = milvus_manager.get_collection()
+            collection: Collection = milvus_manager.get_collection(collection_name)
 
             # 3. 构建搜索参数
             search_params = {

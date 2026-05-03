@@ -1,0 +1,85 @@
+{
+  "dataset_status": {
+    "final_rag_samples": 64,
+    "valid_samples": 64,
+    "split_counts": {
+      "build": 30,
+      "dev": 20,
+      "test": 0,
+      "reserve": 14
+    },
+    "missing_files": [
+      "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
+      "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
+      "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
+      "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json"
+    ]
+  },
+  "retrieval_findings": [
+    "dense baseline can recall many gold chunks into candidate top50",
+    "final top10 ordering remains the bottleneck before rerank",
+    "current rerank improves Hit@K and MRR on both build and dev",
+    "rerank mainly promotes gold chunks from candidate top50 into final top10/top5/top3/top1",
+    "current rerank reflects the current system strategy: online rerank with local fallback"
+  ],
+  "confidence_findings": [
+    "rank_and_margin is the most stable general baseline across current build/dev runs",
+    "system_top3_support behaves more like a strong low-confidence interception strategy",
+    "system_top3_support thresholds are not final and should be re-tuned after dataset expansion",
+    "confidence results should not be over-interpreted yet because build/dev sample counts remain small"
+  ],
+  "limitations": [
+    "当前正式样本只有 64 条",
+    "当前没有 test split",
+    "Grundfos 样本偏少",
+    "symptom_cause 样本偏少",
+    "没有 cross_doc_multi",
+    "没有 abstention_insufficient_evidence",
+    "rerank 结果受 Cohere 429 fallback 影响",
+    "confidence 阈值尚未最终确定"
+  ],
+  "next_steps": [
+    "扩展候选题到 200+，人工审核后得到 150–170 条 reviewed RAG samples",
+    "增加 cross_doc_multi 和 abstention_insufficient_evidence",
+    "重新 split: build/dev/test",
+    "在 build/dev 上重新确定 confidence 参数",
+    "冻结 test 后只跑最终策略",
+    "补充 hybrid retrieval 对比",
+    "将最终 confidence strategy 抽取到项目服务层"
+  ],
+  "files_used": [
+    "aiops-docs/experiment/chunks/annotation_pool_report.json",
+    "aiops-docs/experiment/chunks/chunk_build_report.json",
+    "aiops-docs/experiment/rag/candidate_review_import_report.json",
+    "aiops-docs/experiment/rag/experiment_rag_dataset.validated.jsonl",
+    "aiops-docs/experiment/rag/rag_candidate_questions.jsonl",
+    "aiops-docs/experiment/rag/rag_validation_report.json",
+    "aiops-docs/experiment/rag/splits/rag_split_report.json",
+    "aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence_eval_system_top3_support_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence_eval_system_top3_support_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence_tuning_system_top3_support_build.json",
+    "aiops-docs/experiment/results/confidence_tuning_system_top3_support_dev.json",
+    "aiops-docs/experiment/results/dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/dense_no_rerank_build.json",
+    "aiops-docs/experiment/results/dense_no_rerank_dev.json",
+    "aiops-docs/experiment/sources/source_manifest.json"
+  ],
+  "missing_files": [
+    "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json"
+  ],
+  "warnings": [
+    "missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
+    "missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json",
+    "missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
+    "missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
+    "missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json",
+    "missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json"
+  ],
+  "generated_at": "2026-05-03T14:42:22.433128+00:00"
+}
