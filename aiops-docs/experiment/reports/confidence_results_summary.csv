@@ -1,11 +1,11 @@
 strategy,split,score_direction,high_confidence_precision,low_confidence_error_capture,confidence_accuracy,count_high,count_medium,count_low,low_ratio,strong_threshold,support_threshold,high_avg_threshold,notes
-rank_and_margin,build,,1.0,0.571429,0.633333,7,11,12,0.4,,,,legacy output missing score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json
-score_margin,build,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json
-score_threshold,build,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json
+rank_and_margin,build,,1.0,0.571429,0.633333,7,11,12,0.4,,,,legacy output missing score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_build.json
+score_margin,build,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json
+score_threshold,build,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json
 system_top3_support,build,higher_is_better,0.8,0.857143,0.333333,5,0,25,0.833333,0.78,0.45,0.55,
 system_top3_support_tuned,build,lower_is_better,0.909091,0.571429,0.533333,11,4,15,0.5,0.68,0.57,0.6,best config from tuning grid search
-rank_and_margin,dev,,1.0,0.666667,0.6,4,5,11,0.55,,,,legacy output missing score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json
-score_margin,dev,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json
-score_threshold,dev,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json
+rank_and_margin,dev,,1.0,0.666667,0.6,4,5,11,0.55,,,,legacy output missing score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_dev.json
+score_margin,dev,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json
+score_threshold,dev,,,,,,,,,,,,missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json
 system_top3_support,dev,higher_is_better,1.0,1.0,0.7,5,0,15,0.75,0.78,0.45,0.55,
 system_top3_support_tuned,dev,higher_is_better,1.0,0.777778,0.65,5,3,12,0.6,0.6,0.27,0.67,best config from tuning grid search

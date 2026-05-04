@@ -1,0 +1,45 @@
+{
+  "total_candidates": 160,
+  "count_by_source": {
+    "abb_manual_for_induction_motors_and_generators_en": 30,
+    "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions": 35,
+    "haascnc_com_rotary_troubleshooting_guide_ngc": 25,
+    "rockwell_powerflex_520_series_user_manual_520_um001_en_e": 35,
+    "s71200_system_manual": 35
+  },
+  "count_by_question_type": {
+    "abstention_insufficient_evidence": 25,
+    "cross_doc_multi": 15,
+    "definition_or_component_lookup": 10,
+    "parameter_or_fault_code": 20,
+    "safety_or_constraint": 25,
+    "symptom_cause": 35,
+    "troubleshooting_step": 30
+  },
+  "reused_chunk_count": 0,
+  "excluded_existing_chunk_count": 80,
+  "failed_generation_count": 0,
+  "skipped_chunks": {
+    "input_pool_rows": 728,
+    "eligible_rows_considered": 593,
+    "excluded_existing_rows": 80,
+    "generated_rows": 160,
+    "cross_doc_generated": 15,
+    "abstention_generated": 25
+  },
+  "warnings": [
+    "exclude_existing_candidates:80",
+    "exclude_reviewed_candidates:80",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::29-29::50e2cd92bd69e434",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::6-6::8b46423b2e3b7e34",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::29-29::61ae0e5e7bdb0020",
+    "definition_fallback_used:grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions::66-66::16e4b76e8f7b65df",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::62-62::f84b18e64a7ed2f4",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::72-73::c0e9a3c9cf886096",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::84-84::400702d9d1682349",
+    "definition_fallback_used:rockwell_powerflex_520_series_user_manual_520_um001_en_e::126-126::f4a824774a84e636",
+    "definition_fallback_used:s71200_system_manual::130-130::6f1ea86f77a6b3f7",
+    "definition_fallback_used:s71200_system_manual::164-164::cd8588414a2563b3",
+    "selected_rows_need_manual_focus:33"
+  ]
+}

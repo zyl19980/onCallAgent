@@ -7,6 +7,7 @@ from scripts.experiment.evaluate_rag_retrieval import (
     diagnose_live_retrieval,
     evaluate_rag_retrieval,
     extract_live_chunk_id,
+    validate_retrieval_config,
 )
 
 
@@ -66,6 +67,40 @@ class FakeCurrentRerankAdapter:
         }
 
 
+class FakeHybridLiveAdapter:
+    def __init__(self, chunks_by_id):
+        self.chunks_by_id = chunks_by_id
+
+    def retrieve(self, sample, *, top_k, collection_filter_from_sample, source_filter_from_sample):
+        del collection_filter_from_sample, source_filter_from_sample
+        return [
+            {
+                "rank": 1,
+                "chunk_id": "chunk-h1",
+                "source_id": "source_h",
+                "source_file": "source_h.pdf",
+                "page_start": 5,
+                "page_end": 5,
+                "score": 0.91,
+                "vector_score": 0.8,
+                "keyword_score": 0.6,
+                "fused_score": 0.91,
+            },
+            {
+                "rank": 2,
+                "chunk_id": "chunk-hx",
+                "source_id": "source_x",
+                "source_file": "source_x.pdf",
+                "page_start": 8,
+                "page_end": 8,
+                "score": 0.5,
+                "vector_score": 0.3,
+                "keyword_score": 0.4,
+                "fused_score": 0.5,
+            },
+        ][:top_k]
+
+
 def test_evaluate_rag_retrieval_mock_mode_runs_and_writes_summary(tmp_path: Path):
     dataset_path = tmp_path / "rag_build.jsonl"
     chunks_path = tmp_path / "experiment_chunks.jsonl"
@@ -111,6 +146,18 @@ def test_evaluate_rag_retrieval_mock_mode_runs_and_writes_summary(tmp_path: Path
     assert "candidate_top_k" in rows[0]
     assert "candidate_hit_at_10" in rows[0]
     assert "hit_at_1" in rows[0]
+
+
+def test_validate_retrieval_config_supports_dense_and_hybrid_with_none_and_current():
+    for retrieval_strategy in ("dense", "hybrid"):
+        for rerank in ("none", "current"):
+            validate_retrieval_config(
+                mode="live",
+                retrieval_strategy=retrieval_strategy,
+                rerank=rerank,
+                candidate_top_k=50,
+                final_top_k=10,
+            )
 
 
 def test_evaluate_rag_retrieval_metrics_and_warnings(tmp_path: Path):
@@ -304,6 +351,43 @@ def test_rerank_current_reorders_and_tracks_gold_promotion(tmp_path: Path):
     assert row["final_results"][0]["rerank_rank"] == 1
     assert row["gold_promoted_by_rerank"] is True
     assert report["final_metrics"]["hit_at_1"] == 1.0
+
+
+def test_evaluate_rag_retrieval_live_hybrid_uses_hybrid_adapter(tmp_path: Path, monkeypatch):
+    dataset_path = tmp_path / "rag_build.jsonl"
+    chunks_path = tmp_path / "experiment_chunks.jsonl"
+    output_path = tmp_path / "results.json"
+    summary_path = tmp_path / "summary.csv"
+
+    dataset_rows = [make_sample("q1", ["chunk-h1"], [5], "source_h", "troubleshooting_step")]
+    chunk_rows = [
+        make_chunk("chunk-h1", "source_h", "source_h.pdf", 5, 5),
+        make_chunk("chunk-hx", "source_x", "source_x.pdf", 8, 8),
+    ]
+    write_jsonl(dataset_path, dataset_rows)
+    write_jsonl(chunks_path, chunk_rows)
+
+    monkeypatch.setattr(
+        "scripts.experiment.evaluate_rag_retrieval.HybridRetrievalAdapter",
+        FakeHybridLiveAdapter,
+    )
+
+    report = evaluate_rag_retrieval(
+        dataset_path=dataset_path,
+        chunks_path=chunks_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        mode="live",
+        candidate_top_k=2,
+        final_top_k=1,
+        retrieval_strategy="hybrid",
+        rerank="none",
+    )
+
+    assert report["retrieval_strategy"] == "hybrid"
+    assert report["candidate_metrics"]["candidate_hit_at_10"] == 1.0
+    assert report["final_metrics"]["hit_at_1"] == 1.0
+    assert report["per_sample"][0]["candidate_results"][0]["chunk_id"] == "chunk-h1"
 
 
 def test_rerank_current_tracks_gold_demotion_and_candidate_not_final(tmp_path: Path):

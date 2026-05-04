@@ -110,7 +110,7 @@ def validate_rag_dataset(
             row_errors.append("missing_user_input")
 
         reference_answer = str(row.get("reference_answer") or "").strip()
-        if not should_abstain and not reference_answer:
+        if not reference_answer:
             row_errors.append("missing_reference_answer")
 
         reference_chunk_ids = row.get("reference_chunk_ids")
@@ -173,7 +173,8 @@ def validate_rag_dataset(
         if question_type not in VALID_QUESTION_TYPES:
             row_errors.append("invalid_question_type")
 
-        normalized_hops = normalize_reasoning_hops(row.get("reasoning_hops"), should_abstain)
+        raw_reasoning_hops = row.get("reasoning_hops")
+        normalized_hops = normalize_reasoning_hops(raw_reasoning_hops, should_abstain)
         if not normalized_hops:
             row_errors.append("invalid_reasoning_hops")
         else:
@@ -192,6 +193,21 @@ def validate_rag_dataset(
         annotation_status = str(row.get("annotation_status") or "")
         if annotation_status not in VALID_ANNOTATION_STATUS:
             row_errors.append("invalid_annotation_status")
+
+        if should_abstain:
+            if question_type != "abstention_insufficient_evidence":
+                row_errors.append("abstain_invalid_question_type")
+            raw_hops_text = str(raw_reasoning_hops).strip()
+            if raw_hops_text and raw_hops_text != "abstention":
+                row_errors.append("abstain_invalid_reasoning_hops")
+            if expected_confidence != "low":
+                row_errors.append("abstain_invalid_expected_confidence")
+
+        if question_type == "cross_doc_multi":
+            if len(reference_chunk_ids) < 2:
+                row_errors.append("cross_doc_insufficient_reference_chunks")
+            if normalized_hops and normalized_hops != "multi_doc":
+                row_errors.append("cross_doc_invalid_reasoning_hops")
 
         if row_errors:
             errors_by_type.update(row_errors)
@@ -222,6 +238,9 @@ def validate_rag_dataset(
         "invalid_samples": len(dataset_rows) - len(valid_rows),
         "count_by_source": dict(sorted(Counter(flatten_source_ids(valid_rows)).items())),
         "count_by_question_type": dict(sorted(Counter(row["question_type"] for row in valid_rows).items())),
+        "count_by_should_abstain": dict(
+            sorted(Counter("true" if row.get("should_abstain") else "false" for row in valid_rows).items())
+        ),
         "count_by_split": dict(sorted(Counter(row["split"] for row in valid_rows).items())),
         "errors_by_type": dict(sorted(errors_by_type.items())),
         "warnings": warnings,

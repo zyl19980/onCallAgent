@@ -116,6 +116,17 @@ def split_rag_dataset(
             split: dict(sorted(Counter(row["question_type"] for row in split_rows[split]).items()))
             for split in ("build", "dev", "test", "reserve")
         },
+        "count_by_should_abstain_per_split": {
+            split: dict(
+                sorted(
+                    Counter(
+                        "true" if row.get("should_abstain") else "false"
+                        for row in split_rows[split]
+                    ).items()
+                )
+            )
+            for split in ("build", "dev", "test", "reserve")
+        },
         "leakage_warnings": leakage_warnings,
         "seed": seed,
     }
@@ -153,13 +164,18 @@ def rebalance_rows(
     groups = build_leakage_groups(rows)
     overall_source_counts = Counter(source for row in rows for source in row.get("source_ids", []))
     overall_qtype_counts = Counter(str(row["question_type"]) for row in rows)
+    overall_abstain_counts = Counter(
+        "true" if row.get("should_abstain") else "false" for row in rows
+    )
     source_targets = build_label_targets(overall_source_counts, targets)
     qtype_targets = build_label_targets(overall_qtype_counts, targets)
+    abstain_targets = build_label_targets(overall_abstain_counts, targets)
     rng = random.Random(seed)
 
     split_rows = {split: [] for split in ("build", "dev", "test", "reserve")}
     current_source = {split: Counter() for split in split_rows}
     current_qtype = {split: Counter() for split in split_rows}
+    current_abstain = {split: Counter() for split in split_rows}
     source_quota_by_source = invert_split_label_targets(source_targets)
     groups_by_source: dict[str, list[list[dict[str, object]]]] = defaultdict(list)
     for group in groups:
@@ -204,12 +220,14 @@ def rebalance_rows(
                     split=split,
                     group=group,
                     targets=targets,
-                    split_rows=split_rows,
-                    current_source=current_source,
-                    current_qtype=current_qtype,
-                    source_targets=source_targets,
-                    qtype_targets=qtype_targets,
-                )
+                        split_rows=split_rows,
+                        current_source=current_source,
+                        current_qtype=current_qtype,
+                        current_abstain=current_abstain,
+                        source_targets=source_targets,
+                        qtype_targets=qtype_targets,
+                        abstain_targets=abstain_targets,
+                    )
                 options.append((score, split))
 
             if not options:
@@ -224,8 +242,10 @@ def rebalance_rows(
                         split_rows=split_rows,
                         current_source=current_source,
                         current_qtype=current_qtype,
+                        current_abstain=current_abstain,
                         source_targets=source_targets,
                         qtype_targets=qtype_targets,
+                        abstain_targets=abstain_targets,
                     )
                     options.append((score + 500, split))
 
@@ -243,6 +263,7 @@ def rebalance_rows(
                 for row_source in updated.get("source_ids", []):
                     current_source[chosen_split][row_source] += 1
                 current_qtype[chosen_split][str(updated["question_type"])] += 1
+                current_abstain[chosen_split]["true" if updated.get("should_abstain") else "false"] += 1
 
     output: list[dict[str, object]] = []
     for split in ("build", "dev", "test", "reserve"):
@@ -309,8 +330,10 @@ def assignment_score(
     split_rows: dict[str, list[dict[str, object]]],
     current_source: dict[str, Counter],
     current_qtype: dict[str, Counter],
+    current_abstain: dict[str, Counter],
     source_targets: dict[str, dict[str, int]],
     qtype_targets: dict[str, dict[str, int]],
+    abstain_targets: dict[str, dict[str, int]],
 ) -> float:
     target_size = targets[split]
     if target_size == 0:
@@ -321,13 +344,16 @@ def assignment_score(
 
     projected_source = current_source[split].copy()
     projected_qtype = current_qtype[split].copy()
+    projected_abstain = current_abstain[split].copy()
     for row in group:
         for source in row.get("source_ids", []):
             projected_source[source] += 1
         projected_qtype[str(row["question_type"])] += 1
+        projected_abstain["true" if row.get("should_abstain") else "false"] += 1
 
     group_sources = {source for row in group for source in row.get("source_ids", [])}
     group_qtypes = {str(row["question_type"]) for row in group}
+    group_abstain_keys = {"true" if row.get("should_abstain") else "false" for row in group}
 
     for source in group_sources:
         target = source_targets[split].get(source, 0)
@@ -348,6 +374,22 @@ def assignment_score(
             score += (projected - target) * 8
         if current >= target and target > 0:
             score += 10
+
+    for abstain_key in group_abstain_keys:
+        target = abstain_targets[split].get(abstain_key, 0)
+        current = current_abstain[split][abstain_key]
+        projected = projected_abstain[abstain_key]
+        score += abs(projected - target) * 4
+        if projected > target:
+            score += (projected - target) * 8
+
+    if any(row.get("should_abstain") for row in group) or any(
+        str(row.get("question_type")) == "cross_doc_multi" for row in group
+    ):
+        if split == "build":
+            score += 18
+        elif split in {"dev", "test"}:
+            score -= 4
 
     return score
 

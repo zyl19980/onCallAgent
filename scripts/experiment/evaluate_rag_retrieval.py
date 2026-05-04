@@ -210,6 +210,79 @@ class LiveRetrievalAdapter:
         }
 
 
+class HybridRetrievalAdapter:
+    def __init__(self, chunks_by_id: dict[str, dict[str, object]]) -> None:
+        self.chunks_by_id = chunks_by_id
+        try:
+            from app.services.hybrid_retrieval_service import hybrid_retrieval_service
+        except Exception as exc:
+            raise RuntimeError(
+                "hybrid 检索 unavailable: 无法导入 app.services.hybrid_retrieval_service"
+            ) from exc
+        self.hybrid_retrieval_service = hybrid_retrieval_service
+
+    def retrieve(
+        self,
+        sample: dict[str, object],
+        *,
+        top_k: int,
+        collection_filter_from_sample: bool,
+        source_filter_from_sample: bool,
+    ) -> list[dict[str, object]]:
+        query = str(sample.get("user_input") or "").strip()
+        analysis = self.hybrid_retrieval_service._understand_query(query, "", [])
+        vector_candidates = self.hybrid_retrieval_service._vector_recall(analysis)
+        keyword_candidates = self.hybrid_retrieval_service._keyword_recall(analysis)
+        fused_candidates = self.hybrid_retrieval_service._fuse_candidates(
+            vector_candidates,
+            keyword_candidates,
+        )
+
+        collections = set(str(item) for item in sample.get("collections", []))
+        source_ids = set(str(item) for item in sample.get("source_ids", []))
+
+        normalized: list[dict[str, object]] = []
+        for candidate in fused_candidates:
+            metadata = dict(candidate.metadata or {})
+            chunk_id = str(candidate.id or "").strip()
+            chunk = self.chunks_by_id.get(chunk_id, {})
+
+            source_id = chunk.get("source_id") or metadata.get("source_id") or metadata.get("_source")
+            source_file = chunk.get("source_file") or metadata.get("source_file") or metadata.get("_file_name")
+            page_start = chunk.get("page_start") or metadata.get("page_start") or metadata.get("page_number")
+            page_end = chunk.get("page_end") or metadata.get("page_end") or metadata.get("page_number")
+            collection = chunk.get("collection") or metadata.get("collection")
+
+            if collection_filter_from_sample and collections and str(collection) not in collections:
+                continue
+            if source_filter_from_sample and source_ids and str(source_id) not in source_ids:
+                continue
+
+            normalized.append(
+                {
+                    "chunk_id": chunk_id,
+                    "source_id": str(source_id) if source_id is not None else "",
+                    "source_file": str(source_file) if source_file is not None else "",
+                    "page_start": to_optional_int(page_start),
+                    "page_end": to_optional_int(page_end),
+                    "score": float(candidate.fused_score),
+                    "vector_score": float(candidate.vector_score),
+                    "keyword_score": float(candidate.keyword_score),
+                    "fused_score": float(candidate.fused_score),
+                    "text": str(chunk.get("text") or candidate.content or ""),
+                    "section_path": str(chunk.get("section_path") or metadata.get("section_path") or ""),
+                    "matched_queries": list(candidate.matched_queries),
+                }
+            )
+
+        output = []
+        for rank, item in enumerate(normalized[:top_k], start=1):
+            enriched = dict(item)
+            enriched["rank"] = rank
+            output.append(enriched)
+        return output
+
+
 class NoRerankAdapter:
     def rerank(
         self,
@@ -301,20 +374,22 @@ class CurrentRerankAdapter:
         metadata = {
             "chunk_id": chunk_id,
             "_file_name": str(chunk.get("source_file") or item.get("source_file") or ""),
-            "section_path": str(chunk.get("section_path") or ""),
+            "section_path": str(chunk.get("section_path") or item.get("section_path") or ""),
             "page_number": to_optional_int(page_start),
         }
-        content = str(chunk.get("text") or "")
+        content = str(chunk.get("text") or item.get("text") or "")
         original_rank = int(item["rank"])
         original_score = float(item.get("score", 0.0))
-        similarity_score = 1 / (1 + max(original_score, 0.0))
+        similarity_score = float(item.get("vector_score", 1 / (1 + max(original_score, 0.0))))
+        keyword_score = float(item.get("keyword_score", 0.0))
+        fused_score = float(item.get("fused_score", 1 / (60 + original_rank)))
         candidate = RetrievalCandidate(
             id=chunk_id,
             content=content,
             metadata=metadata,
             vector_score=similarity_score,
-            keyword_score=0.0,
-            fused_score=1 / (60 + original_rank),
+            keyword_score=keyword_score,
+            fused_score=fused_score,
             matched_queries=[query],
         )
         return candidate
@@ -346,7 +421,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--top-k", type=int, default=None, help="兼容旧参数；等价于 candidate-top-k/final-top-k 同值")
     parser.add_argument("--candidate-top-k", type=int, default=50)
     parser.add_argument("--final-top-k", type=int, default=10)
-    parser.add_argument("--retrieval-strategy", default="dense", choices=["dense"])
+    parser.add_argument("--retrieval-strategy", default="dense", choices=["dense", "hybrid"])
     parser.add_argument("--rerank", default="none", choices=["none", "current"])
     parser.add_argument("--experiment-name", default="rag_retrieval_experiment")
     parser.add_argument("--ks", default="1,3,5,10", help="以逗号分隔的 K 列表")
@@ -470,6 +545,8 @@ def evaluate_rag_retrieval(
                 chunks_by_id=chunks_by_id,
                 collection_name=collection_name,
             )
+        elif mode == "live" and retrieval_strategy == "hybrid":
+            adapter = HybridRetrievalAdapter(chunks_by_id=chunks_by_id)
         else:
             raise ValueError(f"未知模式或检索策略: mode={mode}, retrieval_strategy={retrieval_strategy}")
     if rerank_adapter is None:
@@ -524,6 +601,12 @@ def evaluate_rag_retrieval(
                     "page_start": item.get("page_start"),
                     "page_end": item.get("page_end"),
                     "score": float(item.get("score", 0.0)),
+                    **({"vector_score": float(item.get("vector_score", 0.0))} if "vector_score" in item else {}),
+                    **({"keyword_score": float(item.get("keyword_score", 0.0))} if "keyword_score" in item else {}),
+                    **({"fused_score": float(item.get("fused_score", 0.0))} if "fused_score" in item else {}),
+                    **({"text": str(item.get("text") or "")} if "text" in item else {}),
+                    **({"section_path": str(item.get("section_path") or "")} if "section_path" in item else {}),
+                    **({"matched_queries": list(item.get("matched_queries") or [])} if "matched_queries" in item else {}),
                     **({"raw": item.get("raw")} if "raw" in item else {}),
                 }
             )
@@ -1037,8 +1120,8 @@ def validate_retrieval_config(
 ) -> None:
     if mode not in {"mock", "live"}:
         raise ValueError(f"未知 mode: {mode}")
-    if retrieval_strategy != "dense":
-        raise ValueError(f"当前仅支持 dense 检索策略: {retrieval_strategy}")
+    if retrieval_strategy not in {"dense", "hybrid"}:
+        raise ValueError(f"当前仅支持 dense/hybrid 检索策略: {retrieval_strategy}")
     if rerank not in {"none", "current"}:
         raise ValueError(f"当前仅支持 rerank=none/current: {rerank}")
     if candidate_top_k <= 0 or final_top_k <= 0:

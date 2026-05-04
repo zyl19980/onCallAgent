@@ -9,10 +9,10 @@
       "reserve": 14
     },
     "missing_files": [
-      "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
-      "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
-      "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
-      "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json"
+      "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json",
+      "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json",
+      "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json",
+      "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json"
     ]
   },
   "retrieval_findings": [
@@ -50,36 +50,36 @@
   "files_used": [
     "aiops-docs/experiment/chunks/annotation_pool_report.json",
     "aiops-docs/experiment/chunks/chunk_build_report.json",
-    "aiops-docs/experiment/rag/candidate_review_import_report.json",
-    "aiops-docs/experiment/rag/experiment_rag_dataset.validated.jsonl",
-    "aiops-docs/experiment/rag/rag_candidate_questions.jsonl",
-    "aiops-docs/experiment/rag/rag_validation_report.json",
-    "aiops-docs/experiment/rag/splits/rag_split_report.json",
-    "aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json",
-    "aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json",
-    "aiops-docs/experiment/results/confidence_eval_system_top3_support_dense_current_rerank_build.json",
-    "aiops-docs/experiment/results/confidence_eval_system_top3_support_dense_current_rerank_dev.json",
-    "aiops-docs/experiment/results/confidence_tuning_system_top3_support_build.json",
-    "aiops-docs/experiment/results/confidence_tuning_system_top3_support_dev.json",
-    "aiops-docs/experiment/results/dense_current_rerank_build.json",
-    "aiops-docs/experiment/results/dense_current_rerank_dev.json",
-    "aiops-docs/experiment/results/dense_no_rerank_build.json",
-    "aiops-docs/experiment/results/dense_no_rerank_dev.json",
+    "aiops-docs/experiment/rag/candidates/batch1/rag_candidate_questions.jsonl",
+    "aiops-docs/experiment/rag/datasets/pilot/experiment_rag_dataset.validated.jsonl",
+    "aiops-docs/experiment/rag/datasets/pilot/rag_validation_report.json",
+    "aiops-docs/experiment/rag/reviews/batch1/candidate_review_import_report.json",
+    "aiops-docs/experiment/rag/splits/pilot/rag_split_report.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_system_top3_support_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_system_top3_support_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence/tuning/confidence_tuning_system_top3_support_build.json",
+    "aiops-docs/experiment/results/confidence/tuning/confidence_tuning_system_top3_support_dev.json",
+    "aiops-docs/experiment/results/retrieval/pilot/dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/retrieval/pilot/dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/retrieval/pilot/dense_no_rerank_build.json",
+    "aiops-docs/experiment/results/retrieval/pilot/dense_no_rerank_dev.json",
     "aiops-docs/experiment/sources/source_manifest.json"
   ],
   "missing_files": [
-    "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
-    "aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
-    "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
-    "aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json"
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json",
+    "aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json"
   ],
   "warnings": [
-    "missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json",
-    "missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json",
-    "missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json",
-    "missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json",
-    "missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json",
-    "missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json"
+    "missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json",
+    "missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json",
+    "missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json",
+    "missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json",
+    "missing_metric:score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_build.json",
+    "missing_metric:score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_dev.json"
   ],
-  "generated_at": "2026-05-03T14:42:22.433128+00:00"
+  "generated_at": "2026-05-04T06:32:11.123175+00:00"
 }

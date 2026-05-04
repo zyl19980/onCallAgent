@@ -46,14 +46,14 @@
 - current rerank reflects the current system strategy: online rerank with local fallback
 
 ## 6. Confidence Experiment Summary
-- `rank_and_margin / build`: `high_precision=1.0`, `low_capture=0.571429`, `confidence_accuracy=0.633333`, `count_high=7`, `count_medium=11`, `count_low=12`, `low_ratio=0.4`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`legacy output missing score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json`
-- `score_margin / build`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json`
-- `score_threshold / build`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json`
+- `rank_and_margin / build`: `high_precision=1.0`, `low_capture=0.571429`, `confidence_accuracy=0.633333`, `count_high=7`, `count_medium=11`, `count_low=12`, `low_ratio=0.4`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`legacy output missing score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_build.json`
+- `score_margin / build`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json`
+- `score_threshold / build`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json`
 - `system_top3_support / build`: `high_precision=0.8`, `low_capture=0.857143`, `confidence_accuracy=0.333333`, `count_high=5`, `count_medium=0`, `count_low=25`, `low_ratio=0.833333`, `score_direction=higher_is_better`, `strong=0.78`, `support=0.45`, `high_avg=0.55`
 - `system_top3_support_tuned / build`: `high_precision=0.909091`, `low_capture=0.571429`, `confidence_accuracy=0.533333`, `count_high=11`, `count_medium=4`, `count_low=15`, `low_ratio=0.5`, `score_direction=lower_is_better`, `strong=0.68`, `support=0.57`, `high_avg=0.6`, notes=`best config from tuning grid search`
-- `rank_and_margin / dev`: `high_precision=1.0`, `low_capture=0.666667`, `confidence_accuracy=0.6`, `count_high=4`, `count_medium=5`, `count_low=11`, `low_ratio=0.55`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`legacy output missing score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json`
-- `score_margin / dev`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json`
-- `score_threshold / dev`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json`
+- `rank_and_margin / dev`: `high_precision=1.0`, `low_capture=0.666667`, `confidence_accuracy=0.6`, `count_high=4`, `count_medium=5`, `count_low=11`, `low_ratio=0.55`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`legacy output missing score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_dev.json`
+- `score_margin / dev`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json`
+- `score_threshold / dev`: `high_precision=`, `low_capture=`, `confidence_accuracy=`, `count_high=`, `count_medium=`, `count_low=`, `low_ratio=`, `score_direction=missing`, `strong=`, `support=`, `high_avg=`, notes=`missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json`
 - `system_top3_support / dev`: `high_precision=1.0`, `low_capture=1.0`, `confidence_accuracy=0.7`, `count_high=5`, `count_medium=0`, `count_low=15`, `low_ratio=0.75`, `score_direction=higher_is_better`, `strong=0.78`, `support=0.45`, `high_avg=0.55`
 - `system_top3_support_tuned / dev`: `high_precision=1.0`, `low_capture=0.777778`, `confidence_accuracy=0.65`, `count_high=5`, `count_medium=3`, `count_low=12`, `low_ratio=0.6`, `score_direction=higher_is_better`, `strong=0.6`, `support=0.27`, `high_avg=0.67`, notes=`best config from tuning grid search`
 
@@ -83,15 +83,15 @@
 - 将最终 confidence strategy 抽取到项目服务层
 
 ## Missing Files
-- `aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json`
-- `aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json`
-- `aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json`
-- `aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json`
+- `aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json`
+- `aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json`
+- `aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json`
+- `aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json`
 
 ## Warnings
-- `missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_build.json`
-- `missing_file:aiops-docs/experiment/results/confidence_eval_score_threshold_dense_current_rerank_dev.json`
-- `missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_build.json`
-- `missing_file:aiops-docs/experiment/results/confidence_eval_score_margin_dense_current_rerank_dev.json`
-- `missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_build.json`
-- `missing_metric:score_direction:aiops-docs/experiment/results/confidence_eval_dense_current_rerank_dev.json`
+- `missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_build.json`
+- `missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_threshold_dense_current_rerank_dev.json`
+- `missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_build.json`
+- `missing_file:aiops-docs/experiment/results/confidence/baseline/confidence_eval_score_margin_dense_current_rerank_dev.json`
+- `missing_metric:score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_build.json`
+- `missing_metric:score_direction:aiops-docs/experiment/results/confidence/baseline/confidence_eval_dense_current_rerank_dev.json`

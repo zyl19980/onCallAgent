@@ -91,15 +91,27 @@ def build_rag_dataset_from_candidates(
             skipped_pending += 1
             continue
 
-        reference_chunk_ids = list(candidate.get("source_chunk_ids") or [])
-        resolved_chunks: list[dict[str, object]] = []
-        missing_chunk = False
-        for chunk_id in reference_chunk_ids:
-            chunk = chunks_by_id.get(chunk_id)
-            if chunk is None:
-                missing_chunk = True
-                break
-            resolved_chunks.append(chunk)
+        question_type = resolve_question_type(candidate)
+        should_abstain = bool(candidate.get("should_abstain"))
+        reference_chunk_ids = normalize_chunk_ids(candidate.get("source_chunk_ids"))
+        resolved_chunks, missing_chunk = resolve_chunks(reference_chunk_ids, chunks_by_id)
+
+        if should_abstain and question_type == "abstention_insufficient_evidence":
+            weak_chunk_ids = normalize_chunk_ids(candidate.get("weak_evidence_chunk_ids"))
+            weak_chunks, weak_missing_chunk = resolve_chunks(weak_chunk_ids, chunks_by_id)
+            if weak_missing_chunk:
+                invalid_missing_chunk += 1
+                continue
+
+            dataset_row = build_abstention_dataset_row(
+                candidate=candidate,
+                weak_chunks=weak_chunks,
+                rag_index=rag_index,
+            )
+            rag_index += 1
+            converted_rows.append(dataset_row)
+            continue
+
         if missing_chunk or not resolved_chunks:
             invalid_missing_chunk += 1
             continue
@@ -133,6 +145,17 @@ def build_rag_dataset_from_candidates(
         "count_by_question_type": dict(
             sorted(Counter(row["question_type"] for row in converted_rows).items())
         ),
+        "count_by_should_abstain": dict(
+            sorted(Counter("true" if row["should_abstain"] else "false" for row in converted_rows).items())
+        ),
+        "cross_doc_multi_count": sum(
+            1 for row in converted_rows if row["question_type"] == "cross_doc_multi"
+        ),
+        "abstention_count": sum(
+            1
+            for row in converted_rows
+            if row["question_type"] == "abstention_insufficient_evidence"
+        ),
         "warnings": warnings,
     }
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
@@ -163,6 +186,7 @@ def build_dataset_row(
         str(candidate.get("final_question_type") or "").strip()
         or str(candidate.get("suggested_question_type") or "").strip()
     )
+    reasoning_hops = resolve_reasoning_hops(candidate, question_type, should_abstain=False)
 
     return {
         "id": f"rag_{rag_index:03d}",
@@ -184,7 +208,7 @@ def build_dataset_row(
         "expected_source_files": expected_source_files,
         "expected_page_numbers": expected_page_numbers,
         "question_type": question_type,
-        "reasoning_hops": int(candidate.get("suggested_reasoning_hops") or 1),
+        "reasoning_hops": reasoning_hops,
         "criticality": str(candidate.get("suggested_criticality") or "medium"),
         "expected_confidence": "high",
         "should_abstain": False,
@@ -195,8 +219,62 @@ def build_dataset_row(
     }
 
 
+def build_abstention_dataset_row(
+    candidate: dict[str, object],
+    weak_chunks: list[dict[str, object]],
+    rag_index: int,
+) -> dict[str, object]:
+    source_ids = unique_preserve_order(
+        list(normalize_string_list(candidate.get("source_ids")))
+        or [str(candidate.get("source_id") or "").strip()]
+        or [str(chunk["source_id"]) for chunk in weak_chunks]
+    )
+    source_ids = [value for value in source_ids if value]
+    collections = unique_preserve_order(str(chunk["collection"]) for chunk in weak_chunks)
+    expected_source_files = unique_preserve_order(
+        list(normalize_string_list(candidate.get("source_files")))
+        or [str(candidate.get("source_file") or "").strip()]
+        or [str(chunk["source_file"]) for chunk in weak_chunks]
+    )
+    expected_source_files = [value for value in expected_source_files if value]
+    expected_page_numbers = flatten_page_numbers(weak_chunks)
+    user_input = (
+        str(candidate.get("final_question") or "").strip()
+        or str(candidate.get("generated_question") or "").strip()
+    )
+    reference_answer = (
+        str(candidate.get("final_answer") or "").strip()
+        or str(candidate.get("generated_answer") or "").strip()
+    )
+
+    return {
+        "id": f"rag_{rag_index:03d}",
+        "split": "build",
+        "source_ids": source_ids,
+        "collections": collections,
+        "user_input": user_input,
+        "reference_answer": reference_answer,
+        "reference_chunk_ids": [],
+        "reference_evidence": [],
+        "expected_source_files": expected_source_files,
+        "expected_page_numbers": expected_page_numbers,
+        "question_type": "abstention_insufficient_evidence",
+        "reasoning_hops": "abstention",
+        "criticality": str(candidate.get("suggested_criticality") or "medium"),
+        "expected_confidence": "low",
+        "should_abstain": True,
+        "annotation_status": "reviewed",
+        "annotator": str(candidate.get("generator") or "template_dry_run"),
+        "reviewer": "human",
+        "notes": build_notes(candidate),
+    }
+
+
 def build_notes(candidate: dict[str, object]) -> str:
     parts = [f"candidate_id={candidate['candidate_id']}"]
+    abstention_reason = str(candidate.get("abstention_reason") or "").strip()
+    if abstention_reason:
+        parts.append(f"abstention_reason={abstention_reason}")
     reviewer_notes = str(candidate.get("reviewer_notes") or "").strip()
     if reviewer_notes:
         parts.append(f"reviewer_notes={reviewer_notes}")
@@ -228,6 +306,56 @@ def unique_preserve_order(values):
         seen.add(value)
         output.append(value)
     return output
+
+
+def normalize_chunk_ids(value: object) -> list[str]:
+    return [str(item).strip() for item in list(value or []) if str(item).strip()]
+
+
+def normalize_string_list(value: object) -> list[str]:
+    return [str(item).strip() for item in list(value or []) if str(item).strip()]
+
+
+def resolve_chunks(
+    chunk_ids: list[str],
+    chunks_by_id: dict[str, dict[str, object]],
+) -> tuple[list[dict[str, object]], bool]:
+    resolved_chunks: list[dict[str, object]] = []
+    for chunk_id in chunk_ids:
+        chunk = chunks_by_id.get(chunk_id)
+        if chunk is None:
+            return [], True
+        resolved_chunks.append(chunk)
+    return resolved_chunks, False
+
+
+def resolve_question_type(candidate: dict[str, object]) -> str:
+    return (
+        str(candidate.get("final_question_type") or "").strip()
+        or str(candidate.get("suggested_question_type") or "").strip()
+    )
+
+
+def resolve_reasoning_hops(
+    candidate: dict[str, object],
+    question_type: str,
+    should_abstain: bool,
+) -> str:
+    if should_abstain or question_type == "abstention_insufficient_evidence":
+        return "abstention"
+
+    raw_value = str(candidate.get("suggested_reasoning_hops") or "").strip()
+    if question_type == "cross_doc_multi":
+        return "multi_doc"
+    if raw_value in {"single_chunk", "multi_chunk_same_doc", "multi_doc", "abstention"}:
+        return raw_value
+    if raw_value == "1":
+        return "single_chunk"
+    if raw_value == "2":
+        return "multi_chunk_same_doc"
+    if raw_value == "multi_doc":
+        return "multi_doc"
+    return "single_chunk"
 
 
 def load_jsonl(path: Path) -> list[dict[str, object]]:
