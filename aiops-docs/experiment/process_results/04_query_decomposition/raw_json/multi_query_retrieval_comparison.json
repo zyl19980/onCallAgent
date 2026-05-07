@@ -1,0 +1,293 @@
+{
+  "generated_from": [
+    "aiops-docs/experiment/reports/query_decomposition_build_dev_report.md",
+    "aiops-docs/experiment/results/retrieval/expanded/mq1_original_keyword_dense_current_rerank_expanded_test.json",
+    "aiops-docs/experiment/results/thesis_tables/retrieval/expanded/mq1_original_keyword_dense_current_rerank_expanded_test.csv",
+    "aiops-docs/experiment/results/retrieval/expanded/dense_current_rerank_expanded_test.json",
+    "aiops-docs/experiment/results/thesis_tables/retrieval/expanded/dense_current_rerank_expanded_test.csv"
+  ],
+  "fixed_backbone": "dense_current_rerank",
+  "rerank_note": "current_rerank = online rerank + local fallback",
+  "query_modes": [
+    "original",
+    "original_keyword",
+    "original_keyword_expanded"
+  ],
+  "build_dev_selection": {
+    "selected_query_mode_for_test": "original_keyword",
+    "why_q1_entered_test": [
+      "Q1 improved build candidate Hit@50, Hit@10, and MRR over Q0",
+      "Q1 improved dev Hit@10 and MRR over Q0",
+      "Q1 had acceptable duplicate_candidate_ratio compared with Q2",
+      "Q1 showed keyword_only gold hits on both build and dev"
+    ],
+    "why_q2_did_not_enter_test": [
+      "Q2 did not stably improve over Q1",
+      "Q2 regressed on build Hit@10 and MRR",
+      "Q2 duplicate_candidate_ratio was much higher than Q1",
+      "expanded_query showed very limited expanded_only gold hits"
+    ],
+    "test_not_used_for_query_mode_selection": true
+  },
+  "rows": [
+    {
+      "experiment_name": "mq0_original_dense_current_rerank_expanded_build",
+      "phase": "build_dev",
+      "split": "build",
+      "query_mode": "original",
+      "evaluated_samples": 27,
+      "skipped_abstain": 3,
+      "candidate_hit_at_50": 0.740741,
+      "candidate_recall_at_50": 0.703704,
+      "hit_at_10": 0.666667,
+      "mrr": 0.545062,
+      "gold_in_candidate_not_final_count": 2,
+      "raw_candidate_count_avg": 50.0,
+      "union_candidate_count_avg": 50.0,
+      "duplicate_candidate_ratio_avg": 0.0,
+      "source_query_hit": {
+        "main": 20,
+        "keyword": 0,
+        "expanded": 0,
+        "none": 7,
+        "main_only": 20,
+        "keyword_only": 0,
+        "expanded_only": 0,
+        "main_keyword": 0,
+        "main_expanded": 0,
+        "keyword_expanded": 0,
+        "all3": 0
+      }
+    },
+    {
+      "experiment_name": "mq0_original_dense_current_rerank_expanded_dev",
+      "phase": "build_dev",
+      "split": "dev",
+      "query_mode": "original",
+      "evaluated_samples": 30,
+      "skipped_abstain": 5,
+      "candidate_hit_at_50": 0.7,
+      "candidate_recall_at_50": 0.7,
+      "hit_at_10": 0.466667,
+      "mrr": 0.201481,
+      "gold_in_candidate_not_final_count": 7,
+      "raw_candidate_count_avg": 50.0,
+      "union_candidate_count_avg": 50.0,
+      "duplicate_candidate_ratio_avg": 0.0,
+      "source_query_hit": {
+        "main": 21,
+        "keyword": 0,
+        "expanded": 0,
+        "none": 9,
+        "main_only": 21,
+        "keyword_only": 0,
+        "expanded_only": 0,
+        "main_keyword": 0,
+        "main_expanded": 0,
+        "keyword_expanded": 0,
+        "all3": 0
+      }
+    },
+    {
+      "experiment_name": "mq1_original_keyword_dense_current_rerank_expanded_build",
+      "phase": "build_dev",
+      "split": "build",
+      "query_mode": "original_keyword",
+      "evaluated_samples": 27,
+      "skipped_abstain": 3,
+      "candidate_hit_at_50": 0.777778,
+      "candidate_recall_at_50": 0.740741,
+      "hit_at_10": 0.703704,
+      "mrr": 0.569136,
+      "gold_in_candidate_not_final_count": 2,
+      "raw_candidate_count_avg": 100.0,
+      "union_candidate_count_avg": 78.0,
+      "duplicate_candidate_ratio_avg": 0.22,
+      "source_query_hit": {
+        "main": 20,
+        "keyword": 18,
+        "expanded": 0,
+        "none": 6,
+        "main_only": 3,
+        "keyword_only": 1,
+        "expanded_only": 0,
+        "main_keyword": 17,
+        "main_expanded": 0,
+        "keyword_expanded": 0,
+        "all3": 0
+      }
+    },
+    {
+      "experiment_name": "mq1_original_keyword_dense_current_rerank_expanded_dev",
+      "phase": "build_dev",
+      "split": "dev",
+      "query_mode": "original_keyword",
+      "evaluated_samples": 30,
+      "skipped_abstain": 5,
+      "candidate_hit_at_50": 0.7,
+      "candidate_recall_at_50": 0.7,
+      "hit_at_10": 0.533333,
+      "mrr": 0.28004,
+      "gold_in_candidate_not_final_count": 5,
+      "raw_candidate_count_avg": 100.0,
+      "union_candidate_count_avg": 78.6,
+      "duplicate_candidate_ratio_avg": 0.214,
+      "source_query_hit": {
+        "main": 21,
+        "keyword": 13,
+        "expanded": 0,
+        "none": 8,
+        "main_only": 9,
+        "keyword_only": 1,
+        "expanded_only": 0,
+        "main_keyword": 12,
+        "main_expanded": 0,
+        "keyword_expanded": 0,
+        "all3": 0
+      }
+    },
+    {
+      "experiment_name": "mq2_original_keyword_expanded_dense_current_rerank_expanded_build",
+      "phase": "build_dev",
+      "split": "build",
+      "query_mode": "original_keyword_expanded",
+      "evaluated_samples": 27,
+      "skipped_abstain": 3,
+      "candidate_hit_at_50": 0.777778,
+      "candidate_recall_at_50": 0.740741,
+      "hit_at_10": 0.666667,
+      "mrr": 0.5,
+      "gold_in_candidate_not_final_count": 3,
+      "raw_candidate_count_avg": 150.0,
+      "union_candidate_count_avg": 84.888889,
+      "duplicate_candidate_ratio_avg": 0.434074,
+      "source_query_hit": {
+        "main": 20,
+        "keyword": 18,
+        "expanded": 20,
+        "none": 6,
+        "main_only": 0,
+        "keyword_only": 1,
+        "expanded_only": 0,
+        "main_keyword": 0,
+        "main_expanded": 3,
+        "keyword_expanded": 0,
+        "all3": 17
+      }
+    },
+    {
+      "experiment_name": "mq2_original_keyword_expanded_dense_current_rerank_expanded_dev",
+      "phase": "build_dev",
+      "split": "dev",
+      "query_mode": "original_keyword_expanded",
+      "evaluated_samples": 30,
+      "skipped_abstain": 5,
+      "candidate_hit_at_50": 0.7,
+      "candidate_recall_at_50": 0.7,
+      "hit_at_10": 0.533333,
+      "mrr": 0.332593,
+      "gold_in_candidate_not_final_count": 5,
+      "raw_candidate_count_avg": 150.0,
+      "union_candidate_count_avg": 84.6,
+      "duplicate_candidate_ratio_avg": 0.436,
+      "source_query_hit": {
+        "main": 21,
+        "keyword": 13,
+        "expanded": 22,
+        "none": 7,
+        "main_only": 0,
+        "keyword_only": 1,
+        "expanded_only": 1,
+        "main_keyword": 0,
+        "main_expanded": 9,
+        "keyword_expanded": 0,
+        "all3": 12
+      }
+    },
+    {
+      "experiment_name": "dense_current_rerank_expanded_test",
+      "phase": "test_baseline",
+      "split": "test",
+      "query_mode": "original",
+      "evaluated_samples": 52,
+      "skipped_abstain": 8,
+      "candidate_hit_at_50": 0.75,
+      "candidate_recall_at_50": 0.730769,
+      "hit_at_10": 0.596154,
+      "mrr": 0.429884,
+      "gold_in_candidate_not_final_count": 8,
+      "raw_candidate_count_avg": null,
+      "union_candidate_count_avg": null,
+      "duplicate_candidate_ratio_avg": null,
+      "source_query_hit": null,
+      "note": "baseline test result predates query-mode instrumentation; multi-query diagnostics unavailable"
+    },
+    {
+      "experiment_name": "mq1_original_keyword_dense_current_rerank_expanded_test",
+      "phase": "test_selected",
+      "split": "test",
+      "query_mode": "original_keyword",
+      "evaluated_samples": 52,
+      "skipped_abstain": 8,
+      "candidate_hit_at_50": 0.730769,
+      "candidate_recall_at_50": 0.711538,
+      "hit_at_10": 0.596154,
+      "mrr": 0.41514,
+      "gold_in_candidate_not_final_count": 7,
+      "raw_candidate_count_avg": 100.0,
+      "union_candidate_count_avg": 80.307692,
+      "duplicate_candidate_ratio_avg": 0.196923,
+      "source_query_hit": {
+        "main": 39,
+        "keyword": 27,
+        "expanded": 0,
+        "none": 12,
+        "main_only": 13,
+        "keyword_only": 1,
+        "expanded_only": 0,
+        "main_keyword": 26,
+        "main_expanded": 0,
+        "keyword_expanded": 0,
+        "all3": 0
+      },
+      "runtime_notes": {
+        "cohere_429_count_in_log": 667,
+        "local_fallback_count_in_log": 36,
+        "online_fail_count_in_log": 36,
+        "traceback_count_in_log": 0
+      }
+    }
+  ],
+  "test_comparison": {
+    "baseline_original": {
+      "candidate_hit_at_50": 0.75,
+      "candidate_recall_at_50": 0.730769,
+      "hit_at_10": 0.596154,
+      "mrr": 0.429884,
+      "gold_in_candidate_not_final_count": 8
+    },
+    "q1_original_keyword": {
+      "candidate_hit_at_50": 0.730769,
+      "candidate_recall_at_50": 0.711538,
+      "hit_at_10": 0.596154,
+      "mrr": 0.41514,
+      "gold_in_candidate_not_final_count": 7,
+      "duplicate_candidate_ratio_avg": 0.196923
+    },
+    "delta_q1_minus_baseline": {
+      "candidate_hit_at_50": -0.019231,
+      "candidate_recall_at_50": -0.019231,
+      "hit_at_10": 0.0,
+      "mrr": -0.014744,
+      "gold_in_candidate_not_final_count": -1
+    },
+    "held_out_test_reproduced_build_dev_gain": false
+  },
+  "final_recommendation": {
+    "effective_keyword_gain_in_build_dev": true,
+    "effective_expanded_gain_in_build_dev": false,
+    "adopt_original_keyword_in_final_system": false,
+    "retain_original_as_final_query_mode": true,
+    "reason": "Q1 original_keyword showed promise on build/dev but did not improve the held-out test over the original baseline on primary metrics."
+  }
+}

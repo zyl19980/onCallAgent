@@ -1,0 +1,9 @@
+experiment_name,phase,split,query_mode,evaluated_samples,skipped_abstain,candidate_hit_at_50,candidate_recall_at_50,hit_at_10,mrr,gold_in_candidate_not_final_count,raw_candidate_count_avg,union_candidate_count_avg,duplicate_candidate_ratio_avg,source_main_hit,source_keyword_hit,source_expanded_hit,source_none,source_main_only,source_keyword_only,source_expanded_only,source_main_keyword,source_main_expanded,source_keyword_expanded,source_all3,notes
+mq0_original_dense_current_rerank_expanded_build,build_dev,build,original,27,3,0.740741,0.703704,0.666667,0.545062,2,50.0,50.0,0.0,20,0,0,7,20,0,0,0,0,0,0,
+mq0_original_dense_current_rerank_expanded_dev,build_dev,dev,original,30,5,0.7,0.7,0.466667,0.201481,7,50.0,50.0,0.0,21,0,0,9,21,0,0,0,0,0,0,
+mq1_original_keyword_dense_current_rerank_expanded_build,build_dev,build,original_keyword,27,3,0.777778,0.740741,0.703704,0.569136,2,100.0,78.0,0.22,20,18,0,6,3,1,0,17,0,0,0,
+mq1_original_keyword_dense_current_rerank_expanded_dev,build_dev,dev,original_keyword,30,5,0.7,0.7,0.533333,0.28004,5,100.0,78.6,0.214,21,13,0,8,9,1,0,12,0,0,0,
+mq2_original_keyword_expanded_dense_current_rerank_expanded_build,build_dev,build,original_keyword_expanded,27,3,0.777778,0.740741,0.666667,0.5,3,150.0,84.888889,0.434074,20,18,20,6,0,1,0,0,3,0,17,
+mq2_original_keyword_expanded_dense_current_rerank_expanded_dev,build_dev,dev,original_keyword_expanded,30,5,0.7,0.7,0.533333,0.332593,5,150.0,84.6,0.436,21,13,22,7,0,1,1,0,9,0,12,
+dense_current_rerank_expanded_test,test_baseline,test,original,52,8,0.75,0.730769,0.596154,0.429884,8,,,,,,,,,,,,,,baseline test predates query-mode instrumentation; multi-query diagnostics unavailable
+mq1_original_keyword_dense_current_rerank_expanded_test,test_selected,test,original_keyword,52,8,0.730769,0.711538,0.596154,0.41514,7,100.0,80.307692,0.196923,39,27,0,12,13,1,0,26,0,0,0,Cohere 429 observed; 36 local fallbacks in log

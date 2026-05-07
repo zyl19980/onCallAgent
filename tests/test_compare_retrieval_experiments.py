@@ -76,18 +76,28 @@ def test_compare_retrieval_experiments_builds_rows_and_deltas(tmp_path: Path):
     current = by_name["dense_current_rerank_build"]
     assert current["split"] == "build"
     assert current["candidate_hit_at_50"] == 0.9
+    assert current["candidate_recall_at_50"] == 0.85
+    assert current["skipped_abstain"] == 2
     assert current["delta_hit_at_1"] == 0.1
     assert current["delta_hit_at_3"] == 0.1
     assert current["delta_hit_at_5"] == 0.05
     assert current["delta_hit_at_10"] == 0.05
     assert current["delta_mrr"] == 0.1
     assert current["gold_promoted_by_rerank_count"] == 5
+    assert current["rerank_provider_local_samples"] == 1
+    assert current["rerank_provider_cohere_samples"] == 1
+    assert current["rerank_provider_local_results"] == 2
+    assert current["rerank_provider_cohere_results"] == 1
+    assert current["rerank_fallback_sample_count"] == 1
+    assert current["rerank_fallback_result_count"] == 2
 
     with csv_path.open("r", encoding="utf-8", newline="") as fh:
         csv_rows = list(csv.DictReader(fh))
     assert len(csv_rows) == 3
     assert csv_rows[0]["experiment_name"]
     assert "delta_hit_at_10" in csv_rows[0]
+    assert "candidate_recall_at_50" in csv_rows[0]
+    assert "rerank_fallback_sample_count" in csv_rows[0]
 
 
 def make_result(
@@ -110,12 +120,14 @@ def make_result(
         "retrieval_strategy": "dense",
         "rerank": rerank,
         "evaluated_samples": 10,
+        "skipped_abstain": 2,
         "candidate_top_k": 50,
         "final_top_k": 10,
         "candidate_metrics": {
             "candidate_hit_at_10": 0.5,
             "candidate_hit_at_20": 0.7,
             "candidate_hit_at_50": 0.9,
+            "candidate_recall_at_50": 0.85,
         },
         "final_metrics": {
             "hit_at_1": hit_at_1,
@@ -131,6 +143,21 @@ def make_result(
         "gold_in_candidate_not_final_count": gold_in_candidate_not_final_count,
         "gold_promoted_by_rerank_count": gold_promoted_by_rerank_count,
         "gold_demoted_by_rerank_count": gold_demoted_by_rerank_count,
+        "per_sample": [
+            {
+                "final_results": [
+                    {"rerank_provider": "local"},
+                    {"rerank_provider": "local"},
+                ]
+            },
+            {
+                "final_results": [
+                    {"rerank_provider": "cohere"},
+                ]
+            },
+        ]
+        if rerank == "current"
+        else [],
     }
 
 

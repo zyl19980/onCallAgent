@@ -6,6 +6,7 @@ from scripts.experiment.evaluate_retrieval_confidence import (
     diagnose_score_direction,
     evaluate_retrieval_confidence,
     predict_confidence,
+    tune_build_dev_confidence,
     tune_confidence_thresholds,
 )
 
@@ -223,16 +224,21 @@ def test_evaluate_retrieval_confidence_writes_outputs(tmp_path: Path):
     assert report["low_confidence_error_capture"] == 1.0
     assert report["medium_confidence_success_rate"] == 1.0
     assert report["confidence_accuracy"] == 1.0
+    assert report["abstention_precision"] == 0.0
+    assert report["abstention_recall"] == 0.0
     assert report["per_sample"][0]["confidence_debug"]["support_count"] == 2
     assert report["per_sample"][1]["predicted_confidence"] == "low"
     assert report["per_sample"][2]["predicted_confidence"] == "medium"
     assert report["per_sample"][2]["confidence_debug"]["top3_is_support"] is False
+    assert report["per_sample"][0]["top1_top2_margin"] == 0.1
+    assert report["per_sample"][0]["top3_support_features"]["support_count"] == 2
 
     with summary_path.open("r", encoding="utf-8", newline="") as fh:
         rows = list(csv.DictReader(fh))
     assert len(rows) == 1
     assert rows[0]["strategy"] == "system_top3_support"
     assert rows[0]["high_confidence_precision"] == "1.0"
+    assert rows[0]["abstention_precision"] == "0.0"
     assert rows[0]["count_high"] == "1"
     assert rows[0]["count_medium"] == "1"
     assert rows[0]["count_low"] == "1"
@@ -319,6 +325,146 @@ def test_tune_thresholds_selects_best_eligible_config(tmp_path: Path):
         rows = list(csv.DictReader(fh))
     assert len(rows) == 2
     assert "passes_constraints" in rows[0]
+
+
+def test_evaluate_retrieval_confidence_merges_should_abstain_labels(tmp_path: Path):
+    results_path = tmp_path / "expanded_build.json"
+    labels_path = tmp_path / "rag_build.jsonl"
+    output_path = tmp_path / "confidence_eval.json"
+    summary_path = tmp_path / "confidence_eval.csv"
+
+    payload = {
+        "experiment_name": "dense_current_rerank_expanded_build",
+        "dataset": "aiops-docs/experiment/rag/splits/expanded/rag_build.jsonl",
+        "per_sample": [
+            make_sample(
+                "s1",
+                [0.92, 0.7, 0.69],
+                {"1": 1.0, "3": 1.0, "5": 1.0, "10": 1.0},
+                source_ids=["source_a", "source_a", "source_b"],
+            ),
+        ],
+    }
+    results_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    labels_path.write_text(
+        "\n".join(
+            [
+                json.dumps({"id": "s1", "split": "build", "should_abstain": False, "source_ids": ["source_a"]}, ensure_ascii=False),
+                json.dumps({"id": "s2", "split": "build", "should_abstain": True, "source_ids": []}, ensure_ascii=False),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    report = evaluate_retrieval_confidence(
+        results_path=results_path,
+        labels_path=labels_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        strategy="rank_and_margin",
+        score_direction="higher_is_better",
+        high_threshold=0.9,
+        low_threshold=0.4,
+        margin_threshold=0.1,
+        success_k=10,
+    )
+
+    assert report["evaluated_samples"] == 2
+    assert report["answerable_samples"] == 1
+    assert report["should_abstain_samples"] == 1
+    assert report["abstention_precision"] == 1.0
+    assert report["abstention_recall"] == 1.0
+    assert report["false_confident_count"] == 0
+    assert report["coverage"] == 0.5
+
+    abstain_row = next(row for row in report["per_sample"] if row["sample_id"] == "s2")
+    assert abstain_row["should_abstain"] is True
+    assert abstain_row["top1_score"] == 0.0
+    assert abstain_row["candidate_hit_at_50"] == 0.0
+    assert abstain_row["predicted_confidence"] == "low"
+    assert abstain_row["rerank_provider_counts"] == {}
+
+
+def test_tune_build_dev_confidence_recommends_global_config(tmp_path: Path):
+    build_results_path = tmp_path / "build.json"
+    dev_results_path = tmp_path / "dev.json"
+    build_labels_path = tmp_path / "rag_build.jsonl"
+    dev_labels_path = tmp_path / "rag_dev.jsonl"
+    output_path = tmp_path / "tuning.json"
+    summary_path = tmp_path / "tuning.csv"
+
+    build_payload = {
+        "experiment_name": "dense_current_rerank_expanded_build",
+        "dataset": "aiops-docs/experiment/rag/splits/expanded/rag_build.jsonl",
+        "per_sample": [
+            make_sample("b1", [0.95, 0.7, 0.69], {"10": 1.0}, source_ids=["source_a", "source_a", "source_b"]),
+            make_sample("b2", [0.58, 0.575, 0.57], {"10": 0.0}, source_ids=["source_b", "source_b", "source_b"]),
+        ],
+    }
+    dev_payload = {
+        "experiment_name": "dense_current_rerank_expanded_dev",
+        "dataset": "aiops-docs/experiment/rag/splits/expanded/rag_dev.jsonl",
+        "per_sample": [
+            make_sample("d1", [0.93, 0.71, 0.7], {"10": 1.0}, source_ids=["source_a", "source_a", "source_c"]),
+            make_sample("d2", [0.57, 0.568, 0.567], {"10": 0.0}, source_ids=["source_d", "source_d", "source_d"]),
+        ],
+    }
+    build_results_path.write_text(json.dumps(build_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dev_results_path.write_text(json.dumps(dev_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    build_labels_path.write_text(
+        "\n".join(
+            [
+                json.dumps({"id": "b1", "split": "build", "should_abstain": False, "source_ids": ["source_a"]}, ensure_ascii=False),
+                json.dumps({"id": "b2", "split": "build", "should_abstain": False, "source_ids": ["source_b"]}, ensure_ascii=False),
+                json.dumps({"id": "b3", "split": "build", "should_abstain": True, "source_ids": []}, ensure_ascii=False),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    dev_labels_path.write_text(
+        "\n".join(
+            [
+                json.dumps({"id": "d1", "split": "dev", "should_abstain": False, "source_ids": ["source_a"]}, ensure_ascii=False),
+                json.dumps({"id": "d2", "split": "dev", "should_abstain": False, "source_ids": ["source_d"]}, ensure_ascii=False),
+                json.dumps({"id": "d3", "split": "dev", "should_abstain": True, "source_ids": []}, ensure_ascii=False),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
+    report = tune_build_dev_confidence(
+        build_results_path=build_results_path,
+        dev_results_path=dev_results_path,
+        build_labels_path=build_labels_path,
+        dev_labels_path=dev_labels_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        strategies=["rank_and_margin", "system_top3_support"],
+        score_directions=["higher_is_better"],
+        high_threshold_grid=[0.8, 0.9],
+        low_threshold_grid=[0.4, 0.55],
+        margin_threshold_grid=[0.02],
+        strong_threshold_grid=[0.8, 0.9],
+        support_threshold_grid=[0.6],
+        high_avg_threshold_grid=[0.7],
+        success_k=10,
+    )
+
+    assert output_path.exists()
+    assert summary_path.exists()
+    assert report["recommended_strategy"] in {"rank_and_margin", "system_top3_support"}
+    assert report["selected_build_report"]["should_abstain_samples"] == 1
+    assert report["selected_dev_report"]["should_abstain_samples"] == 1
+    assert len(report["rows"]) == 6
+    assert "recommended_config" in report
+
+    with summary_path.open("r", encoding="utf-8", newline="") as fh:
+        rows = list(csv.DictReader(fh))
+    assert len(rows) == 6
+    assert "avg_abstention_f1" in rows[0]
 
 
 def make_sample(

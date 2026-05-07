@@ -20,9 +20,8 @@
 - `rag/splits/`: RAG dataset 划分结果，按 `pilot / expanded` 分开保存。
 - `agent/`: Agent 实验案例、轨迹标注、金标准答案。
 - `agent/splits/`: Agent 实验的 train/dev/test 或回放划分文件。
-- `results/`: 实验运行输出、统计汇总、分析结果，现已按 `retrieval / confidence / diagnostics / indexing` 分层整理。
-- `results/thesis_tables/`: 面向论文正文/附录的表格导出结果，按实验类型继续分层保存。
-- `reports/`: 面向论文写作与实验复盘的阶段性汇总报告。
+- `process_results/`: 阶段性实验过程产物，按 `01_overview` 到 `06_diagnostics_indexing` 的顺序整理。
+- `final_results/`: 最终冻结结论、最终 held-out test confirmation 结果与论文最终汇总表。
 
 ## 当前推荐入口
 
@@ -30,8 +29,9 @@
 - 当前审核结果入口：`rag/reviews/batch1/`、`rag/reviews/batch2/`、`rag/reviews/merged/`
 - 当前正式数据集入口：`rag/datasets/expanded/experiment_rag_dataset_expanded.validated.jsonl`
 - 当前正式 split 入口：`rag/splits/expanded/`
-- 当前 expanded retrieval 对比入口：`results/retrieval/expanded/` 与 `results/thesis_tables/retrieval/expanded/`
-- 当前阶段报告入口：`reports/expanded_experiment_stage_report.md`
+- 当前过程结果入口：`process_results/README.md`
+- 当前最终结果入口：`final_results/README.md`
+- 当前最终总报告入口：`final_results/reports/03_rag_experiment_final_report.md`
 
 ## 配套脚本
 
@@ -41,6 +41,8 @@
 - chunk 构造与数据导出
 - RAG/Agent 样本划分
 - 结果统计与论文表格生成
+
+注意：部分历史脚本可能仍保留旧 `reports/` 或 `results/` 默认输出路径。重新运行实验时，应通过 `--output`、`--summary`、`--report` 或同类参数显式输出到 `process_results/` 或 `final_results/`。
 
 ## 约束
 

@@ -1,0 +1,95 @@
+stage,item,split,metric,value,note
+dataset,expanded_dataset,all,validated_samples,138,experiment_rag_dataset_expanded.validated.jsonl
+dataset,expanded_dataset,all,should_abstain_samples,17,from expanded validated dataset
+dataset,expanded_split,build,total_samples,30,rag_build.jsonl
+dataset,expanded_split,build,should_abstain_samples,3,rag_build.jsonl
+dataset,expanded_split,dev,total_samples,35,rag_dev.jsonl
+dataset,expanded_split,dev,should_abstain_samples,5,rag_dev.jsonl
+dataset,expanded_split,test,total_samples,60,rag_test.jsonl
+dataset,expanded_split,test,should_abstain_samples,8,rag_test.jsonl
+dataset,expanded_split,reserve,total_samples,13,rag_reserve.jsonl
+dataset,expanded_split,reserve,should_abstain_samples,1,rag_reserve.jsonl
+evidence_base,experiment_chunks,all,chunk_count,4503,aiops-docs/experiment/chunks/experiment_chunks.jsonl
+evidence_base,milvus_collection,all,collection,experiment_manuals_all,fixed retrieval collection
+retrieval,dense_no_rerank,build,candidate_hit_at_50,0.740741,expanded retrieval comparison v2
+retrieval,dense_no_rerank,build,candidate_recall_at_50,0.703704,expanded retrieval comparison v2
+retrieval,dense_no_rerank,build,hit_at_10,0.407407,expanded retrieval comparison v2
+retrieval,dense_no_rerank,build,mrr,0.288272,expanded retrieval comparison v2
+retrieval,dense_no_rerank,dev,candidate_hit_at_50,0.700000,expanded retrieval comparison v2
+retrieval,dense_no_rerank,dev,candidate_recall_at_50,0.700000,expanded retrieval comparison v2
+retrieval,dense_no_rerank,dev,hit_at_10,0.433333,expanded retrieval comparison v2
+retrieval,dense_no_rerank,dev,mrr,0.153651,expanded retrieval comparison v2
+retrieval,dense_no_rerank,test,candidate_hit_at_50,0.750000,expanded retrieval comparison v2
+retrieval,dense_no_rerank,test,candidate_recall_at_50,0.730769,expanded retrieval comparison v2
+retrieval,dense_no_rerank,test,hit_at_10,0.442308,expanded retrieval comparison v2
+retrieval,dense_no_rerank,test,mrr,0.302564,expanded retrieval comparison v2
+retrieval,dense_current_rerank,build,candidate_hit_at_50,0.740741,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,build,candidate_recall_at_50,0.703704,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,build,hit_at_10,0.666667,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,build,mrr,0.545062,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,dev,candidate_hit_at_50,0.700000,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,dev,candidate_recall_at_50,0.700000,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,dev,hit_at_10,0.466667,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,dev,mrr,0.208889,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,test,candidate_hit_at_50,0.750000,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,test,candidate_recall_at_50,0.730769,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,test,hit_at_10,0.596154,current_rerank = online rerank + local fallback
+retrieval,dense_current_rerank,test,mrr,0.429884,current_rerank = online rerank + local fallback
+retrieval,hybrid_no_rerank,build,candidate_hit_at_50,0.703704,hybrid did not stably improve candidate recall
+retrieval,hybrid_no_rerank,build,candidate_recall_at_50,0.685185,hybrid did not stably improve candidate recall
+retrieval,hybrid_no_rerank,build,hit_at_10,0.666667,expanded retrieval comparison v2
+retrieval,hybrid_no_rerank,build,mrr,0.399691,expanded retrieval comparison v2
+retrieval,hybrid_no_rerank,dev,candidate_hit_at_50,0.800000,hybrid improved dev candidate recall
+retrieval,hybrid_no_rerank,dev,candidate_recall_at_50,0.800000,hybrid improved dev candidate recall
+retrieval,hybrid_no_rerank,dev,hit_at_10,0.600000,expanded retrieval comparison v2
+retrieval,hybrid_no_rerank,dev,mrr,0.216111,expanded retrieval comparison v2
+retrieval,hybrid_no_rerank,test,candidate_hit_at_50,0.653846,hybrid did not stably improve candidate recall
+retrieval,hybrid_no_rerank,test,candidate_recall_at_50,0.634615,hybrid did not stably improve candidate recall
+retrieval,hybrid_no_rerank,test,hit_at_10,0.634615,expanded retrieval comparison v2
+retrieval,hybrid_no_rerank,test,mrr,0.395406,expanded retrieval comparison v2
+retrieval,hybrid_current_rerank,build,candidate_hit_at_50,0.703704,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,build,candidate_recall_at_50,0.685185,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,build,hit_at_10,0.666667,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,build,mrr,0.501235,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,dev,candidate_hit_at_50,0.800000,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,dev,candidate_recall_at_50,0.800000,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,dev,hit_at_10,0.633333,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,dev,mrr,0.344854,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,test,candidate_hit_at_50,0.653846,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,test,candidate_recall_at_50,0.634615,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,test,hit_at_10,0.634615,current_rerank = online rerank + local fallback
+retrieval,hybrid_current_rerank,test,mrr,0.400824,current_rerank = online rerank + local fallback
+query_decomposition,Q0_original,build,hit_at_10,0.666667,build/dev ablation
+query_decomposition,Q0_original,build,mrr,0.545062,build/dev ablation
+query_decomposition,Q0_original,dev,hit_at_10,0.466667,build/dev ablation
+query_decomposition,Q0_original,dev,mrr,0.201481,build/dev ablation
+query_decomposition,Q1_original_keyword,build,hit_at_10,0.703704,selected for test on build/dev
+query_decomposition,Q1_original_keyword,build,mrr,0.569136,selected for test on build/dev
+query_decomposition,Q1_original_keyword,dev,hit_at_10,0.533333,selected for test on build/dev
+query_decomposition,Q1_original_keyword,dev,mrr,0.280040,selected for test on build/dev
+query_decomposition,Q2_original_keyword_expanded,build,hit_at_10,0.666667,not selected for test
+query_decomposition,Q2_original_keyword_expanded,build,mrr,0.500000,not selected for test
+query_decomposition,Q2_original_keyword_expanded,dev,hit_at_10,0.533333,not selected for test
+query_decomposition,Q2_original_keyword_expanded,dev,mrr,0.332593,not selected for test
+query_decomposition,Q0_original_baseline,test,candidate_hit_at_50,0.750000,final query mode remains original
+query_decomposition,Q0_original_baseline,test,hit_at_10,0.596154,final query mode remains original
+query_decomposition,Q0_original_baseline,test,mrr,0.429884,final query mode remains original
+query_decomposition,Q1_original_keyword,test,candidate_hit_at_50,0.730769,test did not reproduce build/dev gain
+query_decomposition,Q1_original_keyword,test,hit_at_10,0.596154,test did not reproduce build/dev gain
+query_decomposition,Q1_original_keyword,test,mrr,0.415140,test did not reproduce build/dev gain
+confidence,score_threshold,test,total_samples,60,held-out final confirmation
+confidence,score_threshold,test,answerable_samples,52,held-out final confirmation
+confidence,score_threshold,test,should_abstain_samples,8,held-out final confirmation
+confidence,score_threshold,test,abstention_precision,1.000000,current merged offline evaluation
+confidence,score_threshold,test,abstention_recall,1.000000,current merged offline evaluation
+confidence,score_threshold,test,false_confident_count,0,current merged offline evaluation
+confidence,score_threshold,test,low_confidence_capture_rate,0.275862,current merged offline evaluation
+confidence,score_threshold,test,answerable_over_abstention_count,0,current merged offline evaluation
+confidence,score_threshold,test,coverage,0.866667,current merged offline evaluation
+confidence,score_threshold,test,accuracy_if_answered,0.596154,current merged offline evaluation
+final_config,retrieval_backbone,all,value,dense_current_rerank,final recommended retrieval backbone
+final_config,query_mode,all,value,original,final query mode
+final_config,confidence_strategy,all,value,score_threshold,final confidence strategy
+final_config,confidence_high_threshold,all,value,0.56,higher_is_better
+final_config,confidence_low_threshold,all,value,0.52,higher_is_better
+final_config,rerank_interpretation,all,value,online rerank + local fallback,not pure Cohere rerank

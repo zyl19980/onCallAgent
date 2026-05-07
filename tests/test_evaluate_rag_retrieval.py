@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from scripts.experiment.evaluate_rag_retrieval import (
+    QueryPlan,
     build_rerank_adapter,
     diagnose_live_retrieval,
     evaluate_rag_retrieval,
@@ -17,6 +18,21 @@ class StaticAdapter:
 
     def retrieve(self, sample, *, top_k, collection_filter_from_sample, source_filter_from_sample):
         rows = self.mapping[sample["id"]]
+        output = []
+        for rank, item in enumerate(rows[:top_k], start=1):
+            enriched = dict(item)
+            enriched.setdefault("rank", rank)
+            output.append(enriched)
+        return output
+
+
+class QueryAwareAdapter:
+    def __init__(self, mapping):
+        self.mapping = mapping
+
+    def retrieve(self, sample, *, top_k, collection_filter_from_sample, source_filter_from_sample):
+        del collection_filter_from_sample, source_filter_from_sample
+        rows = self.mapping[str(sample["user_input"])]
         output = []
         for rank, item in enumerate(rows[:top_k], start=1):
             enriched = dict(item)
@@ -68,8 +84,10 @@ class FakeCurrentRerankAdapter:
 
 
 class FakeHybridLiveAdapter:
-    def __init__(self, chunks_by_id):
+    def __init__(self, chunks_by_id, chunk_rows=None, collection_name=None):
         self.chunks_by_id = chunks_by_id
+        self.chunk_rows = chunk_rows
+        self.collection_name = collection_name
 
     def retrieve(self, sample, *, top_k, collection_filter_from_sample, source_filter_from_sample):
         del collection_filter_from_sample, source_filter_from_sample
@@ -137,6 +155,7 @@ def test_evaluate_rag_retrieval_mock_mode_runs_and_writes_summary(tmp_path: Path
 
     assert report["mode"] == "mock"
     assert report["experiment_name"] == "mock_smoke"
+    assert report["query_mode"] == "original"
     assert report["total_samples"] == 2
     assert report["evaluated_samples"] == 2
     assert summary_path.exists()
@@ -151,13 +170,208 @@ def test_evaluate_rag_retrieval_mock_mode_runs_and_writes_summary(tmp_path: Path
 def test_validate_retrieval_config_supports_dense_and_hybrid_with_none_and_current():
     for retrieval_strategy in ("dense", "hybrid"):
         for rerank in ("none", "current"):
-            validate_retrieval_config(
-                mode="live",
-                retrieval_strategy=retrieval_strategy,
-                rerank=rerank,
-                candidate_top_k=50,
-                final_top_k=10,
-            )
+            for query_mode in ("original", "original_keyword", "original_keyword_expanded"):
+                validate_retrieval_config(
+                    mode="live",
+                    retrieval_strategy=retrieval_strategy,
+                    rerank=rerank,
+                    query_mode=query_mode,
+                    candidate_top_k=50,
+                    final_top_k=10,
+                )
+
+
+def test_query_mode_original_keeps_single_route_behavior(tmp_path: Path, monkeypatch):
+    dataset_path = tmp_path / "rag_build.jsonl"
+    chunks_path = tmp_path / "experiment_chunks.jsonl"
+    output_path = tmp_path / "results.json"
+    summary_path = tmp_path / "summary.csv"
+
+    dataset_rows = [make_sample("q1", ["chunk-1"], [3], "source_a", "troubleshooting_step")]
+    chunk_rows = [
+        make_chunk("chunk-1", "source_a", "source_a.pdf", 3, 3),
+        make_chunk("chunk-2", "source_a", "source_a.pdf", 4, 4),
+    ]
+    write_jsonl(dataset_path, dataset_rows)
+    write_jsonl(chunks_path, chunk_rows)
+
+    monkeypatch.setattr(
+        "scripts.experiment.evaluate_rag_retrieval.build_query_plan",
+        lambda sample, query_mode: QueryPlan(
+            query_mode=query_mode,
+            main_query="main only",
+            keyword_query="keyword only",
+            expanded_query="expanded only",
+        ),
+    )
+
+    report = evaluate_rag_retrieval(
+        dataset_path=dataset_path,
+        chunks_path=chunks_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        mode="mock",
+        candidate_top_k=3,
+        final_top_k=2,
+        query_mode="original",
+        adapter=QueryAwareAdapter(
+            {
+                "main only": [
+                    make_retrieved("chunk-1", "source_a", "source_a.pdf", 3, 3, 0.9),
+                    make_retrieved("chunk-2", "source_a", "source_a.pdf", 4, 4, 0.8),
+                ]
+            }
+        ),
+    )
+
+    row = report["per_sample"][0]
+    assert report["query_mode"] == "original"
+    assert row["query_mode"] == "original"
+    assert row["main_query"] == "main only"
+    assert row["raw_candidate_count"] == 2
+    assert row["union_candidate_count"] == 2
+    assert row["duplicate_candidate_ratio"] == 0.0
+    assert row["matched_query_types"] == ["main_query"]
+    assert row["source_query_hit"] == {
+        "main_query": True,
+        "keyword_query": False,
+        "expanded_query": False,
+    }
+    assert row["candidate_results"][0]["matched_query_types"] == ["main_query"]
+
+
+def test_query_mode_original_keyword_merges_two_routes_and_dedupes_by_chunk_id(tmp_path: Path, monkeypatch):
+    dataset_path = tmp_path / "rag_build.jsonl"
+    chunks_path = tmp_path / "experiment_chunks.jsonl"
+    output_path = tmp_path / "results.json"
+    summary_path = tmp_path / "summary.csv"
+
+    dataset_rows = [make_sample("q1", ["chunk-2"], [4], "source_a", "troubleshooting_step")]
+    chunk_rows = [
+        make_chunk("chunk-1", "source_a", "source_a.pdf", 3, 3),
+        make_chunk("chunk-2", "source_a", "source_a.pdf", 4, 4),
+        make_chunk("chunk-3", "source_a", "source_a.pdf", 5, 5),
+    ]
+    write_jsonl(dataset_path, dataset_rows)
+    write_jsonl(chunks_path, chunk_rows)
+
+    monkeypatch.setattr(
+        "scripts.experiment.evaluate_rag_retrieval.build_query_plan",
+        lambda sample, query_mode: QueryPlan(
+            query_mode=query_mode,
+            main_query="main route",
+            keyword_query="keyword route",
+            expanded_query="expanded route",
+        ),
+    )
+
+    report = evaluate_rag_retrieval(
+        dataset_path=dataset_path,
+        chunks_path=chunks_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        mode="mock",
+        candidate_top_k=5,
+        final_top_k=3,
+        query_mode="original_keyword",
+        adapter=QueryAwareAdapter(
+            {
+                "main route": [
+                    make_retrieved("chunk-1", "source_a", "source_a.pdf", 3, 3, 0.9),
+                    make_retrieved("chunk-2", "source_a", "source_a.pdf", 4, 4, 0.8),
+                ],
+                "keyword route": [
+                    make_retrieved("chunk-2", "source_a", "source_a.pdf", 4, 4, 0.95),
+                    make_retrieved("chunk-3", "source_a", "source_a.pdf", 5, 5, 0.7),
+                ],
+            }
+        ),
+    )
+
+    row = report["per_sample"][0]
+    assert row["query_mode"] == "original_keyword"
+    assert row["raw_candidate_count"] == 4
+    assert row["union_candidate_count"] == 3
+    assert row["duplicate_candidate_ratio"] == 0.25
+    assert row["matched_query_types"] == ["main_query", "keyword_query"]
+    assert row["source_query_hit"] == {
+        "main_query": True,
+        "keyword_query": True,
+        "expanded_query": False,
+    }
+    by_chunk_id = {item["chunk_id"]: item for item in row["candidate_results"]}
+    assert sorted(by_chunk_id["chunk-2"]["matched_query_types"]) == ["keyword_query", "main_query"]
+
+
+def test_query_mode_original_keyword_expanded_merges_three_routes_and_tracks_source_hits(tmp_path: Path, monkeypatch):
+    dataset_path = tmp_path / "rag_build.jsonl"
+    chunks_path = tmp_path / "experiment_chunks.jsonl"
+    output_path = tmp_path / "results.json"
+    summary_path = tmp_path / "summary.csv"
+
+    dataset_rows = [make_sample("q1", ["chunk-4"], [6], "source_a", "troubleshooting_step")]
+    chunk_rows = [
+        make_chunk("chunk-1", "source_a", "source_a.pdf", 3, 3),
+        make_chunk("chunk-2", "source_a", "source_a.pdf", 4, 4),
+        make_chunk("chunk-3", "source_a", "source_a.pdf", 5, 5),
+        make_chunk("chunk-4", "source_a", "source_a.pdf", 6, 6),
+    ]
+    write_jsonl(dataset_path, dataset_rows)
+    write_jsonl(chunks_path, chunk_rows)
+
+    monkeypatch.setattr(
+        "scripts.experiment.evaluate_rag_retrieval.build_query_plan",
+        lambda sample, query_mode: QueryPlan(
+            query_mode=query_mode,
+            main_query="main route",
+            keyword_query="keyword route",
+            expanded_query="expanded route",
+        ),
+    )
+
+    report = evaluate_rag_retrieval(
+        dataset_path=dataset_path,
+        chunks_path=chunks_path,
+        output_path=output_path,
+        summary_path=summary_path,
+        mode="mock",
+        candidate_top_k=6,
+        final_top_k=3,
+        query_mode="original_keyword_expanded",
+        adapter=QueryAwareAdapter(
+            {
+                "main route": [
+                    make_retrieved("chunk-1", "source_a", "source_a.pdf", 3, 3, 0.9),
+                    make_retrieved("chunk-2", "source_a", "source_a.pdf", 4, 4, 0.8),
+                ],
+                "keyword route": [
+                    make_retrieved("chunk-2", "source_a", "source_a.pdf", 4, 4, 0.95),
+                    make_retrieved("chunk-3", "source_a", "source_a.pdf", 5, 5, 0.7),
+                ],
+                "expanded route": [
+                    make_retrieved("chunk-3", "source_a", "source_a.pdf", 5, 5, 0.96),
+                    make_retrieved("chunk-4", "source_a", "source_a.pdf", 6, 6, 0.75),
+                ],
+            }
+        ),
+    )
+
+    row = report["per_sample"][0]
+    assert row["query_mode"] == "original_keyword_expanded"
+    assert row["main_query"] == "main route"
+    assert row["keyword_query"] == "keyword route"
+    assert row["expanded_query"] == "expanded route"
+    assert row["raw_candidate_count"] == 6
+    assert row["union_candidate_count"] == 4
+    assert row["duplicate_candidate_ratio"] == 0.333333
+    assert row["matched_query_types"] == ["main_query", "keyword_query", "expanded_query"]
+    assert row["source_query_hit"] == {
+        "main_query": False,
+        "keyword_query": False,
+        "expanded_query": True,
+    }
+    by_chunk_id = {item["chunk_id"]: item for item in row["candidate_results"]}
+    assert sorted(by_chunk_id["chunk-3"]["matched_query_types"]) == ["expanded_query", "keyword_query"]
 
 
 def test_evaluate_rag_retrieval_metrics_and_warnings(tmp_path: Path):

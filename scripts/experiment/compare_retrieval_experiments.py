@@ -24,11 +24,13 @@ CSV_FIELDS = [
     "retrieval_strategy",
     "rerank",
     "evaluated_samples",
+    "skipped_abstain",
     "candidate_top_k",
     "final_top_k",
     "candidate_hit_at_10",
     "candidate_hit_at_20",
     "candidate_hit_at_50",
+    "candidate_recall_at_50",
     "hit_at_1",
     "hit_at_3",
     "hit_at_5",
@@ -41,6 +43,12 @@ CSV_FIELDS = [
     "gold_in_candidate_not_final_count",
     "gold_promoted_by_rerank_count",
     "gold_demoted_by_rerank_count",
+    "rerank_provider_local_samples",
+    "rerank_provider_cohere_samples",
+    "rerank_provider_local_results",
+    "rerank_provider_cohere_results",
+    "rerank_fallback_sample_count",
+    "rerank_fallback_result_count",
     "delta_hit_at_1",
     "delta_hit_at_3",
     "delta_hit_at_5",
@@ -118,17 +126,20 @@ def build_comparison_row(payload: dict[str, object]) -> dict[str, object]:
     split = infer_split(payload, dataset)
     candidate_metrics = dict(payload.get("candidate_metrics") or {})
     final_metrics = dict(payload.get("final_metrics") or payload.get("metrics") or {})
+    provider_stats = summarize_rerank_providers(payload)
     return {
         "experiment_name": str(payload.get("experiment_name") or ""),
         "split": split,
         "retrieval_strategy": str(payload.get("retrieval_strategy") or ""),
         "rerank": str(payload.get("rerank") or ""),
         "evaluated_samples": int(payload.get("evaluated_samples") or 0),
+        "skipped_abstain": int(payload.get("skipped_abstain") or 0),
         "candidate_top_k": int(payload.get("candidate_top_k") or 0),
         "final_top_k": int(payload.get("final_top_k") or 0),
         "candidate_hit_at_10": to_float(candidate_metrics.get("candidate_hit_at_10")),
         "candidate_hit_at_20": to_float(candidate_metrics.get("candidate_hit_at_20")),
         "candidate_hit_at_50": to_float(candidate_metrics.get("candidate_hit_at_50")),
+        "candidate_recall_at_50": to_float(candidate_metrics.get("candidate_recall_at_50")),
         "hit_at_1": to_float(final_metrics.get("hit_at_1")),
         "hit_at_3": to_float(final_metrics.get("hit_at_3")),
         "hit_at_5": to_float(final_metrics.get("hit_at_5")),
@@ -141,6 +152,7 @@ def build_comparison_row(payload: dict[str, object]) -> dict[str, object]:
         "gold_in_candidate_not_final_count": int(payload.get("gold_in_candidate_not_final_count") or 0),
         "gold_promoted_by_rerank_count": int(payload.get("gold_promoted_by_rerank_count") or 0),
         "gold_demoted_by_rerank_count": int(payload.get("gold_demoted_by_rerank_count") or 0),
+        **provider_stats,
         "delta_hit_at_1": 0.0,
         "delta_hit_at_3": 0.0,
         "delta_hit_at_5": 0.0,
@@ -172,12 +184,51 @@ def apply_delta(row: dict[str, object], baseline: dict[str, object] | None) -> N
 
 
 def sort_key(row: dict[str, object]) -> tuple[str, int, str]:
+    retrieval_order = {"dense": 0, "hybrid": 1}
     rerank_order = {"none": 0, "current": 1}
     return (
         str(row["split"]),
+        retrieval_order.get(str(row["retrieval_strategy"]), 99),
         rerank_order.get(str(row["rerank"]), 99),
         str(row["experiment_name"]),
     )
+
+
+def summarize_rerank_providers(payload: dict[str, object]) -> dict[str, int]:
+    provider_local_samples = 0
+    provider_cohere_samples = 0
+    provider_local_results = 0
+    provider_cohere_results = 0
+
+    per_sample = payload.get("per_sample") or []
+    for sample in per_sample:
+        final_results = sample.get("final_results") or []
+        sample_providers: set[str] = set()
+        for item in final_results:
+            provider = str(item.get("rerank_provider") or "").strip()
+            if not provider:
+                continue
+            sample_providers.add(provider)
+            if provider == "local":
+                provider_local_results += 1
+            elif provider == "cohere":
+                provider_cohere_results += 1
+
+        if "local" in sample_providers:
+            provider_local_samples += 1
+        if "cohere" in sample_providers:
+            provider_cohere_samples += 1
+
+    fallback_sample_count = provider_local_samples if str(payload.get("rerank") or "") == "current" else 0
+    fallback_result_count = provider_local_results if str(payload.get("rerank") or "") == "current" else 0
+    return {
+        "rerank_provider_local_samples": provider_local_samples,
+        "rerank_provider_cohere_samples": provider_cohere_samples,
+        "rerank_provider_local_results": provider_local_results,
+        "rerank_provider_cohere_results": provider_cohere_results,
+        "rerank_fallback_sample_count": fallback_sample_count,
+        "rerank_fallback_result_count": fallback_result_count,
+    }
 
 
 def write_csv(path: Path, rows: list[dict[str, object]]) -> None:

@@ -1,0 +1,3191 @@
+{
+  "results": "aiops-docs/experiment/results/retrieval/expanded/dense_current_rerank_expanded_test.json",
+  "experiment_name": "dense_current_rerank_expanded_test",
+  "split": "test",
+  "strategy": "score_threshold",
+  "score_direction": "higher_is_better",
+  "high_threshold": 0.56,
+  "low_threshold": 0.52,
+  "margin_threshold": 0.0,
+  "strong_threshold": 0.78,
+  "support_threshold": 0.45,
+  "high_avg_threshold": 0.55,
+  "success_k": 10,
+  "labels": "aiops-docs/experiment/rag/splits/expanded/rag_test.jsonl",
+  "evaluated_samples": 60,
+  "per_sample": [
+    {
+      "sample_id": "rag_009",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.908163,
+      "top1_rerank_score": 0.908163,
+      "top2_score": 0.897552,
+      "top1_top2_margin": 0.010611,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.908163,
+        "top2_score": 0.897552,
+        "top3_score": 0.893533,
+        "avg_top3_score": 0.899749,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.899749,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_010",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.966105,
+      "top1_rerank_score": 0.966105,
+      "top2_score": 0.84446,
+      "top1_top2_margin": 0.121644,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.966105,
+        "top2_score": 0.84446,
+        "top3_score": 0.737612,
+        "avg_top3_score": 0.849392,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.849392,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_012",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.949967,
+      "top1_rerank_score": 0.949967,
+      "top2_score": 0.920103,
+      "top1_top2_margin": 0.029864,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.949967,
+        "top2_score": 0.920103,
+        "top3_score": 0.871218,
+        "avg_top3_score": 0.913763,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.913763,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_013",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.959398,
+      "top1_rerank_score": 0.959398,
+      "top2_score": 0.956569,
+      "top1_top2_margin": 0.002829,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 3,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.959398,
+        "top2_score": 0.956569,
+        "top3_score": 0.955585,
+        "avg_top3_score": 0.957184,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.957184,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_014",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.946912,
+      "top1_rerank_score": 0.946912,
+      "top2_score": 0.94092,
+      "top1_top2_margin": 0.005992,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.946912,
+        "top2_score": 0.94092,
+        "top3_score": 0.895376,
+        "avg_top3_score": 0.927736,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.927736,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_015",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.894089,
+      "top1_rerank_score": 0.894089,
+      "top2_score": 0.809336,
+      "top1_top2_margin": 0.084752,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.894089,
+        "top2_score": 0.809336,
+        "top3_score": 0.746583,
+        "avg_top3_score": 0.816669,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.816669,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_016",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.942844,
+      "top1_rerank_score": 0.942844,
+      "top2_score": 0.921809,
+      "top1_top2_margin": 0.021035,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.942844,
+        "top2_score": 0.921809,
+        "top3_score": 0.86517,
+        "avg_top3_score": 0.909941,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.909941,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_017",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.907837,
+      "top1_rerank_score": 0.907837,
+      "top2_score": 0.838071,
+      "top1_top2_margin": 0.069765,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.907837,
+        "top2_score": 0.838071,
+        "top3_score": 0.761077,
+        "avg_top3_score": 0.835662,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.835662,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_018",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.882873,
+      "top1_rerank_score": 0.882873,
+      "top2_score": 0.847009,
+      "top1_top2_margin": 0.035864,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "cohere",
+      "rerank_provider_counts": {
+        "cohere": 10
+      },
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.882873,
+        "top2_score": 0.847009,
+        "top3_score": 0.826488,
+        "avg_top3_score": 0.852123,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.852123,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_019",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.617078,
+      "top1_rerank_score": 0.617078,
+      "top2_score": 0.610184,
+      "top1_top2_margin": 0.006895,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.617078,
+        "top2_score": 0.610184,
+        "top3_score": 0.581188,
+        "avg_top3_score": 0.602817,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.602817,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_024",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.596483,
+      "top1_rerank_score": 0.596483,
+      "top2_score": 0.593589,
+      "top1_top2_margin": 0.002893,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.596483,
+        "top2_score": 0.593589,
+        "top3_score": 0.555366,
+        "avg_top3_score": 0.581813,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.581813,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_025",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.587143,
+      "top1_rerank_score": 0.587143,
+      "top2_score": 0.562866,
+      "top1_top2_margin": 0.024276,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 2,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.587143,
+        "top2_score": 0.562866,
+        "top3_score": 0.557401,
+        "avg_top3_score": 0.569137,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.569137,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_029",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.580306,
+      "top1_rerank_score": 0.580306,
+      "top2_score": 0.537098,
+      "top1_top2_margin": 0.043208,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.580306,
+        "top2_score": 0.537098,
+        "top3_score": 0.523151,
+        "avg_top3_score": 0.546852,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.546852,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_030",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.644111,
+      "top1_rerank_score": 0.644111,
+      "top2_score": 0.56077,
+      "top1_top2_margin": 0.083342,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.644111,
+        "top2_score": 0.56077,
+        "top3_score": 0.555793,
+        "avg_top3_score": 0.586891,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.586891,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_031",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.60637,
+      "top1_rerank_score": 0.60637,
+      "top2_score": 0.546454,
+      "top1_top2_margin": 0.059916,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.60637,
+        "top2_score": 0.546454,
+        "top3_score": 0.532326,
+        "avg_top3_score": 0.561717,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.561717,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_034",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.585828,
+      "top1_rerank_score": 0.585828,
+      "top2_score": 0.584082,
+      "top1_top2_margin": 0.001746,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.585828,
+        "top2_score": 0.584082,
+        "top3_score": 0.534251,
+        "avg_top3_score": 0.568054,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.568054,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_035",
+      "split": "test",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.590871,
+      "top1_rerank_score": 0.590871,
+      "top2_score": 0.564672,
+      "top1_top2_margin": 0.026199,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 3,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.590871,
+        "top2_score": 0.564672,
+        "top3_score": 0.563959,
+        "avg_top3_score": 0.573167,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.573167,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_046",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.632923,
+      "top1_rerank_score": 0.632923,
+      "top2_score": 0.613424,
+      "top1_top2_margin": 0.0195,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.632923,
+        "top2_score": 0.613424,
+        "top3_score": 0.594292,
+        "avg_top3_score": 0.613546,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.613546,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_047",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.628241,
+      "top1_rerank_score": 0.628241,
+      "top2_score": 0.617315,
+      "top1_top2_margin": 0.010926,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.628241,
+        "top2_score": 0.617315,
+        "top3_score": 0.586844,
+        "avg_top3_score": 0.6108,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.6108,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_049",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.638206,
+      "top1_rerank_score": 0.638206,
+      "top2_score": 0.610433,
+      "top1_top2_margin": 0.027773,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.638206,
+        "top2_score": 0.610433,
+        "top3_score": 0.593606,
+        "avg_top3_score": 0.614082,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.614082,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_050",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.570693,
+      "top1_rerank_score": 0.570693,
+      "top2_score": 0.5634,
+      "top1_top2_margin": 0.007293,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 10,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.570693,
+        "top2_score": 0.5634,
+        "top3_score": 0.554081,
+        "avg_top3_score": 0.562725,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.562725,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_051",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.617794,
+      "top1_rerank_score": 0.617794,
+      "top2_score": 0.593197,
+      "top1_top2_margin": 0.024596,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.617794,
+        "top2_score": 0.593197,
+        "top3_score": 0.573179,
+        "avg_top3_score": 0.594723,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.594723,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_058",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.645945,
+      "top1_rerank_score": 0.645945,
+      "top2_score": 0.644781,
+      "top1_top2_margin": 0.001164,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 2,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.645945,
+        "top2_score": 0.644781,
+        "top3_score": 0.620261,
+        "avg_top3_score": 0.636996,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.636996,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_059",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.611787,
+      "top1_rerank_score": 0.611787,
+      "top2_score": 0.585407,
+      "top1_top2_margin": 0.02638,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.611787,
+        "top2_score": 0.585407,
+        "top3_score": 0.58427,
+        "avg_top3_score": 0.593822,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.593822,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_060",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.609432,
+      "top1_rerank_score": 0.609432,
+      "top2_score": 0.609186,
+      "top1_top2_margin": 0.000246,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.609432,
+        "top2_score": 0.609186,
+        "top3_score": 0.603005,
+        "avg_top3_score": 0.607208,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.607208,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_061",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.596484,
+      "top1_rerank_score": 0.596484,
+      "top2_score": 0.565403,
+      "top1_top2_margin": 0.031081,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 9,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.596484,
+        "top2_score": 0.565403,
+        "top3_score": 0.560389,
+        "avg_top3_score": 0.574092,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.574092,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_062",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.603568,
+      "top1_rerank_score": 0.603568,
+      "top2_score": 0.597208,
+      "top1_top2_margin": 0.00636,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.603568,
+        "top2_score": 0.597208,
+        "top3_score": 0.590407,
+        "avg_top3_score": 0.597061,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.597061,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_073",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.578802,
+      "top1_rerank_score": 0.578802,
+      "top2_score": 0.553072,
+      "top1_top2_margin": 0.025731,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.578802,
+        "top2_score": 0.553072,
+        "top3_score": 0.536017,
+        "avg_top3_score": 0.555964,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.555964,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_074",
+      "split": "test",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.609292,
+      "top1_rerank_score": 0.609292,
+      "top2_score": 0.592423,
+      "top1_top2_margin": 0.016869,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.609292,
+        "top2_score": 0.592423,
+        "top3_score": 0.590039,
+        "avg_top3_score": 0.597251,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.597251,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_075",
+      "split": "test",
+      "question_type": "cross_doc_multi",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en",
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.564898,
+      "top1_rerank_score": 0.564898,
+      "top2_score": 0.535027,
+      "top1_top2_margin": 0.029872,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 6,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.564898,
+        "top2_score": 0.535027,
+        "top3_score": 0.534256,
+        "avg_top3_score": 0.544727,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.544727,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_076",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.574117,
+      "top1_rerank_score": 0.574117,
+      "top2_score": 0.566919,
+      "top1_top2_margin": 0.007199,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 6,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.574117,
+        "top2_score": 0.566919,
+        "top3_score": 0.554735,
+        "avg_top3_score": 0.565257,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.565257,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_078",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_079",
+      "split": "test",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.588312,
+      "top1_rerank_score": 0.588312,
+      "top2_score": 0.540316,
+      "top1_top2_margin": 0.047996,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 7,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.588312,
+        "top2_score": 0.540316,
+        "top3_score": 0.538691,
+        "avg_top3_score": 0.555773,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.555773,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_080",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_081",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "abb_manual_for_induction_motors_and_generators_en"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.594591,
+      "top1_rerank_score": 0.594591,
+      "top2_score": 0.538408,
+      "top1_top2_margin": 0.056182,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.594591,
+        "top2_score": 0.538408,
+        "top3_score": 0.530655,
+        "avg_top3_score": 0.554551,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.554551,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_083",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_084",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.572593,
+      "top1_rerank_score": 0.572593,
+      "top2_score": 0.560128,
+      "top1_top2_margin": 0.012464,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.572593,
+        "top2_score": 0.560128,
+        "top3_score": 0.553523,
+        "avg_top3_score": 0.562081,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.562081,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_085",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.564569,
+      "top1_rerank_score": 0.564569,
+      "top2_score": 0.555782,
+      "top1_top2_margin": 0.008787,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.564569,
+        "top2_score": 0.555782,
+        "top3_score": 0.542213,
+        "avg_top3_score": 0.554188,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.554188,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_088",
+      "split": "test",
+      "question_type": "cross_doc_multi",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.572466,
+      "top1_rerank_score": 0.572466,
+      "top2_score": 0.531559,
+      "top1_top2_margin": 0.040906,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.572466,
+        "top2_score": 0.531559,
+        "top3_score": 0.530626,
+        "avg_top3_score": 0.544884,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.544884,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_089",
+      "split": "test",
+      "question_type": "cross_doc_multi",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.572723,
+      "top1_rerank_score": 0.572723,
+      "top2_score": 0.533895,
+      "top1_top2_margin": 0.038828,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 3,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.572723,
+        "top2_score": 0.533895,
+        "top3_score": 0.528469,
+        "avg_top3_score": 0.545029,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.545029,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_090",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_091",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_092",
+      "split": "test",
+      "question_type": "cross_doc_multi",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions",
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.541412,
+      "top1_rerank_score": 0.541412,
+      "top2_score": 0.541392,
+      "top1_top2_margin": 2.1e-05,
+      "predicted_confidence": "medium",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.541412,
+        "top2_score": 0.541392,
+        "top3_score": 0.540348,
+        "avg_top3_score": 0.541051,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.541051,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_098",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_099",
+      "split": "test",
+      "question_type": "symptom_cause",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.589635,
+      "top1_rerank_score": 0.589635,
+      "top2_score": 0.560642,
+      "top1_top2_margin": 0.028993,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.589635,
+        "top2_score": 0.560642,
+        "top3_score": 0.546494,
+        "avg_top3_score": 0.56559,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.56559,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_100",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "grundfos_nbe_nbse_nke_tpe_tped_installation_and_operating_instructions"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_103",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.561386,
+      "top1_rerank_score": 0.561386,
+      "top2_score": 0.559888,
+      "top1_top2_margin": 0.001498,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 6,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.561386,
+        "top2_score": 0.559888,
+        "top3_score": 0.551471,
+        "avg_top3_score": 0.557581,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.557581,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_104",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.561386,
+      "top1_rerank_score": 0.561386,
+      "top2_score": 0.559888,
+      "top1_top2_margin": 0.001498,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.561386,
+        "top2_score": 0.559888,
+        "top3_score": 0.551471,
+        "avg_top3_score": 0.557581,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.557581,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_108",
+      "split": "test",
+      "question_type": "abstention_insufficient_evidence",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": true,
+      "top1_score": 0.0,
+      "top1_rerank_score": 0.0,
+      "top2_score": 0.0,
+      "top1_top2_margin": 0.0,
+      "predicted_confidence": "low",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "",
+      "rerank_provider_counts": {},
+      "rerank_used_local_fallback": false,
+      "confidence_debug": {
+        "top1_score": 0.0,
+        "top2_score": 0.0,
+        "top3_score": 0.0,
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.0,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_109",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "haascnc_com_rotary_troubleshooting_guide_ngc"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.591997,
+      "top1_rerank_score": 0.591997,
+      "top2_score": 0.588449,
+      "top1_top2_margin": 0.003548,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 2,
+      "hit_at_1": 0.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.591997,
+        "top2_score": 0.588449,
+        "top3_score": 0.574406,
+        "avg_top3_score": 0.584951,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.584951,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_118",
+      "split": "test",
+      "question_type": "cross_doc_multi",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e",
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.5601,
+      "top1_rerank_score": 0.5601,
+      "top2_score": 0.55226,
+      "top1_top2_margin": 0.00784,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.5601,
+        "top2_score": 0.55226,
+        "top3_score": 0.551013,
+        "avg_top3_score": 0.554458,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.554458,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_121",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.599786,
+      "top1_rerank_score": 0.599786,
+      "top2_score": 0.585618,
+      "top1_top2_margin": 0.014168,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.599786,
+        "top2_score": 0.585618,
+        "top3_score": 0.560328,
+        "avg_top3_score": 0.581911,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.581911,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_122",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.61538,
+      "top1_rerank_score": 0.61538,
+      "top2_score": 0.585129,
+      "top1_top2_margin": 0.030251,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": true,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.61538,
+        "top2_score": 0.585129,
+        "top3_score": 0.561521,
+        "avg_top3_score": 0.587343,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.587343,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_124",
+      "split": "test",
+      "question_type": "safety_or_constraint",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.673281,
+      "top1_rerank_score": 0.673281,
+      "top2_score": 0.639772,
+      "top1_top2_margin": 0.033509,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.673281,
+        "top2_score": 0.639772,
+        "top3_score": 0.632893,
+        "avg_top3_score": 0.648649,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.648649,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_125",
+      "split": "test",
+      "question_type": "troubleshooting_step",
+      "source_ids": [
+        "rockwell_powerflex_520_series_user_manual_520_um001_en_e"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.641012,
+      "top1_rerank_score": 0.641012,
+      "top2_score": 0.621486,
+      "top1_top2_margin": 0.019526,
+      "predicted_confidence": "high",
+      "retrieval_success": true,
+      "first_relevant_rank": 1,
+      "hit_at_1": 1.0,
+      "hit_at_3": 1.0,
+      "hit_at_5": 1.0,
+      "hit_at_10": 1.0,
+      "candidate_hit_at_50": 1.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.641012,
+        "top2_score": 0.621486,
+        "top3_score": 0.59115,
+        "avg_top3_score": 0.617883,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.617883,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_132",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.565858,
+      "top1_rerank_score": 0.565858,
+      "top2_score": 0.536935,
+      "top1_top2_margin": 0.028923,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.565858,
+        "top2_score": 0.536935,
+        "top3_score": 0.531038,
+        "avg_top3_score": 0.54461,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.54461,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_133",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.570313,
+      "top1_rerank_score": 0.570313,
+      "top2_score": 0.568322,
+      "top1_top2_margin": 0.001991,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.570313,
+        "top2_score": 0.568322,
+        "top3_score": 0.543363,
+        "avg_top3_score": 0.560666,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.560666,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_134",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.571811,
+      "top1_rerank_score": 0.571811,
+      "top2_score": 0.561423,
+      "top1_top2_margin": 0.010388,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.571811,
+        "top2_score": 0.561423,
+        "top3_score": 0.556379,
+        "avg_top3_score": 0.563205,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.563205,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_135",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.569466,
+      "top1_rerank_score": 0.569466,
+      "top2_score": 0.536762,
+      "top1_top2_margin": 0.032705,
+      "predicted_confidence": "high",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.569466,
+        "top2_score": 0.536762,
+        "top3_score": 0.532014,
+        "avg_top3_score": 0.546081,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.546081,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    },
+    {
+      "sample_id": "rag_136",
+      "split": "test",
+      "question_type": "parameter_or_fault_code",
+      "source_ids": [
+        "s71200_system_manual"
+      ],
+      "should_abstain": false,
+      "top1_score": 0.555537,
+      "top1_rerank_score": 0.555537,
+      "top2_score": 0.549135,
+      "top1_top2_margin": 0.006402,
+      "predicted_confidence": "medium",
+      "retrieval_success": false,
+      "first_relevant_rank": 0,
+      "hit_at_1": 0.0,
+      "hit_at_3": 0.0,
+      "hit_at_5": 0.0,
+      "hit_at_10": 0.0,
+      "candidate_hit_at_50": 0.0,
+      "gold_in_candidate_not_final": false,
+      "rerank_provider_top1": "local",
+      "rerank_provider_counts": {
+        "local": 10
+      },
+      "rerank_used_local_fallback": true,
+      "confidence_debug": {
+        "top1_score": 0.555537,
+        "top2_score": 0.549135,
+        "top3_score": 0.520565,
+        "avg_top3_score": 0.541746,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false,
+        "score_direction": "higher_is_better",
+        "thresholds": {
+          "high_threshold": 0.56,
+          "low_threshold": 0.52,
+          "margin_threshold": 0.0
+        }
+      },
+      "top3_support_features": {
+        "avg_top3_score": 0.541746,
+        "strong_count": 0,
+        "support_count": 0,
+        "top1_is_strong": false,
+        "top2_is_support": false,
+        "top3_is_support": false
+      }
+    }
+  ],
+  "answerable_samples": 52,
+  "should_abstain_samples": 8,
+  "count_by_confidence": {
+    "high": 50,
+    "medium": 2,
+    "low": 8
+  },
+  "high_confidence_precision": 0.62,
+  "low_confidence_error_capture": 0.0,
+  "medium_confidence_success_rate": 0.0,
+  "confidence_accuracy": 0.596154,
+  "abstention_precision": 1.0,
+  "abstention_recall": 1.0,
+  "false_confident_count": 0,
+  "low_confidence_capture_rate": 0.275862,
+  "answerable_over_abstention_count": 0,
+  "coverage": 0.866667,
+  "accuracy_if_answered": 0.596154,
+  "rerank_provider_top1_counts": {
+    "cohere": 9,
+    "local": 43,
+    "none": 8
+  },
+  "rerank_fallback_sample_count": 43,
+  "calibration_table": [
+    {
+      "confidence": "high",
+      "count": 50,
+      "success_count": 31,
+      "fail_count": 19,
+      "success_rate": 0.62,
+      "avg_top1_score": 0.655704,
+      "avg_score_margin": 0.025716
+    },
+    {
+      "confidence": "medium",
+      "count": 2,
+      "success_count": 0,
+      "fail_count": 2,
+      "success_rate": 0.0,
+      "avg_top1_score": 0.548474,
+      "avg_score_margin": 0.003211
+    },
+    {
+      "confidence": "low",
+      "count": 8,
+      "success_count": 0,
+      "fail_count": 8,
+      "success_rate": 0.0,
+      "avg_top1_score": 0.0,
+      "avg_score_margin": 0.0
+    }
+  ],
+  "metadata": {
+    "strategy": "score_threshold",
+    "score_direction": "higher_is_better",
+    "high_threshold": 0.56,
+    "low_threshold": 0.52,
+    "margin_threshold": 0.0,
+    "strong_threshold": 0.78,
+    "support_threshold": 0.45,
+    "high_avg_threshold": 0.55,
+    "success_k": 10
+  }
+}
