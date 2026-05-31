@@ -5,7 +5,6 @@ Executor 节点：执行单个步骤
 
 from typing import Dict, Any
 from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_qwq import ChatQwen
 from langgraph.prebuilt import ToolNode
 from loguru import logger
 
@@ -13,6 +12,7 @@ from app.config import config
 from app.tools import get_current_time, retrieve_knowledge
 from app.agent.mcp_client import get_mcp_tools_safely
 from .state import PlanExecuteState
+from .runtime import create_aiops_chat_model
 
 
 async def executor(state: PlanExecuteState) -> Dict[str, Any]:
@@ -32,14 +32,18 @@ async def executor(state: PlanExecuteState) -> Dict[str, Any]:
 
     # 取出第一个步骤
     task = plan[0]
+    input_text = state.get("input", "")
+    rag_enabled = state.get("rag_enabled", True)
+    replay_case_id = state.get("replay_case_id", "")
+    model_name = state.get("model_name") or config.rag_model
+    temperature = float(state.get("temperature", 0.0))
     logger.info(f"当前任务: {task}")
 
     try:
         # 获取本地工具
-        local_tools = [
-            get_current_time,
-            retrieve_knowledge
-        ]
+        local_tools = [get_current_time]
+        if rag_enabled:
+            local_tools.append(retrieve_knowledge)
 
         # 获取 MCP 工具
         mcp_tools = await get_mcp_tools_safely()
@@ -49,10 +53,9 @@ async def executor(state: PlanExecuteState) -> Dict[str, Any]:
         all_tools = local_tools + mcp_tools
 
         # 创建 LLM（绑定工具）
-        llm = ChatQwen(
-            model=config.rag_model,
-            api_key=config.dashscope_api_key,
-            temperature=0
+        llm = create_aiops_chat_model(
+            model_name=model_name,
+            temperature=temperature,
         )
         llm_with_tools = llm.bind_tools(all_tools)
 
@@ -74,7 +77,21 @@ async def executor(state: PlanExecuteState) -> Dict[str, Any]:
 - 不要编造数据，只返回实际获取的信息
 - 执行结果要清晰、准确
 - 专注于当前步骤，不要考虑其他任务"""),
-            HumanMessage(content=f"请执行以下任务: {task}")
+            HumanMessage(
+                content="\n".join(
+                    part
+                    for part in [
+                        f"原始任务: {input_text}",
+                        (
+                            f"固定回放参数: replay_case_id={replay_case_id}。"
+                            "调用 MCP 监控或日志工具时必须传入这个参数。"
+                            if replay_case_id else ""
+                        ),
+                        f"请执行以下任务: {task}",
+                    ]
+                    if part
+                )
+            )
         ]
 
         # 第一步：LLM 决定是否调用工具

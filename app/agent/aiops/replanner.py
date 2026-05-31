@@ -6,7 +6,6 @@ Replanner 节点：重新规划或生成最终响应
 from textwrap import dedent
 from typing import Dict, Any, List
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_qwq import ChatQwen
 from pydantic import BaseModel, Field
 from loguru import logger
 
@@ -14,6 +13,7 @@ from app.config import config
 from app.tools import get_current_time, retrieve_knowledge
 from app.agent.mcp_client import get_mcp_tools_safely
 from .state import PlanExecuteState
+from .runtime import create_aiops_chat_model
 from .utils import format_tools_description
 
 
@@ -82,6 +82,8 @@ replanner_prompt = ChatPromptTemplate.from_messages(
                 **决策优先级口诀：** 
                 "优先结束 > 保持不变 > 调整计划"
                 "信息足够就响应，不要追求完美"
+
+                结构化输出必须符合 JSON schema，由系统自动解析。
             """).strip(),
         ),
         ("placeholder", "{messages}"),
@@ -101,6 +103,7 @@ response_prompt = ChatPromptTemplate.from_messages(
                 - 基于实际数据，不要编造
                 - 如果某些步骤失败，要诚实说明
                 - 使用 Markdown 格式
+                - 结构化输出必须符合 JSON schema，由系统自动解析
             """).strip(),
         ),
         ("placeholder", "{messages}"),
@@ -122,6 +125,10 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
     input_text = state.get("input", "")
     plan = state.get("plan", [])
     past_steps = state.get("past_steps", [])
+    rag_enabled = state.get("rag_enabled", True)
+    replay_case_id = state.get("replay_case_id", "")
+    model_name = state.get("model_name") or config.rag_model
+    temperature = float(state.get("temperature", 0.0))
 
     logger.info(f"剩余计划步骤: {len(plan)}")
     logger.info(f"已执行步骤: {len(past_steps)}")
@@ -130,20 +137,18 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
     MAX_STEPS = 8
     if len(past_steps) >= MAX_STEPS:
         logger.warning(f"已执行 {len(past_steps)} 个步骤，超过最大限制 {MAX_STEPS}，强制生成最终响应")
-        llm = ChatQwen(
-            model=config.rag_model,
-            api_key=config.dashscope_api_key,
-            temperature=0
+        llm = create_aiops_chat_model(
+            model_name=model_name,
+            temperature=temperature,
         )
         return await _generate_response(state, llm)
 
     # 获取可用工具列表
     try:
         # 获取本地工具
-        local_tools = [
-            get_current_time,
-            retrieve_knowledge
-        ]
+        local_tools = [get_current_time]
+        if rag_enabled:
+            local_tools.append(retrieve_knowledge)
 
         # 获取 MCP 工具
         mcp_tools = await get_mcp_tools_safely()
@@ -159,10 +164,9 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
         tools_description = "无法获取工具列表"
 
     # 创建 LLM
-    llm = ChatQwen(
-        model=config.rag_model,
-        api_key=config.dashscope_api_key,
-        temperature=0
+    llm = create_aiops_chat_model(
+        model_name=model_name,
+        temperature=temperature,
     )
 
     # 格式化已执行的步骤
@@ -180,6 +184,14 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
         try:
             messages = [
                 ("user", f"原始任务: {input_text}"),
+                (
+                    "user",
+                    (
+                        f"固定回放参数: replay_case_id={replay_case_id}。"
+                        "如果后续步骤需要调用 MCP 工具，请保留该参数。"
+                    )
+                    if replay_case_id else ""
+                ),
                 ("user", f"已执行的步骤:\n{steps_summary}"),
                 ("user", f"剩余计划: {', '.join(plan)}"),
                 ("user", f"⚠️ 重要提示：已执行 {len(past_steps)} 个步骤，请优先考虑是否信息已足够生成响应（respond）")
@@ -241,7 +253,7 @@ async def replanner(state: PlanExecuteState) -> Dict[str, Any]:
         return await _generate_response(state, llm)
 
 
-async def _generate_response(state: PlanExecuteState, llm: ChatQwen) -> Dict[str, Any]:
+async def _generate_response(state: PlanExecuteState, llm: Any) -> Dict[str, Any]:
     """生成最终响应"""
     logger.info("生成最终响应...")
 

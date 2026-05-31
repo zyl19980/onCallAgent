@@ -15,6 +15,7 @@ import json
 import random
 from typing import Dict, Any, Optional
 from datetime import datetime, timedelta
+from pathlib import Path
 from fastmcp import FastMCP
 
 # 配置日志
@@ -25,6 +26,15 @@ logging.basicConfig(
 logger = logging.getLogger("Monitor_MCP_Server")
 
 mcp = FastMCP("Monitor")
+
+REPLAY_CASES_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "aiops-docs"
+    / "experiment"
+    / "agent"
+    / "cases"
+    / "agent_eval_cases_v1.jsonl"
+)
 
 
 def log_tool_call(func):
@@ -74,6 +84,60 @@ def log_tool_call(func):
             raise
 
     return wrapper
+
+
+@functools.lru_cache(maxsize=1)
+def load_replay_cases() -> Dict[str, Dict[str, Any]]:
+    """加载 Agent 固定案例回放数据。"""
+    cases: Dict[str, Dict[str, Any]] = {}
+
+    if not REPLAY_CASES_PATH.exists():
+        logger.warning(f"回放案例文件不存在: {REPLAY_CASES_PATH}")
+        return cases
+
+    with REPLAY_CASES_PATH.open("r", encoding="utf-8") as fp:
+        for line_no, line in enumerate(fp, 1):
+            line = line.strip()
+            if not line:
+                continue
+
+            try:
+                case = json.loads(line)
+            except json.JSONDecodeError as exc:
+                logger.warning(f"跳过无法解析的回放案例行 {line_no}: {exc}")
+                continue
+
+            case_id = case.get("case_id")
+            if case_id:
+                cases[case_id] = case
+
+            routing_key = case.get("mock_routing_key")
+            if routing_key:
+                cases[routing_key] = case
+
+    return cases
+
+
+def get_replay_payload(replay_case_id: Optional[str], payload_key: str) -> Optional[Dict[str, Any]]:
+    """按 case_id 读取指定 payload；未传 replay_case_id 时保持默认 mock 行为。"""
+    if not replay_case_id:
+        return None
+
+    case = load_replay_cases().get(replay_case_id)
+    if not case:
+        return {
+            "error": f"未找到回放案例: {replay_case_id}",
+            "message": f"请检查 replay_case_id 是否存在于 {REPLAY_CASES_PATH.name}"
+        }
+
+    payload = case.get(payload_key)
+    if isinstance(payload, dict):
+        return payload
+
+    return {
+        "error": f"回放案例 {replay_case_id} 不包含 {payload_key}",
+        "message": "请检查 agent_eval_cases_v1.jsonl 的案例字段"
+    }
 
 
 # ============================================================
@@ -127,7 +191,8 @@ def query_cpu_metrics(
     service_name: str,
     start_time: Optional[str] = None,
     end_time: Optional[str] = None,
-    interval: str = "1m"
+    interval: str = "1m",
+    replay_case_id: Optional[str] = None
 ) -> Dict[str, Any]:
     """查询服务的 CPU 使用率监控数据。
 
@@ -151,6 +216,10 @@ def query_cpu_metrics(
             可选值: "1m" (1分钟), "5m" (5分钟), "1h" (1小时)
             默认值: "1m"
             说明: 控制数据点的时间间隔
+
+        replay_case_id: 固定案例回放 ID（可选）
+            示例: "agent_case_001"
+            说明: 传入后返回 agent_eval_cases_v1.jsonl 中对应 case 的 metrics_payload
 
     Returns:
         Dict: CPU 监控数据
@@ -187,6 +256,10 @@ def query_cpu_metrics(
             start_time="2026-02-14 10:00:00"
         )
     """
+    replay_payload = get_replay_payload(replay_case_id, "metrics_payload")
+    if replay_payload is not None:
+        return replay_payload
+
     # 解析时间参数
     start_dt = parse_time_or_default(start_time, default_offset_hours=-1)
     end_dt = parse_time_or_default(end_time, default_offset_hours=0)
@@ -280,7 +353,8 @@ def query_memory_metrics(
     service_name: str,
     start_time: Optional[str] = None,
     end_time: Optional[str] = None,
-    interval: str = "1m"
+    interval: str = "1m",
+    replay_case_id: Optional[str] = None
 ) -> Dict[str, Any]:
     """查询服务的内存使用监控数据。
 
@@ -303,6 +377,10 @@ def query_memory_metrics(
         interval: 数据聚合间隔（可选）
             可选值: "1m" (1分钟), "5m" (5分钟), "1h" (1小时)
             默认值: "1m"
+
+        replay_case_id: 固定案例回放 ID（可选）
+            示例: "agent_case_002"
+            说明: 传入后返回 agent_eval_cases_v1.jsonl 中对应 case 的 metrics_payload
 
     Returns:
         Dict: 内存监控数据
@@ -335,6 +413,10 @@ def query_memory_metrics(
             interval="5m"
         )
     """
+    replay_payload = get_replay_payload(replay_case_id, "metrics_payload")
+    if replay_payload is not None:
+        return replay_payload
+
     # 解析时间参数
     start_dt = parse_time_or_default(start_time, default_offset_hours=-1)
     end_dt = parse_time_or_default(end_time, default_offset_hours=0)

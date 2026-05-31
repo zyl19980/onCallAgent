@@ -1,0 +1,5 @@
+rag_relevant,mode,n_cases,root_cause_accuracy_correct,root_cause_accuracy_partial,root_cause_accuracy_incorrect,evidence_completeness_mean,recommendation_correct,recommendation_partial,recommendation_incorrect,tool_precision_mean,tool_recall_mean,tool_call_count_mean,executed_steps_mean,replan_count_mean,latency_ms_mean
+True,A2,5,3,2,0,0.768,3,2,0,1.0,1.0,4.8,3.0,1.0,30927.0
+True,A3,5,4,1,0,0.894,3,2,0,1.0,1.0,3.2,3.0,1.0,33205.2
+False,A2,30,29,1,0,0.867667,13,17,0,0.933333,1.0,4.266667,3.0,1.0,31276.533333
+False,A3,30,29,1,0,0.893957,11,19,0,0.966667,1.0,3.266667,3.0,1.0,32030.333333

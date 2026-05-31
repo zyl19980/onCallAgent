@@ -6,7 +6,6 @@ Planner 节点：制定执行计划
 from textwrap import dedent
 from typing import Dict, Any, List
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_qwq import ChatQwen
 from pydantic import BaseModel, Field
 from loguru import logger
 
@@ -14,6 +13,7 @@ from app.config import config
 from app.tools import get_current_time, retrieve_knowledge
 from app.agent.mcp_client import get_mcp_tools_safely
 from .state import PlanExecuteState
+from .runtime import create_aiops_chat_model
 from .utils import format_tools_description
 
 
@@ -46,6 +46,7 @@ planner_prompt = ChatPromptTemplate.from_messages(
                 - 步骤之间应该有清晰的依赖关系
                 - 步骤描述要具体、可操作
                 - **如果有相关经验文档，请参考其中的方法和步骤制定计划**
+                - 结构化输出必须符合 JSON schema，由系统自动解析
 
                 示例输入："分析当前系统的性能问题"
                 示例输出（假设有对应工具）：
@@ -71,30 +72,37 @@ async def planner(state: PlanExecuteState) -> Dict[str, Any]:
     logger.info("=== Planner：制定执行计划 ===")
 
     input_text = state.get("input", "")
+    rag_enabled = state.get("rag_enabled", True)
+    replay_case_id = state.get("replay_case_id", "")
+    model_name = state.get("model_name") or config.rag_model
+    temperature = float(state.get("temperature", 0.0))
     logger.info(f"用户输入: {input_text}")
+    logger.info(f"RAG 经验检索: {'启用' if rag_enabled else '禁用'}")
 
     try:
         # 步骤1: 查询内部文档获取相关经验
-        logger.info("查询内部文档，寻找相关经验...")
         experience_docs = ""
-        try:
-            # retrieve_knowledge 使用 response_format="content_and_artifact"
-            # ainvoke() 只返回 content（字符串），不是元组
-            context_str = await retrieve_knowledge.ainvoke({"query": input_text})
-            if context_str and context_str.strip():
-                experience_docs = context_str
-                logger.info(f"找到相关经验文档，长度: {len(experience_docs)}")
-            else:
-                logger.info("未找到相关经验文档")
-        except Exception as e:
-            logger.warning(f"查询内部文档失败: {e}")
+        if rag_enabled:
+            logger.info("查询内部文档，寻找相关经验...")
+            try:
+                # retrieve_knowledge 使用 response_format="content_and_artifact"
+                # ainvoke() 只返回 content（字符串），不是元组
+                context_str = await retrieve_knowledge.ainvoke({"query": input_text})
+                if context_str and context_str.strip():
+                    experience_docs = context_str
+                    logger.info(f"找到相关经验文档，长度: {len(experience_docs)}")
+                else:
+                    logger.info("未找到相关经验文档")
+            except Exception as e:
+                logger.warning(f"查询内部文档失败: {e}")
+        else:
+            logger.info("已按实验参数跳过 RAG 经验检索")
 
         # 步骤2: 获取可用工具列表
         # 获取本地工具
-        local_tools = [
-            get_current_time,
-            retrieve_knowledge
-        ]
+        local_tools = [get_current_time]
+        if rag_enabled:
+            local_tools.append(retrieve_knowledge)
 
         # 获取 MCP 工具
         mcp_tools = await get_mcp_tools_safely()
@@ -121,17 +129,26 @@ async def planner(state: PlanExecuteState) -> Dict[str, Any]:
             experience_context = ""
 
         # 步骤4: 创建 LLM 并生成计划
-        llm = ChatQwen(
-            model=config.rag_model,
-            api_key=config.dashscope_api_key,
-            temperature=0
+        llm = create_aiops_chat_model(
+            model_name=model_name,
+            temperature=temperature,
         )
 
         planner_chain = planner_prompt | llm.with_structured_output(Plan)
 
         # 调用 LLM 生成计划
         plan_result = await planner_chain.ainvoke({
-            "messages": [("user", input_text)],
+            "messages": [
+                ("user", input_text),
+                (
+                    "user",
+                    (
+                        f"固定回放参数: replay_case_id={replay_case_id}。"
+                        "如果计划中需要调用 MCP 工具，请在步骤里明确带上该参数。"
+                    )
+                    if replay_case_id else ""
+                ),
+            ],
             "tools_description": tools_description,
             "experience_context": experience_context
         })

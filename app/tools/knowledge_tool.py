@@ -8,7 +8,13 @@ from langchain_core.documents import Document
 from langchain_core.tools import tool
 from loguru import logger
 
-from app.services.hybrid_retrieval_service import hybrid_retrieval_service
+try:
+    from app.services.hybrid_retrieval_service import hybrid_retrieval_service
+except Exception as exc:  # pragma: no cover - optional vector stack in eval envs
+    hybrid_retrieval_service = None
+    _hybrid_retrieval_import_error = exc
+else:
+    _hybrid_retrieval_import_error = None
 
 
 def _format_retrieval_tool_output(retrieval) -> str:
@@ -37,6 +43,8 @@ def _format_retrieval_tool_output(retrieval) -> str:
 def retrieve_knowledge(query: str) -> Tuple[str, List[Document]]:
     """从知识库中检索相关信息来回答问题。"""
     try:
+        if hybrid_retrieval_service is None:
+            return f"知识库检索组件不可用: {_hybrid_retrieval_import_error}", []
         logger.info(f"知识检索工具被调用: query='{query}'")
         retrieval = hybrid_retrieval_service.retrieve(query)
         if not retrieval.candidates:

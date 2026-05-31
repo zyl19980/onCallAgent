@@ -8,6 +8,7 @@ import functools
 import json
 from typing import Dict, Any, Optional
 from datetime import datetime, timedelta
+from pathlib import Path
 from fastmcp import FastMCP
 
 # 配置日志
@@ -18,6 +19,15 @@ logging.basicConfig(
 logger = logging.getLogger("CLS_MCP_Server")
 
 mcp = FastMCP("CLS")
+
+REPLAY_CASES_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "aiops-docs"
+    / "experiment"
+    / "agent"
+    / "cases"
+    / "agent_eval_cases_v1.jsonl"
+)
 
 
 def log_tool_call(func):
@@ -67,6 +77,72 @@ def log_tool_call(func):
             raise
 
     return wrapper
+
+
+@functools.lru_cache(maxsize=1)
+def load_replay_cases() -> Dict[str, Dict[str, Any]]:
+    """加载 Agent 固定案例回放数据。"""
+    cases: Dict[str, Dict[str, Any]] = {}
+
+    if not REPLAY_CASES_PATH.exists():
+        logger.warning(f"回放案例文件不存在: {REPLAY_CASES_PATH}")
+        return cases
+
+    with REPLAY_CASES_PATH.open("r", encoding="utf-8") as fp:
+        for line_no, line in enumerate(fp, 1):
+            line = line.strip()
+            if not line:
+                continue
+
+            try:
+                case = json.loads(line)
+            except json.JSONDecodeError as exc:
+                logger.warning(f"跳过无法解析的回放案例行 {line_no}: {exc}")
+                continue
+
+            case_id = case.get("case_id")
+            if case_id:
+                cases[case_id] = case
+
+            routing_key = case.get("mock_routing_key")
+            if routing_key:
+                cases[routing_key] = case
+
+    return cases
+
+
+def get_replay_case(replay_case_id: Optional[str]) -> Optional[Dict[str, Any]]:
+    """按 case_id 读取固定回放案例；未传 replay_case_id 时保持默认 mock 行为。"""
+    if not replay_case_id:
+        return None
+
+    case = load_replay_cases().get(replay_case_id)
+    if not case:
+        return {
+            "error": f"未找到回放案例: {replay_case_id}",
+            "message": f"请检查 replay_case_id 是否存在于 {REPLAY_CASES_PATH.name}"
+        }
+
+    return case
+
+
+def get_replay_payload(replay_case_id: Optional[str], payload_key: str) -> Optional[Dict[str, Any]]:
+    """按 case_id 读取指定 payload；未传 replay_case_id 时保持默认 mock 行为。"""
+    case = get_replay_case(replay_case_id)
+    if case is None:
+        return None
+
+    if "error" in case:
+        return case
+
+    payload = case.get(payload_key)
+    if isinstance(payload, dict):
+        return payload
+
+    return {
+        "error": f"回放案例 {replay_case_id} 不包含 {payload_key}",
+        "message": "请检查 agent_eval_cases_v1.jsonl 的案例字段"
+    }
 
 
 def parse_time_or_default(time_str: Optional[str], default_offset_hours: int = 0) -> datetime:
@@ -214,7 +290,8 @@ def get_topic_info_by_name(topic_name: str, region_code: Optional[str] = None) -
 def search_topic_by_service_name(
     service_name: str,
     region_code: Optional[str] = None,
-    fuzzy: bool = True
+    fuzzy: bool = True,
+    replay_case_id: Optional[str] = None
 ) -> Dict[str, Any]:
     """根据服务名称搜索相关的日志主题信息，支持模糊搜索。
     
@@ -232,6 +309,10 @@ def search_topic_by_service_name(
         fuzzy: 是否启用模糊搜索（可选，默认 True）
             True: 部分匹配，例如 "sync" 可以匹配 "data-sync-service"
             False: 精确匹配，必须完全一致
+
+        replay_case_id: 固定案例回放 ID（可选）
+            示例: "agent_case_001"
+            说明: 传入后返回与该 case service_name 和 logs_payload.topic_id 对齐的固定 topic
     
     Returns:
         Dict: 搜索结果
@@ -279,6 +360,43 @@ def search_topic_by_service_name(
             end_time=current_ts
         )
     """
+    replay_case = get_replay_case(replay_case_id)
+    if replay_case is not None:
+        if "error" in replay_case:
+            return {
+                "total": 0,
+                "topics": [],
+                "query": {
+                    "service_name": service_name,
+                    "region_code": region_code,
+                    "fuzzy": fuzzy
+                },
+                "error": replay_case["error"],
+                "message": replay_case["message"]
+            }
+
+        replay_logs = replay_case.get("logs_payload", {})
+        replay_service_name = replay_case.get("service_name", service_name)
+        topic = {
+            "topic_id": replay_logs.get("topic_id", "topic-001"),
+            "topic_name": f"{replay_service_name}日志",
+            "service_name": replay_service_name,
+            "region_code": region_code or "ap-beijing",
+            "create_time": "2024-01-01 10:00:00",
+            "log_count": replay_logs.get("total", 0),
+            "description": f"{replay_service_name} 的固定回放日志"
+        }
+        return {
+            "total": 1,
+            "topics": [topic],
+            "query": {
+                "service_name": service_name,
+                "region_code": region_code,
+                "fuzzy": fuzzy
+            },
+            "message": f"找到 1 个匹配的回放日志主题: {replay_case_id}"
+        }
+
     # Mock 主题数据（实际应该从配置或数据库读取）
     mock_topics = [
         {
@@ -350,7 +468,8 @@ def search_log(
     start_time: int,
     end_time: int,
     query: Optional[str] = None,
-    limit: int = 100
+    limit: int = 100,
+    replay_case_id: Optional[str] = None
 ) -> Dict[str, Any]:
     """基于提供的查询参数搜索日志。
 
@@ -377,6 +496,10 @@ def search_log(
             示例: "level:ERROR" 或 "message:异常"
         
         limit: 返回结果数量限制（默认100，可选）
+
+        replay_case_id: 固定案例回放 ID（可选）
+            示例: "agent_case_001"
+            说明: 传入后返回 agent_eval_cases_v1.jsonl 中对应 case 的 logs_payload
 
     Returns:
         Dict: 搜索结果
@@ -408,6 +531,10 @@ def search_log(
             limit=100
         )
     """
+    replay_payload = get_replay_payload(replay_case_id, "logs_payload")
+    if replay_payload is not None:
+        return replay_payload
+
     # 根据 topic_id 返回不同的结果
     if topic_id == "topic-001":
         # topic-001: 应用日志，动态生成 INFO 日志

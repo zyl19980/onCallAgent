@@ -22,3 +22,13 @@ class PlanExecuteState(TypedDict):
     
     # 最终响应/报告
     response: str
+
+    # 是否启用 RAG 经验检索。默认由 AIOpsService.execute 设置为 True。
+    rag_enabled: bool
+
+    # 固定案例回放 ID，用于 MCP mock server replay mode。
+    replay_case_id: str
+
+    # 实验运行时模型配置。
+    model_name: str
+    temperature: float

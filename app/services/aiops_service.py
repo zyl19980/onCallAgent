@@ -81,7 +81,11 @@ class AIOpsService:
     async def execute(
         self,
         user_input: str,
-        session_id: str = "default"
+        session_id: str = "default",
+        enable_rag: bool = True,
+        replay_case_id: str | None = None,
+        model_name: str | None = None,
+        temperature: float = 0.0,
     ) -> AsyncGenerator[Dict[str, Any], None]:
         """
         执行 Plan-Execute-Replan 流程
@@ -89,6 +93,10 @@ class AIOpsService:
         Args:
             user_input: 用户的任务描述
             session_id: 会话ID
+            enable_rag: 是否启用 RAG 经验检索，默认 True 保持原行为
+            replay_case_id: 固定案例回放 ID，用于 mock server replay mode
+            model_name: 实验运行时模型名，默认使用配置中的 rag_model
+            temperature: 实验运行时采样温度
 
         Yields:
             Dict[str, Any]: 流式事件
@@ -101,7 +109,11 @@ class AIOpsService:
                 "input": user_input,
                 "plan": [],
                 "past_steps": [],
-                "response": ""
+                "response": "",
+                "rag_enabled": enable_rag,
+                "replay_case_id": replay_case_id or "",
+                "model_name": model_name or "",
+                "temperature": temperature,
             }
 
             # 流式执行工作流

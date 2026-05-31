@@ -1,0 +1,6 @@
+experiment_name,split,question_type,n_samples,faithfulness_supported_by_retrieved_mean,faithfulness_supported_by_retrieved_mean_ci_low_95,faithfulness_supported_by_retrieved_mean_ci_high_95,correctness_strict_mean,correctness_strict_mean_ci_low_95,correctness_strict_mean_ci_high_95,citation_f1_mean,citation_f1_mean_ci_low_95,citation_f1_mean_ci_high_95,hallucination_rate_mean,hallucination_rate_mean_ci_low_95,hallucination_rate_mean_ci_high_95
+dense_current_original_test,test,cross_doc_multi,5,0.966667,0.9,1.0,0.0,0.0,0.0,0.840635,0.811429,0.869841,0.033333,0.0,0.1
+dense_current_original_test,test,parameter_or_fault_code,16,0.876563,0.742188,0.976562,0.25,0.0625,0.5,0.8,0.625,0.954167,0.060938,0.007812,0.125
+dense_current_original_test,test,safety_or_constraint,7,0.775541,0.667749,0.888095,0.428571,0.0,0.857143,0.557823,0.306122,0.829932,0.224459,0.104762,0.331602
+dense_current_original_test,test,symptom_cause,4,0.7125,0.425,1.0,0.0,0.0,0.0,0.642857,0.595238,0.666667,0.2875,0.0,0.575
+dense_current_original_test,test,troubleshooting_step,20,0.87381,0.775,0.957143,0.35,0.15,0.55,0.945159,0.88119,0.987302,0.12619,0.042857,0.225

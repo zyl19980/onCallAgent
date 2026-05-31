@@ -1,0 +1,144 @@
+{
+  "experiment_name": "dense_current_original_dev",
+  "split": "dev",
+  "groups": {
+    "cross_doc_multi": {
+      "n_samples": 2,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 0.95,
+        "ci_low_95": 0.9,
+        "ci_high_95": 1.0
+      },
+      "correctness_strict_mean": {
+        "mean": 0.0,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.0
+      },
+      "citation_f1_mean": {
+        "mean": 0.8333333333333333,
+        "ci_low_95": 0.6666666666666666,
+        "ci_high_95": 1.0
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.05,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.1
+      }
+    },
+    "definition_or_component_lookup": {
+      "n_samples": 2,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 1.0,
+        "ci_low_95": 1.0,
+        "ci_high_95": 1.0
+      },
+      "correctness_strict_mean": {
+        "mean": 0.5,
+        "ci_low_95": 0.0,
+        "ci_high_95": 1.0
+      },
+      "citation_f1_mean": {
+        "mean": 0.5,
+        "ci_low_95": 0.0,
+        "ci_high_95": 1.0
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.0,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.0
+      }
+    },
+    "parameter_or_fault_code": {
+      "n_samples": 9,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 0.8666666666666667,
+        "ci_low_95": 0.6444444444444445,
+        "ci_high_95": 1.0
+      },
+      "correctness_strict_mean": {
+        "mean": 0.1111111111111111,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.3333333333333333
+      },
+      "citation_f1_mean": {
+        "mean": 0.9555555555555556,
+        "ci_low_95": 0.9111111111111111,
+        "ci_high_95": 1.0
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.022222222222222223,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.06666666666666667
+      }
+    },
+    "safety_or_constraint": {
+      "n_samples": 9,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 0.7111111111111111,
+        "ci_low_95": 0.43333333333333335,
+        "ci_high_95": 0.9666666666666667
+      },
+      "correctness_strict_mean": {
+        "mean": 0.5555555555555556,
+        "ci_low_95": 0.2222222222222222,
+        "ci_high_95": 0.8888888888888888
+      },
+      "citation_f1_mean": {
+        "mean": 0.6842047930283224,
+        "ci_low_95": 0.4259259259259259,
+        "ci_high_95": 0.9128540305010893
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.28888888888888886,
+        "ci_low_95": 0.03333333333333333,
+        "ci_high_95": 0.5666666666666667
+      }
+    },
+    "symptom_cause": {
+      "n_samples": 5,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 0.815,
+        "ci_low_95": 0.52,
+        "ci_high_95": 1.0
+      },
+      "correctness_strict_mean": {
+        "mean": 0.0,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.0
+      },
+      "citation_f1_mean": {
+        "mean": 0.6933333333333334,
+        "ci_low_95": 0.3333333333333333,
+        "ci_high_95": 0.96
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.185,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.48000000000000004
+      }
+    },
+    "troubleshooting_step": {
+      "n_samples": 3,
+      "faithfulness_supported_by_retrieved_mean": {
+        "mean": 0.8333333333333334,
+        "ci_low_95": 0.5,
+        "ci_high_95": 1.0
+      },
+      "correctness_strict_mean": {
+        "mean": 0.6666666666666666,
+        "ci_low_95": 0.0,
+        "ci_high_95": 1.0
+      },
+      "citation_f1_mean": {
+        "mean": 0.8888888888888888,
+        "ci_low_95": 0.6666666666666666,
+        "ci_high_95": 1.0
+      },
+      "hallucination_rate_mean": {
+        "mean": 0.16666666666666666,
+        "ci_low_95": 0.0,
+        "ci_high_95": 0.5
+      }
+    }
+  }
+}

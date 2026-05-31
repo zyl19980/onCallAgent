@@ -50,7 +50,7 @@ class Settings(BaseSettings):
     rag_candidate_top_k: int = 20
     rag_final_top_k: int = 5
     rag_window_rounds: int = 10
-    rag_confidence_threshold_high: float = 0.78
+    rag_confidence_threshold_high: float = 0.75
     rag_confidence_threshold_low: float = 0.45
     rag_document_confidence_threshold_high: float = 0.75
     rag_document_confidence_threshold_low: float = 0.45

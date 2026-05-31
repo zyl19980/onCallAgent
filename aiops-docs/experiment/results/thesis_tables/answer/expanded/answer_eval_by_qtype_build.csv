@@ -1,0 +1,7 @@
+experiment_name,split,question_type,n_samples,faithfulness_supported_by_retrieved_mean,faithfulness_supported_by_retrieved_mean_ci_low_95,faithfulness_supported_by_retrieved_mean_ci_high_95,correctness_strict_mean,correctness_strict_mean_ci_low_95,correctness_strict_mean_ci_high_95,citation_f1_mean,citation_f1_mean_ci_low_95,citation_f1_mean_ci_high_95,hallucination_rate_mean,hallucination_rate_mean_ci_low_95,hallucination_rate_mean_ci_high_95
+dense_current_original_build,build,cross_doc_multi,2,0.5,0.0,1.0,0.0,0.0,0.0,0.4,0.0,0.8,0.0,0.0,0.0
+dense_current_original_build,build,definition_or_component_lookup,2,0.333333,0.0,0.666667,0.5,0.0,1.0,0.5,0.0,1.0,0.166667,0.0,0.333333
+dense_current_original_build,build,parameter_or_fault_code,10,0.766667,0.5,0.966667,0.5,0.2,0.8,0.63,0.33,0.87,0.033333,0.0,0.1
+dense_current_original_build,build,safety_or_constraint,8,0.799851,0.635417,0.927083,0.125,0.0,0.375,0.798611,0.673611,0.902778,0.200149,0.06994,0.364583
+dense_current_original_build,build,symptom_cause,3,0.962963,0.888889,1.0,0.333333,0.0,1.0,0.752381,0.4,0.952381,0.037037,0.0,0.111111
+dense_current_original_build,build,troubleshooting_step,2,1.0,1.0,1.0,0.0,0.0,0.0,0.833333,0.666667,1.0,0.0,0.0,0.0

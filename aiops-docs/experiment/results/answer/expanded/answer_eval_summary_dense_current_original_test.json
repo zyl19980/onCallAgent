@@ -1,0 +1,97 @@
+{
+  "experiment_name": "dense_current_original_test",
+  "split": "test",
+  "generated_at": "2026-05-11T23:34:29.057809+08:00",
+  "input_judge_files": [
+    "aiops-docs/experiment/results/answer/expanded/dense_current_original_test_judge.jsonl"
+  ],
+  "evaluated_samples": 60,
+  "answerable_samples": 52,
+  "should_abstain_samples": 8,
+  "main_row": {
+    "experiment_name": "dense_current_original_test",
+    "split": "test",
+    "evaluated_samples": 60,
+    "abstain_samples": 8,
+    "faithfulness_supported_by_retrieved_mean": 0.857948,
+    "faithfulness_supported_by_retrieved_mean_ci_low_95": 0.795933,
+    "faithfulness_supported_by_retrieved_mean_ci_high_95": 0.915018,
+    "faithfulness_supported_by_cited_mean": 0.793357,
+    "faithfulness_supported_by_cited_mean_ci_low_95": 0.731777,
+    "faithfulness_supported_by_cited_mean_ci_high_95": 0.857036,
+    "correctness_strict_mean": 0.269231,
+    "correctness_strict_mean_ci_low_95": 0.153846,
+    "correctness_strict_mean_ci_high_95": 0.403846,
+    "correctness_lenient_mean": 0.475962,
+    "correctness_lenient_mean_ci_low_95": 0.365385,
+    "correctness_lenient_mean_ci_high_95": 0.585577,
+    "citation_precision_mean": 0.770513,
+    "citation_precision_mean_ci_low_95": 0.693269,
+    "citation_precision_mean_ci_high_95": 0.851923,
+    "citation_recall_mean": 0.902244,
+    "citation_recall_mean_ci_low_95": 0.820513,
+    "citation_recall_mean_ci_high_95": 0.966346,
+    "citation_f1_mean": 0.815049,
+    "citation_f1_mean_ci_low_95": 0.73898,
+    "citation_f1_mean_ci_high_95": 0.888523,
+    "hallucination_rate_mean": 0.122821,
+    "hallucination_rate_mean_ci_low_95": 0.075198,
+    "hallucination_rate_mean_ci_high_95": 0.174209,
+    "abstention_precision": 1.0,
+    "abstention_recall": 1.0,
+    "generator_model": "qwen3.6-flash",
+    "judge_model": "deepseek-v3.2",
+    "prompt_version": "v1.1",
+    "run_date": "2026-05-11"
+  },
+  "metrics": {
+    "faithfulness_supported_by_retrieved_mean": {
+      "mean": 0.8579483016983017,
+      "ci_low_95": 0.7959332334332334,
+      "ci_high_95": 0.915018315018315
+    },
+    "faithfulness_supported_by_cited_mean": {
+      "mean": 0.7933573371073371,
+      "ci_low_95": 0.7317772505272505,
+      "ci_high_95": 0.8570360195360195
+    },
+    "correctness_strict_mean": {
+      "mean": 0.2692307692307692,
+      "ci_low_95": 0.15384615384615385,
+      "ci_high_95": 0.40384615384615385
+    },
+    "correctness_lenient_mean": {
+      "mean": 0.47596153846153844,
+      "ci_low_95": 0.36538461538461536,
+      "ci_high_95": 0.5855769230769231
+    },
+    "citation_precision_mean": {
+      "mean": 0.7705128205128206,
+      "ci_low_95": 0.6932692307692307,
+      "ci_high_95": 0.8519230769230769
+    },
+    "citation_recall_mean": {
+      "mean": 0.9022435897435898,
+      "ci_low_95": 0.8205128205128205,
+      "ci_high_95": 0.9663461538461539
+    },
+    "citation_f1_mean": {
+      "mean": 0.81504884004884,
+      "ci_low_95": 0.738980463980464,
+      "ci_high_95": 0.8885225885225885
+    },
+    "hallucination_rate_mean": {
+      "mean": 0.12282092907092906,
+      "ci_low_95": 0.07519771894771894,
+      "ci_high_95": 0.1742091242091242
+    }
+  },
+  "should_abstain_subset": {
+    "samples": 8,
+    "model_abstained": 8,
+    "correct_abstention": 8,
+    "by_question_type": {
+      "abstention_insufficient_evidence": 8
+    }
+  }
+}

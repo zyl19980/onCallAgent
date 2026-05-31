@@ -3,12 +3,21 @@ MCP 客户端管理
 提供全局单例的 MCP 客户端，避免重复初始化
 """
 
+from __future__ import annotations
+
 import asyncio
 from typing import Optional, Dict, Any, List
-from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain_mcp_adapters.interceptors import MCPToolCallRequest
-from mcp.types import CallToolResult, TextContent
 from loguru import logger
+
+try:
+    from langchain_mcp_adapters.client import MultiServerMCPClient
+    from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+    from mcp.types import CallToolResult, TextContent
+except Exception:  # pragma: no cover - optional dependency in experiment envs
+    MultiServerMCPClient = None  # type: ignore[assignment]
+    MCPToolCallRequest = Any  # type: ignore[misc, assignment]
+    CallToolResult = None  # type: ignore[assignment]
+    TextContent = None  # type: ignore[assignment]
 
 
 # 全局 MCP 客户端（延迟初始化）
@@ -68,6 +77,8 @@ async def retry_interceptor(
     # 所有重试都失败，返回错误结果而不是抛出异常
     error_msg = f"工具 {request.name} 在 {max_retries} 次重试后仍然失败: {str(last_error)}"
     logger.error(error_msg)
+    if CallToolResult is None or TextContent is None:
+        raise RuntimeError(error_msg)
     return CallToolResult(
         content=[TextContent(type="text", text=error_msg)],
         isError=True
@@ -103,6 +114,9 @@ async def get_mcp_client(
         MultiServerMCPClient: MCP 客户端实例
     """
     global _mcp_client
+
+    if MultiServerMCPClient is None:
+        raise RuntimeError("langchain_mcp_adapters is not installed")
     
     # 如果请求新实例，直接创建并返回（不缓存）
     if force_new:
@@ -175,6 +189,9 @@ async def get_mcp_tools_safely(
 ) -> list:
     """安全获取 MCP 工具列表；失败时降级为空列表。"""
     try:
+        if MultiServerMCPClient is None:
+            logger.warning("MCP 依赖不可用，将降级为仅使用本地工具")
+            return []
         client = await get_mcp_client_with_retry(
             servers=servers,
             tool_interceptors=tool_interceptors,
@@ -215,4 +232,6 @@ def _create_mcp_client(
         kwargs["tool_interceptors"] = tool_interceptors
     
     # 第一个参数是 servers 配置，直接传递
+    if MultiServerMCPClient is None:
+        raise RuntimeError("langchain_mcp_adapters is not installed")
     return MultiServerMCPClient(servers, **kwargs)  # type: ignore[arg-type]
